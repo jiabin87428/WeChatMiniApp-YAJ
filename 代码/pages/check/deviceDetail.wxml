@@ -1,0 +1,37 @@
+<!--pages/check/deviceDetail.wxml-->
+<view class="baseView">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <view class='scrollItem'>
+      <text class='cellText1'>设备名称</text>
+      <text class='cellText2'>{{deviceInfo.sbmc}}</text>
+      
+    </view>
+    <view class='scrollItem'>
+      <text class='cellText1'>设备型号</text>
+      <text class='cellText2'>{{deviceInfo.sbxh}}</text>
+      
+    </view>
+    <view class='scrollItem'>
+      <text class='cellText1'>设备数量</text>
+      <text class='cellText2'>{{deviceInfo.sl}}</text>
+      
+    </view>
+    <view class='scrollItem'>
+      <text class='cellText1'>设备用途</text>
+      <text class='cellText2'>{{deviceInfo.yt}}</text>
+      
+    </view>
+    <view class='scrollItem'>
+      <text class='cellText1'>使用年限</text>
+      <text class='cellText2'>{{deviceInfo.synx}}</text>
+      
+    </view>
+    <view class='scrollItem'>
+      <text class='cellText1'>完好情况</text>
+      <text class='cellText2'>{{deviceInfo.whqk}}</text>
+    </view>
+    <view>
+      <button class='submitButton' bindtap="submit">确定</button>
+    </view>
+  </scroll-view>
+</view>

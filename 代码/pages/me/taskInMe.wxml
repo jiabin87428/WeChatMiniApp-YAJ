@@ -1,0 +1,24 @@
+<view class='baseView'>
+  <view class="noDataView" style="height:{{scrollHeight-45}}px;" wx:if="{{missionList.length == 0}}">
+    <text class='noDataText'>暂无数据</text>
+  </view>
+  <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-85}}px;" wx:else>
+    <block wx:for="{{missionList}}" wx:for-item="item" wx:for-index="idx">
+      <view class='scrollItem'>
+        <view class='dangerView' data-index="{{idx}}" data-item="{{item}}" bindtap='jumpMission'>
+          <view class='typeView'>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG.png" mode="widthFix" wx:if="{{item.clzt != ''}}"></image>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG2.png" mode="widthFix" wx:else></image>
+            <text class='typeText' wx:if="{{item.clzt != ''}}">复查</text>
+            <text class='typeText' wx:else>初查</text>
+          </view>
+          <view class='subView'>
+            <text class='dangerText'>{{item.qymc}}</text>
+            <text class='subText'>截止日期：{{item.jzrq}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+

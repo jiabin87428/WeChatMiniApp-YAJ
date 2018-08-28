@@ -1,0 +1,15 @@
+<!--pages/check/deviceInfo.wxml-->
+<view class="baseView">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <block wx:for="{{sbList}}" wx:for-item="item" wx:for-index="idx">
+      <view class='scrollItem' data-item="{{item}}"  bindtap='jumpDeviceDetail'>
+        <text class='cellText1'>{{item.sbmc}}</text>
+        <text class='cellText2'></text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
+      </view>
+    </block>
+    <view>
+      <button class='submitButton' bindtap="submit">确定</button>
+    </view>
+  </scroll-view>
+</view>

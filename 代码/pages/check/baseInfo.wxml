@@ -1,0 +1,67 @@
+<view class="baseView">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <view id='companyName' class='scrollItem'>
+      <text class='cellText1'>企业名称</text>
+      <text class='cellText3'>{{qymc}}</text>
+      <image class="arrow" src="" mode="aspectFit" ></image>
+    </view>
+    <view id='qydz' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>公司地址</text>
+      <text class='cellText2'>{{qydz}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='zdmj' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>占地面积</text>
+      <text class='cellText2'>{{zdmj}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='jzmj' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>建筑面积</text>
+      <text class='cellText2'>{{jzmj}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='qyrs' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>企业人数</text>
+      <text class='cellText2'>{{qyrs}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='aqglrs' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>安全管理人数</text>
+      <text class='cellText2'>{{aqglrs}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='cpms' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>产品描述</text>
+      <text class='cellText2'>{{cpms}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='sbms' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>设备描述</text>
+      <text class='cellText2'>{{sbms}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='zyfzr' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>主要负责人</text>
+      <text class='cellText2'>{{zyfzr}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='zyfzrdh' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>主要负责人电话</text>
+      <text class='cellText2'>{{zyfzrdh}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='aqfzr' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>安全负责人</text>
+      <text class='cellText2'>{{aqfzr}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view id='aqfzrdh' class='scrollItem' bindtap='jumpInput'>
+      <text class='cellText1'>安全负责人电话</text>
+      <text class='cellText2'>{{aqfzrdh}}</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+    </view>
+    <view>
+      <button class='submitButton' bindtap="submit" wx:if="{{editable =='true'}}">保存信息</button>
+    </view>
+  </scroll-view>
+</view>

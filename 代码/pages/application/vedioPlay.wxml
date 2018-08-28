@@ -1,0 +1,6 @@
+<!--pages/application/vedioPlay.wxml-->
+<view class='baseView'>
+  <view class="page-section tc">
+    <video id="myVideo" class='video' src="http://www.gelure.com/website/video/riskcloud/Untitled%20Project.mp4" binderror="videoErrorCallback" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+  </view>
+</view>

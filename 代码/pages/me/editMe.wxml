@@ -1,0 +1,86 @@
+<!--pages/me/editMe.wxml-->
+<view class="baseView">
+  <scroll-view scroll-y="true" class='scrollView'>
+
+    <!--检查人用户-->
+    <view wx:if="{{yhlx == 2}}">
+      <view id='name' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>姓名</text>
+        <text class='cellText2'>{{name}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='title' class='scrollItem' bindtap='jumpRadio'>
+        <text class='cellText1'>职称</text>
+        <text class='cellText2'>{{title}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='mobile' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>联系手机</text>
+        <text class='cellText2'>{{mobile}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='email' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>邮箱</text>
+        <text class='cellText2'>{{email}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+    </view>
+
+    <!--管理者用户-->
+    <view wx:if="{{yhlx == 3}}">
+      <view id='name' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>姓名</text>
+        <text class='cellText2'>{{name}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='sex' class='scrollItem' bindtap='jumpRadio'>
+        <text class='cellText1'>性别</text>
+        <text class='cellText2'>{{sex}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='job' class='scrollItem' bindtap='jumpRadio'>
+        <text class='cellText1'>岗位</text>
+        <text class='cellText2'>{{job}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='mobile' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>联系手机</text>
+        <text class='cellText2'>{{mobile}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='email' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>邮箱</text>
+        <text class='cellText2'>{{email}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+    </view>
+
+    <!--政府用户-->
+    <view wx:if="{{yhlx == 4}}">
+      <view id='name' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>姓名</text>
+        <text class='cellText2'>{{name}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='phone' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>联系电话</text>
+        <text class='cellText2'>{{phone}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='mobile' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>联系手机</text>
+        <text class='cellText2'>{{mobile}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+      <view id='email' class='scrollItem' bindtap='jumpInput'>
+        <text class='cellText1'>邮箱</text>
+        <text class='cellText2'>{{email}}</text>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{editable =='true'}}"></image>
+      </view>
+    </view>
+    
+    <view>
+      <button class='submitButton' bindtap="submit" wx:if="{{editable =='true'}}">保存信息</button>
+    </view>
+  </scroll-view>
+</view>

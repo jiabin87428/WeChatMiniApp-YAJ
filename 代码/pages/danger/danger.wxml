@@ -1,0 +1,19 @@
+<scroll-view scroll-y="true" class='scrollView'>
+  <image bindtap="userClick" class="titleImage" src="../../assets/dangerBG.png" mode="widthFix"></image> 
+  <view class="userinfo" wx:if="{{yhlx != 4}}">
+    <view class='dangerView' bindtap='addClick'>
+      <image class="dangerIcon" src="../../assets/add.png" mode="widthFix"></image>
+      <view class='subView'>
+        <text class='dangerText'>初次检查</text>
+        <text class='subText'>对企业进行隐患排查</text>
+      </view>
+    </view>
+    <view class='dangerView' bindtap='listClick'>
+      <image class="dangerIcon" src="../../assets/list.png" mode="widthFix"></image>
+      <view class='subView'>
+        <text class='dangerText'>复查</text>
+        <text class='subText'>对企业进行地毯式排查</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
