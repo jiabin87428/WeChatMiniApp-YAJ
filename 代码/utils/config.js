@@ -9,68 +9,68 @@ var config = {
   // 下面的地址配合 Server 工作
   host,
   // 登录
-  login: `${host}/wxlogin.so`,
+  login: `${host}/wxlogin.do`,
 
   // 注册
-  register: `${host}/register.so?action=Register`,
+  register: `${host}/register.do?action=Register`,
 
   // 企业名称列表
-  getCompanyName: `${host}/getXx.so?action=getQyList`,
+  getCompanyName: `${host}/getXx.do?action=getQyList`,
 
   // 企业属地接口
-  getLocal: `${host}/getXx.so?action=getLocal`,
+  getLocal: `${host}/getXx.do?action=getLocal`,
 
   // 企业类型
-  getType: `${host}/getXx.so?action=getType`,
+  getType: `${host}/getXx.do?action=getType`,
 
   // 隐患列表
-  getYhList: `${host}/getXx.so?action=getYhList&qyid=`,
+  getYhList: `${host}/getXx.do?action=getYhList&qyid=`,
 
   // 隐患详情
-  getOneYh: `${host}/getXx.so?action=getOneYh`,
+  getOneYh: `${host}/getXx.do?action=getOneYh`,
 
   // 统计接口
-  getTj: `${host}/getXx.so?action=getTj`,
+  getTj: `${host}/getXx.do?action=getTj`,
 
   // 插入隐患
-  insertYh: `${host}/getXx.so?action=insertYh`,
+  insertYh: `${host}/getXx.do?action=insertYh`,
 
   // 上传图片接口
   uploadImg: `${host}/uploadImg`,
 
   // 头像默认链接
-  logoImg: `${host}/getXx.so?action=loadQyxxPhoto&qyid=`,
+  logoImg: `${host}/getXx.do?action=loadQyxxPhoto&qyid=`,
 
   // 加载隐患图片头部链接-小图
-  loadYhPhoto: `${host}/getXx.so?action=loadYhPhoto&attid=`,
+  loadYhPhoto: `${host}/getXx.do?action=loadYhPhoto&attid=`,
   // 加载隐患图片头部链接-大图
-  loadBigPhoto: `${host}/getXx.so?action=loadPhoto&attid=`,
+  loadBigPhoto: `${host}/getXx.do?action=loadPhoto&attid=`,
 
   // 修改企业信息
-  updateQyxx: `${host}/getXx.so?action=updateQyxx`,
+  updateQyxx: `${host}/getXx.do?action=updateQyxx`,
 
   // 获取企业信息
-  getQyxx: `${host}/getXx.so?action=getQyxx`,
+  getQyxx: `${host}/getXx.do?action=getQyxx`,
 
   //-----------纪杰------------
   
   // 获取任务列表
-  getRw: `${host}/getXx.so?action=getRw&`,
+  getRw: `${host}/getXx.do?action=getRw&`,
 
   // 获取企业信息和企业安全生产管理现状
-  getBaseAndSaftyInfo: `${host}/getXx.so?action=getQyxx&qyid=`,
+  getBaseAndSaftyInfo: `${host}/getXx.do?action=getQyxx&qyid=`,
 
   // 更新企业基本信息和安全生产信息
-  updateBaseInfoAndSaftyInfo: `${host}/getXx.so?action=updateQyxx`,
+  updateBaseInfoAndSaftyInfo: `${host}/getXx.do?action=updateQyxx`,
 
   // 更新任务信息
-  updateRw: `${host}/getXx.so?action=updateRw`,
+  updateRw: `${host}/getXx.do?action=updateRw`,
 
   // 获取设备信息
-  getSb: `${host}/getXx.so?action=getSb&qyid=`,
+  getSb: `${host}/getXx.do?action=getSb&qyid=`,
 
   // 获取区、街道（总共有3层：市、区、镇）
-  getLocal: `${host}/getXx.so?action=getLocal&orgid=`,
+  getLocal: `${host}/getXx.do?action=getLocal&orgid=`,
 };
 //对外把对象config返回
 module.exports = config
