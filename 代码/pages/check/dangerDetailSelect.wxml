@@ -1,0 +1,11 @@
+<view class="baseView">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <block wx:for="{{repCjwt}}" wx:for-item="item" wx:for-index="idx">
+      <view class='scrollItem' data-item="{{item}}" bindtap=''>
+        <text class='cellText1'>{{item.cjwt}}</text>
+        <text class='cellText2'>({{item.cjwt}})</text>
+      <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
+    </view>
+    </block>
+  </scroll-view>
+</view>

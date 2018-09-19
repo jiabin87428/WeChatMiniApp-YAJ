@@ -35,7 +35,9 @@
     "pages/check/deviceInfo",
     "pages/check/deviceDetail",
     "pages/me/taskInMe",
-    "pages/application/vedioPlay"
+    "pages/application/vedioPlay",
+    "pages/check/dangerTypeSelect",
+    "pages/check/dangerDetailSelect"
   ],
   "window": {
     "backgroundTextStyle": "light",

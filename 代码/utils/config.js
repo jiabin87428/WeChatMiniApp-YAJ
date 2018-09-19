@@ -71,6 +71,12 @@ var config = {
 
   // 获取区、街道（总共有3层：市、区、镇）
   getLocal: `${host}/getXx.do?action=getLocal&orgid=`,
+
+  // 获取模板隐患类别
+  getCategory: `${host}/getXx.do?action=getLb`,
+
+  // 根据模版隐患类别获取详情隐患列表
+  getDangerType: `${host}/getXx.do?action=getCjwt&lb=`
 };
 //对外把对象config返回
 module.exports = config

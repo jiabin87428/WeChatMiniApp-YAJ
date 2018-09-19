@@ -7,7 +7,7 @@
     <text class='cellText2'>{{qymc}}</text>
     <image class="arrow" src="" mode="aspectFit"></image> 
   </view>
-  <view id='desc' class='scrollItem' bindtap='jumpInput'>
+  <view id='desc' class='scrollItem' bindtap='selectInputType'>
     <text class='cellText1'>现场问题</text>
     <text class='mustText'>*</text>
     <text class='cellText2'>{{desc}}</text>
