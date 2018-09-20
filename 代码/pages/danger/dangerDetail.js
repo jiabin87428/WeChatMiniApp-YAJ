@@ -186,9 +186,13 @@ Page({
           // 整改完成情况
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
+        var num = 1
+        if (that.data.sfyzg == "true") {
+          num = 0
+        }
         that.setData({
           imageViewHeight: Math.ceil((that.data.imageList.length) / 4) * (that.data.littleImageWidth + 8),
-          wcImageViewHeight: Math.ceil((that.data.wcImageList.length + 1) / 4) * (that.data.littleImageWidth + 8)
+          wcImageViewHeight: Math.ceil((that.data.wcImageList.length + num) / 4) * (that.data.littleImageWidth + 8)
         })
       } else {
         wx.showToast({

@@ -18,10 +18,6 @@ Page({
     // 企业用户显示
     // 企业全称
     showCompanyName: '企业名称',
-    // 企业属地
-    showCompanyPlace: null,
-    // 企业类型
-    showCompanyType: '企业类型',
     // 联系人
     showContact: '企业联系人',
     // 联系方式
@@ -148,8 +144,6 @@ Page({
             qyid: app.globalData.userInfo.userid,
             logo: config.logoImg + app.globalData.userInfo.userid,
             showCompanyName: app.globalData.userInfo.name,
-            showCompanyPlace: "",
-            showCompanyType: "",
             showContact: "",
             showPhone: "",
             showEmail: "",
@@ -175,12 +169,10 @@ Page({
             logo: config.logoImg + app.globalData.userInfo.userid,
             roleName: '企业用户',
             showCompanyName: app.globalData.userInfo.name,
-            showCompanyPlace: app.globalData.userInfo.companyLocal,
-            showCompanyType: app.globalData.userInfo.companyType,
-            showContact: app.globalData.userInfo.inChargePerson,
-            showPhone: app.globalData.userInfo.mobile,
+            showContact: app.globalData.userInfo.lxr,
+            showPhone: app.globalData.userInfo.lxfs,
             showEmail: app.globalData.userInfo.email,
-            showAddress: app.globalData.userInfo.address,
+            showAddress: app.globalData.userInfo.qydz,
             longitude: app.globalData.userInfo.mapx,
             latitude: app.globalData.userInfo.mapy,
 

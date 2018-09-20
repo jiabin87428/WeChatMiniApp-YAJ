@@ -1,42 +1,22 @@
 <!--index.wxml-->
 <view class='baseView'>
-  <view class="subBaseView3" wx:if="{{isqy == true}}">
+  <view class="subBaseView3" wx:if="{{yhlx == 0}}">
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
-      <text class='cellText1'>隐患总数</text>
-      <text class='cellText2'>{{yhzs}}</text>
-    </view>
-    <view class='scrollItem'>
-      <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
-      <text class='cellText1'>已整改隐患</text>
-      <text class='cellText2'>{{yzgyhs}}</text>
-    </view>
-    <view class='scrollItem'>
-      <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
-      <text class='cellText1'>未整改隐患</text>
-      <text class='cellText2'>{{wzgyhs}}</text>
+      <text class='cellText1'>隐患总数/已整改/未整改</text>
+      <text class='cellText2'>{{yhzs}}/{{yzgyhs}}/{{wzgyhs}}</text>
     </view>
   </view>
   <view class="subBaseView4" wx:else>
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
-      <text class='cellText1'>企业总数</text>
+      <text class='cellText1'>隐患库总数</text>
       <text class='cellText2'>{{qyzs}}</text>
     </view>
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
-      <text class='cellText1'>企业隐患总数</text>
+      <text class='cellText1'>法律法规总数</text>
       <text class='cellText2'>{{qyyhzs}}</text>
-    </view>
-    <view class='scrollItem'>
-      <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
-      <text class='cellText1'>企业已整改隐患</text>
-      <text class='cellText2'>{{qyyzgyh}}</text>
-    </view>
-    <view class='scrollItem'>
-      <image class="point" src="../../assets/point_blue.png" mode="aspectFit"></image>
-      <text class='cellText1'>企业未整改隐患</text>
-      <text class='cellText2'>{{qywzgyh}}</text>
     </view>
   </view>
   <view class="map_container" style='height:{{winHeight-titleHeight}}px;'>

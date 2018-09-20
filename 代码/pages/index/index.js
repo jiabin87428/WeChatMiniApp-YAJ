@@ -13,8 +13,8 @@ Page({
     winHeight: 0,
     // tab切换    
     currentTab: 0,
-    // 是否企业用户
-    isqy: true,
+    // 用户类型
+    yhlx: 0,
     // 顶部统计栏高度
     titleHeight: 144,
     // 地图上的标记
@@ -108,10 +108,13 @@ Page({
       key: 'userInfo',
       success: function (res) {
         app.globalData.userInfo = res.data
+        that.setData({
+          yhlx: app.globalData.userInfo.yhlx
+        })
         that.getStatistics()
         if (app.globalData.userInfo != null) {
           var callout = {
-            content: app.globalData.userInfo.repIsqy == 'false' ? app.globalData.userInfo.name : app.globalData.userInfo.repName,
+            content: app.globalData.userInfo.yhlx == '1' ? app.globalData.userInfo.name : app.globalData.userInfo.repName,
             color: '#FFFFFF',
             bgColor: '#018B0D',
             borderRadius: 5,
@@ -127,12 +130,11 @@ Page({
             height: 30,
             callout: callout
           }]
-          if (app.globalData.userInfo.repIsqy == 'false') {
+          if (app.globalData.userInfo.yhlx == '1') {
             that.setData({
               longitude: app.globalData.userInfo.mapx,
               latitude: app.globalData.userInfo.mapy,
-              isqy: false,
-              titleHeight: 192,
+              titleHeight: 96,
               markers: mark
             })
           } else {
@@ -140,8 +142,7 @@ Page({
               longitude: app.globalData.userInfo.mapx,
               latitude: app.globalData.userInfo.mapy,
               currentLocation: app.globalData.userInfo.dep,
-              isqy: true,
-              titleHeight: 144,
+              titleHeight: 48,
               markers: mark
             })
           }
@@ -166,7 +167,6 @@ Page({
   getStatistics: function () {
     var that = this
     var params = {
-      "repIsqy": app.globalData.userInfo.repIsqy,
       "userid": app.globalData.userInfo.userid
     }
     request.requestLoading(config.getTj, params, '正在加载数据', function (res) {
@@ -178,7 +178,7 @@ Page({
 
       var markList = that.data.markers
 
-      if (app.globalData.userInfo.repIsqy == 'false') {
+      if (app.globalData.userInfo.yhlx == '1') {
         if (res.qylist == null) {
           return
         }
@@ -282,7 +282,7 @@ Page({
   // maker点击事件
   makertap: function (e) {
     console.log(e)
-    if (app.globalData.userInfo.repIsqy == 'false') { // 监管用户
+    if (app.globalData.userInfo.yhlx == '1') { // 监管用户
       if (e.markerId != '99999') { // 点击的不是监管用户本身
         wx.navigateTo({
           url: '../application/companyInfoList?qyid=' + e.markerId
