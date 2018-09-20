@@ -15,9 +15,9 @@ Page({
     imageList: [],
     littleImageWidth: 0,
     imageViewHeight: 100,
-    // 是否企业用户
-    isqy: true,
 
+    // 用户类型
+    yhlx: 0,
     // 提交时间
     time:"",
     // 当前位置
@@ -178,12 +178,8 @@ Page({
   selectInputType: function (e) {
     var that = this
     wx.showActionSheet({
-      itemList: ['从模板选择问题', '自行输入问题'],
+      itemList: ['从隐患库选择', '自行输入问题'],
       success: function (res) {
-        // console.log(res.tapIndex)
-        // var list = ['从模板选择问题', '自行输入问题']
-        // var obj = that.data.returnObj
-        // obj[e.currentTarget.id] = list[res.tapIndex]
         if (res.tapIndex == 0) {// 从模板选择
           wx.navigateTo({
             url: '../danger/dangerTypeSelect'
@@ -274,16 +270,22 @@ Page({
   },
   // 提交事件
   submitClick: function (e) {
+    if (this.checkInput() == false) {
+      return
+    }
     var that = this
     var companyName = ""
-    if (this.data.isqy == true) {
-      companyName = app.globalData.userInfo.repName
+    var qyid = ""
+    if (app.globalData.userInfo.yhlx == "0") {
+      companyName = app.globalData.userInfo.name
     }else {
       companyName = this.data.companyName.name
+      qyid = this.data.companyName.id
     }
     var params = {
       "yhid": "",
-      "qyid": app.globalData.userInfo.repRecordid,
+      "userid": app.globalData.userInfo.userid,
+      "qyid": qyid,
       "qymc": companyName,
       "wtms": this.data.desc,
       "dytk": this.data.clause,
@@ -298,7 +300,6 @@ Page({
       "zgwcqk": "",
       "zgfzr": "",
       "zgwcrq": "",
-      "repIsqy": app.globalData.userInfo.repIsqy,
       "mapx": this.data.longitude,
       "mapy": this.data.latitude
     }
@@ -307,7 +308,7 @@ Page({
       console.log(res)
       if (res.repCode == '200') {
         that.setData({
-          dangerId: res.recordid
+          dangerId: res.yhid
         })
         that.submitImage()
       }else {
@@ -357,6 +358,43 @@ Page({
       }
     })
   },
+  // 判断必填项
+  checkInput: function () {
+    var showText = ""
+    if (this.data.advise == "") {
+      showText = "请输入整改建议"
+    }
+    if (this.data.date == "") {
+      showText = "请输入整改期限"
+    }
+    if (this.data.danger == null) {
+      showText = "请输入潜在事故"
+    }
+    if (this.data.imageList.length == 0) {
+      showText = "请添加隐患照片"
+    }
+    if (this.data.clause == "") {
+      showText = "请输入对应条款"
+    }
+    if (this.data.desc == "") {
+      showText = "请输入隐患描述"
+    }
+    if (app.globalData.userInfo.yhlx != "0") {
+      if (this.data.companyName == null) {
+        showText = "请选择企业"
+      }
+    } 
+
+    if (showText != "") {
+      wx.showToast({
+        title: showText,
+        icon: 'none'
+      })
+      return false
+    }else {
+      return true
+    }
+  },
   // 判断是否登录
   checkLogin: function () {
     var that = this
@@ -364,18 +402,12 @@ Page({
       key: 'userInfo',
       success: function (res) {
         app.globalData.userInfo = res.data
-        if (app.globalData.userInfo.repIsqy == 'false') {
-          that.setData({
-            isqy: false
-          })
-        } else {
-          that.setData({
-            isqy: true
-          })
-        }
+        that.setData({
+          yhlx: app.globalData.userInfo.yhlx
+        })
       }, fail: function (res) {
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })

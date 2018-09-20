@@ -9,8 +9,8 @@ Page({
   data: {
     motto: 'Hello World',
     // 使用用户名密码登录
-    userName:'',
-    passWord:''
+    userName: '',
+    passWord: ''
   },
   // 拿到用户名  
   getUserName: function (e) {
@@ -18,43 +18,25 @@ Page({
     this.setData({
       userName: val
     });
-  },  
+  },
   // 拿到密码  
   getPassWord: function (e) {
     var val = e.detail.value;
     this.setData({
       passWord: val
     });
-  },  
-  // 登录
-  login: function (e) {
-    var params = {
-      "username": this.data.userName,
-      "password": this.data.passWord
-    }
-    request.requestLoading(config.login, params, '正在登录', function (res)     {
-      //res就是我们请求接口返回的数据
-      console.log(res)
-      if (res.repCode == '200') {
-        wx.setStorage({
-          key: "userInfo",
-          data: res
-        })
-        wx.navigateBack({
-          delta: 2
-        })
-      }
-    }, function () {
-      wx.showToast({
-        title: '登录失败',
-        icon: 'none'
-      })
+  },
+  // 微信登录
+  weChartLogin: function (e) {
+    wx.showToast({
+      title: "正在开发，请先使用用户名登录",
+      icon: 'none'
     })
   },
-  // 注册
-  registerClick: function (e) {
+  // 用户名登录
+  userNameLogin: function (e) {
     wx.navigateTo({
-      url: '../register/register'
+      url: '../login/login'
     })
   },
   onLoad: function () {

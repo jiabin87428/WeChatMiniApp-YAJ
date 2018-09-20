@@ -29,20 +29,16 @@ Page({
     // 隐患详情显示参数
     // 企业名称
     qymc: "",
-    // 行业类型
-    hylx: "",
-    // 隐患类别
-    yhlb: "",
-    // 存在问题
-    czwt: "",
     // 问题描述
     wtms: "",
+    // 法律依据
+    clause: "",
+    // 条款内容
+    clauseInfo: "",
     // 可造成后果
     kzchg: "",
     // 潜在隐患
     qzyh: "",
-    // 整改期限
-    xqzgrq: "",
     // 整改建议
     zgjy: "",
     // 提交时间
@@ -53,7 +49,7 @@ Page({
     // 整改负责人
     zgr: "",
     // 整改完成日期
-    date: "",
+    date: "请选择完成日期",
     // 整改完成情况
     zgcs: ""
   },
@@ -161,20 +157,16 @@ Page({
           qyid: res.qyid,
           // 企业名称
           qymc: res.qymc,
-          // 行业类型
-          hylx: "",
-          // 隐患类别
-          yhlb: "",
-          // 存在问题
-          czwt: "",
           // 问题描述
           wtms: res.wtms,
+          // 对应条款
+          clause: res.dytk,
+          // 条款内容
+          clauseInfo: res.tknr,
           // 可造成后果
           kzchg: "",
           // 潜在隐患
           qzyh: res.qzyh == null ? '' : res.qzyh,
-          // 整改期限
-          xqzgrq: res.xqzgrq,
           // 整改建议
           zgjy: res.zgjy == null ? '' : res.zgjy,
           // 提交时间
@@ -190,7 +182,7 @@ Page({
           // 整改负责人
           zgr: res.zgfzr == null ? "" : res.zgfzr,
           // 整改完成日期
-          date: res.zgwcrq == null ? "" : res.zgwcrq,
+          date: res.zgwcrq == "" ? "请选择完成日期" : res.zgwcrq,
           // 整改完成情况
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
@@ -290,7 +282,7 @@ Page({
       "qyid": that.data.qyid,
       "zgwcqk": that.data.zgcs,
       "zgfzr": that.data.zgr,
-      "zgwcrq": that.data.date,
+      "zgwcrq": that.data.date == "请选择完成日期" ? "" : that.data.date,
     }
     request.requestLoading(config.insertYh, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据
@@ -300,11 +292,13 @@ Page({
       } else {
         wx.showToast({
           title: res.repMsg,
+          icon: 'none'
         })
       }
     }, function () {
       wx.showToast({
         title: '加载数据失败',
+        icon: 'none'
       })
     })
   },

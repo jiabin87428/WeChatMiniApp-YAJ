@@ -43,7 +43,7 @@ Page({
   // 点击用户头像
   userClick: function () {
     wx.navigateTo({
-      url: '../login/login'
+      url: '../login/chooseLoginType'
     })
   },
   // 点击添加隐患
@@ -51,32 +51,12 @@ Page({
     wx.navigateTo({
       url: '../danger/addDanger'
     })
-    // if (!this.checkLogin()) {
-    //   wx.navigateTo({
-    //     url: '../login/login'
-    //   })
-    //   return
-    // } else {
-    //   wx.navigateTo({
-    //     url: '../danger/addDanger'
-    //   })
-    // }
   },
   // 点击隐患列表
   listClick: function () {
     wx.navigateTo({
       url: '../danger/dangerCheckList'
     })
-    // if (!this.checkLogin()) {
-    //   wx.navigateTo({
-    //     url: '../login/login'
-    //   })
-    //   return
-    // } else {
-    //   wx.navigateTo({
-    //     url: '../danger/dangerList'
-    //   })
-    // }
   },
 
   // 判断是否登录
@@ -108,7 +88,7 @@ Page({
         }
       }, fail: function (res) {
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })

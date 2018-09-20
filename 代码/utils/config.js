@@ -24,7 +24,7 @@ var config = {
   getType: `${host}/getXx.do?action=getType`,
 
   // 隐患列表
-  getYhList: `${host}/getXx.do?action=getYhList&qyid=`,
+  getYhList: `${host}/getXx.do?action=getYhList`,
 
   // 隐患详情
   getOneYh: `${host}/getXx.do?action=getOneYh`,
@@ -82,7 +82,19 @@ var config = {
   getCategory: `${host}/getXx.do?action=getLb`,
 
   // 根据模版隐患类别获取详情隐患列表
-  getDangerType: `${host}/getXx.do?action=getCjwt`
+  getDangerType: `${host}/getXx.do?action=getCjwt`,
+
+  // 获取法律法规分类
+  getLawsType: `${host}/getXx.do?action=getFgfl`,
+
+  // 根据分类获取法律法规详情文书
+  getLawsDetail: `${host}/getXx.do?action=getFlfg`,
+
+  // 法律法规内容检索
+  searchLawsInfo: `${host}/getXx.do?action=showWj`,
+
+  // 下载文件
+  downLoadFile: `${host}/getfile?fileid=`,
 };
 //对外把对象config返回
 module.exports = config

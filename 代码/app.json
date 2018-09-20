@@ -24,7 +24,12 @@
     "pages/manger/companyFilter",
     "pages/application/companyInfoDetail",
     "pages/danger/dangerTypeSelect",
-    "pages/danger/dangerDetailSelect"
+    "pages/danger/dangerDetailSelect",
+    "pages/login/chooseLoginType",
+    "pages/danger/dangerSearchList",
+    "pages/laws/laws",
+    "pages/laws/lawsDetail",
+    "pages/laws/lawsInfoSearch"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -51,10 +56,10 @@
         "text": "隐患排查"
       },
       {
-        "pagePath": "pages/application/application",
+        "pagePath": "pages/laws/laws",
         "iconPath": "assets/application_unselected.png",
         "selectedIconPath": "assets/application.png",
-        "text": "应用"
+        "text": "法律法规"
       },
       {
         "pagePath": "pages/me/me",

@@ -71,14 +71,14 @@ Page({
   // 点击用户头像
   userClick: function () {
     wx.navigateTo({
-      url: '../login/login'
+      url: '../login/chooseLoginType'
     })
   },
   // 点击添加隐患
   addClick: function () {
     if(!this.checkLogin()) {
       wx.navigateTo({
-        url: '../login/login'
+        url: '../login/chooseLoginType'
       })
       return
     }else{
@@ -91,7 +91,7 @@ Page({
   listClick: function () {
     if(!this.checkLogin()) {
       wx.navigateTo({
-        url: '../login/login'
+        url: '../login/chooseLoginType'
       })
       return
     } else {
@@ -139,7 +139,7 @@ Page({
             that.setData({
               longitude: app.globalData.userInfo.mapx,
               latitude: app.globalData.userInfo.mapy,
-              currentLocation: app.globalData.userInfo.address,
+              currentLocation: app.globalData.userInfo.dep,
               isqy: true,
               titleHeight: 144,
               markers: mark
@@ -152,7 +152,7 @@ Page({
         console.log(app.globalData.userInfo)
       }, fail: function (res) {
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })
@@ -167,7 +167,7 @@ Page({
     var that = this
     var params = {
       "repIsqy": app.globalData.userInfo.repIsqy,
-      "repRecordid": app.globalData.userInfo.repRecordid
+      "userid": app.globalData.userInfo.userid
     }
     request.requestLoading(config.getTj, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据
@@ -179,6 +179,9 @@ Page({
       var markList = that.data.markers
 
       if (app.globalData.userInfo.repIsqy == 'false') {
+        if (res.qylist == null) {
+          return
+        }
         for (var i = 0; i < res.qylist.length; i++) {
           var item = res.qylist[i]
           var callout = {
@@ -208,6 +211,9 @@ Page({
           qywzgyh: res.wzgyhs
         })
       } else {
+        if (res.yhlist == null) {
+          return
+        }
         for (var i = 0; i < res.yhlist.length; i++) {
           var item = res.yhlist[i]
           var callout = {

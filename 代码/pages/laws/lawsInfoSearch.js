@@ -1,4 +1,4 @@
-// pages/check/safetyManage.js
+// pages/check/dangerDetailSelect.js
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
 var app = getApp()
@@ -9,10 +9,10 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    // 搜索文字
     searchName: "",
-    // 对象数组
-    repLb: [],
+    sslist: [],
+    // 下载进度
+    progress: 0,
   },
 
   /**
@@ -28,7 +28,6 @@ Page({
         });
       }
     });
-    this.getDangerTypes()
   },
 
   /**
@@ -42,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('1111')
+
   },
 
   /**
@@ -79,62 +78,68 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 查询类别
-  searchLB: function (e) {
+  // 查询常见隐患
+  searchInfo: function (e) {
     this.setData({
       searchName: e.detail.value
     })
-    this.getDangerTypes()
+    this.getLawsDetails()
   },
-  // 获取类别
-  getDangerTypes: function() {
-    var param = {
-      "lbName": this.data.searchName
-    }
+  // 获取法律分类列表
+  getLawsDetails: function () {
     var that = this
+    var param = {
+      "fgnr": that.data.searchName
+    }
     //调用接口
-    request.requestLoading(config.getCategory, param, '正在加载数据', function (res) {
+    request.requestLoading(config.searchLawsInfo, param, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repLb != null) {
+      if (res.sslist != null) {
         that.setData({
-          repLb: res.repLb
+          sslist: res.sslist
         })
       }
     }, function () {
       wx.showToast({
         title: '加载数据失败',
+        icon: 'none'
       })
-    })
-  },
-  // 跳转编辑页面
-  jumpDetail: function (e) {
-    var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../danger/dangerDetailSelect?type=' + item.lb
     })
   },
 
-  // 保存安全信息
-  submit: function (e) {
-    var that = this
-    //调用接口
-    request.requestLoading(config.updateBaseInfoAndSaftyInfo, this.data.params, '正在加载数据', function (res) {
-      console.log(res)
-      if (res != null) {
-        if (res.repCode == null || res.repCode != '500') {
-          wx.navigateBack({
-            delta: 1
-          })
-        }
-      } else {
-        wx.showToast({
-          title: res.repMsg,
+  // 下载文档并查看
+  downLoadAndView: function (e) {
+    var item = e.currentTarget.dataset.item
+    var fileId = item.attid
+    var fileType = fileId.split('.')[1];
+    const downloadTask = wx.downloadFile({
+      url: config.downLoadFile + fileId,
+      success: function (res) {
+        var filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType: fileType,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: res.errMsg,
+              icon: 'none'
+            })
+          }
         })
       }
-    }, function () {
-      wx.showToast({
-        title: '加载数据失败',
+    })
+
+    downloadTask.onProgressUpdate((res) => {
+      this.setData({
+        progress: res.progress
       })
+      // console.log('下载进度', res.progress)
+      // console.log('已经下载的数据长度', res.totalBytesWritten)
+      // console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+
     })
   },
 })

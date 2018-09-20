@@ -1,7 +1,7 @@
-// pages/check/safetyManage.js
+var app = getApp()
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
-var app = getApp()
+// pages/danger/dangerCheckList.js
 Page({
 
   /**
@@ -9,10 +9,8 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    // 搜索文字
-    searchName: "",
-    // 对象数组
-    repLb: [],
+    // 隐患列表
+    dangerList: []
   },
 
   /**
@@ -28,7 +26,6 @@ Page({
         });
       }
     });
-    this.getDangerTypes()
   },
 
   /**
@@ -42,7 +39,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('1111')
+    var that = this
+    var params = {
+      "repIsqy": app.globalData.userInfo.repIsqy,
+      "repRecordid": app.globalData.userInfo.repRecordid
+    }
+    this.reqDangerList(params)
   },
 
   /**
@@ -79,53 +81,22 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 查询类别
-  searchLB: function (e) {
-    this.setData({
-      searchName: e.detail.value
-    })
-    this.getDangerTypes()
-  },
-  // 获取类别
-  getDangerTypes: function() {
-    var param = {
-      "lbName": this.data.searchName
-    }
-    var that = this
-    //调用接口
-    request.requestLoading(config.getCategory, param, '正在加载数据', function (res) {
-      console.log(res)
-      if (res.repLb != null) {
-        that.setData({
-          repLb: res.repLb
-        })
-      }
-    }, function () {
-      wx.showToast({
-        title: '加载数据失败',
-      })
-    })
-  },
-  // 跳转编辑页面
-  jumpDetail: function (e) {
-    var item = e.currentTarget.dataset.item
+  // 点击查看隐患详情
+  getDetail: function (e) {
     wx.navigateTo({
-      url: '../danger/dangerDetailSelect?type=' + item.lb
+      url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&sfyzg=' + e.currentTarget.dataset.name
     })
   },
-
-  // 保存安全信息
-  submit: function (e) {
+  // 获取隐患列表
+  reqDangerList: function (searchObj, cb) {
     var that = this
     //调用接口
-    request.requestLoading(config.updateBaseInfoAndSaftyInfo, this.data.params, '正在加载数据', function (res) {
+    request.requestLoading(config.getYhList, searchObj, '正在加载数据', function (res) {
       console.log(res)
-      if (res != null) {
-        if (res.repCode == null || res.repCode != '500') {
-          wx.navigateBack({
-            delta: 1
-          })
-        }
+      if (res.repYhList != null) {
+        that.setData({
+          dangerList: res.repYhList
+        })
       } else {
         wx.showToast({
           title: res.repMsg,

@@ -32,7 +32,7 @@ App({
       }, fail: function (res) {
         that.globalData.userInfo = null
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })

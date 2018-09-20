@@ -10,8 +10,10 @@ Page({
   data: {
     scrollHeight: 0,
     searchName: "",
-    type: "",
-    repCjwt: [],
+    typeId: "",
+    repFlfg: [],
+    // 下载进度
+    progress: 0,
   },
 
   /**
@@ -28,11 +30,12 @@ Page({
       }
     });
 
-    var type = options.type
+    var typeId = options.type
     this.setData({
-      type: type,
+      typeId: typeId,
     })
-    this.getDangerDetails()
+
+    this.getLawsDetails()
   },
 
   /**
@@ -46,7 +49,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -88,21 +91,21 @@ Page({
     this.setData({
       searchName: e.detail.value
     })
-    this.getDangerDetails()
+    this.getLawsDetails()
   },
-  // 获取隐患详细列表
-  getDangerDetails: function () {
+  // 获取法律分类列表
+  getLawsDetails: function () {
     var that = this
     var param = {
-      "lb": that.data.type,
-      "dytk": that.data.searchName
+      "categoryid": that.data.typeId,
+      "fileName": that.data.searchName
     }
     //调用接口
-    request.requestLoading(config.getDangerType, param, '正在加载数据', function (res) {
+    request.requestLoading(config.getLawsDetail, param, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repCjwt != null) {
+      if (res.repFlfg != null) {
         that.setData({
-          repCjwt: res.repCjwt
+          repFlfg: res.repFlfg
         })
       }
     }, function () {
@@ -113,18 +116,39 @@ Page({
     })
   },
 
-  // 选择并返回赋值
-  selectItem: function (e) {
-    var pages = getCurrentPages();             //  获取页面栈
-    var prevPage = pages[pages.length - 3];   // 上2个页面
+  // 下载文档并查看
+  downLoadAndView: function (e) {
     var item = e.currentTarget.dataset.item
-    prevPage.setData({
-      desc: item.cjwt,
-      clause: item.dytk,
-      clauseInfo: item.tknr
+    var fileId = item.attachmentId
+    var fileType = fileId.split('.')[1];
+    const downloadTask = wx.downloadFile({
+      url: config.downLoadFile + fileId,
+      success: function (res) {
+        var filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          fileType: fileType,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: res.errMsg,
+              icon: 'none'
+            })
+          }
+        })
+      }
     })
-    wx.navigateBack({
-      delta: 2
+
+    downloadTask.onProgressUpdate((res) => {
+      this.setData({
+        progress: res.progress
+      })
+      // console.log('下载进度', res.progress)
+      // console.log('已经下载的数据长度', res.totalBytesWritten)
+      // console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+      
     })
   },
 })

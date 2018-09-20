@@ -10,19 +10,9 @@ Page({
   data: {
     scrollHeight: 0,
     // 隐患列表
-    dangerList: [
-      // {
-      //   "qymc": "欢天喜地鞭炮销售店",
-      //   "recordid": "B2A63870974F4913A7FE215A56B0B2B8", 
-      //   "yhfxrq": "2018-05-06", 
-      //   "yhnr": "业人员教育培训试试"        
-      // },{
-      //   "qymc": "欢天喜地鞭炮销售店",
-      //   "recordid": "FEF1112ACE414874B3F71F17B44D0433",
-      //   "yhfxrq": "2018-05-03",
-      //   "yhnr": "需要培训"
-      //   }
-    ]
+    dangerList: [],
+    // 当前选中tab页 0-全部 1-未整改 2-已整改
+    currentTab: 0,
   },
 
   /**
@@ -53,8 +43,12 @@ Page({
   onShow: function () {
     var that = this
     var params = {
-      "repIsqy": app.globalData.userInfo.repIsqy,
-      "repRecordid": app.globalData.userInfo.repRecordid
+      "userid": app.globalData.userInfo.userid
+    }
+    if (that.data.currentTab == 1) {
+      params["sfyzg"] = "false"
+    } else if (that.data.currentTab == 2) {
+      params["sfyzg"] = "true"
     }
     this.reqDangerList(params)
   },
@@ -93,6 +87,24 @@ Page({
   onShareAppMessage: function () {
   
   },
+  // 切换Tab页面
+  changeTap: function(e) {
+    var that = this
+    var viewId = e.currentTarget.id;
+    that.setData({
+      currentTab: viewId
+    })
+
+    var params = {
+      "userid": app.globalData.userInfo.userid
+    }
+    if (that.data.currentTab == 1) {
+      params["sfyzg"] = "false"
+    } else if (that.data.currentTab == 2) {
+      params["sfyzg"] = "true"
+    }
+    this.reqDangerList(params)
+  },
   // 点击查看隐患详情
   getDetail: function (e) {
     wx.navigateTo({
@@ -112,11 +124,13 @@ Page({
       }else {
         wx.showToast({
           title: res.repMsg,
+          icon: 'none'
         })
       }
     }, function () {
       wx.showToast({
         title: '加载数据失败',
+        icon: 'none'
       })
     })
   },

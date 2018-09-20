@@ -209,7 +209,7 @@ Page({
         if (app.globalData.userInfo.repIsqy == 'false') {
           that.setData({
             isqy: 'false',
-            qyid: app.globalData.userInfo.repRecordid,
+            qyid: app.globalData.userInfo.userid,
             companyName: app.globalData.userInfo.repName,
             companyPlace: "",
             companyLocalid: "",
@@ -235,7 +235,7 @@ Page({
         } else {
           that.setData({
             isqy: 'true',
-            qyid: app.globalData.userInfo.repRecordid,
+            qyid: app.globalData.userInfo.userid,
             companyName: app.globalData.userInfo.repName,
             companyPlace: { name: app.globalData.userInfo.companyLocal},
             companyLocalid: app.globalData.userInfo.companyLocalid,
@@ -256,7 +256,7 @@ Page({
         console.log(app.globalData.userInfo)
       }, fail: function (res) {
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })

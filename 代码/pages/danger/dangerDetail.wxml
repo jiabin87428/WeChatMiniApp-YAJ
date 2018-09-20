@@ -5,21 +5,17 @@
     <text class='cellText1'>企业名称</text>
     <text class='flex-item cellText2'>{{qymc}}</text>
   </view>
-  <!-- <view id='2' class='scrollItem'>
-    <text class='cellText1'>行业类型</text>
-    <text class='flex-item cellText2'>{{hylx}}</text>
-  </view>
-  <view id='3' class='scrollItem'>
-    <text class='cellText1'>隐患类别</text>
-    <text class='flex-item cellText2'>{{yhlb}}</text>
-  </view>
-  <view id='3' class='scrollItem'>
-    <text class='cellText1'>存在问题</text>
-    <text class='flex-item cellText2'>{{czwt}}</text>
-  </view> -->
   <view id='3' class='scrollItem'>
     <text class='cellText1'>问题描述</text>
     <text class='flex-item cellText2'>{{wtms}}</text>
+  </view>
+  <view id='clause' class='scrollItem'>
+    <text class='cellText1'>对应条款</text>
+    <text class='cellText2'>{{clause}}</text>
+  </view>
+  <view id='clauseInfo' class='scrollItem'>
+    <text class='cellText1'>条款内容</text>
+    <text class='cellText2'>{{clauseInfo}}</text>
   </view>
   <view class='imageBaseView' style='height:{{58+imageViewHeight}}px;'>
     <view class='titleView'>
@@ -81,7 +77,7 @@
     <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text>
     <picker class='dateChoose' mode="date" value="{{date}}" start="2015-09-01" end="2118-12-31" bindchange="bindDateChange" wx:if="{{sfyzg=='false'}}">
       <view class="picker">
-        {{date}}
+        <text class='pickerText'>{{date}}</text>
       </view>
     </picker>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"  wx:if="{{sfyzg=='false'}}"></image>

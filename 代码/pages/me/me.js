@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 是否企业用户
-    isqy: 'false',
+    // 用户类型
+    yhlx: 0,
     // 企业ID
     qyid: '',
     // 用户头像链接
@@ -139,12 +139,14 @@ Page({
       key: 'userInfo',
       success: function (res) {
         app.globalData.userInfo = res.data
-        if (app.globalData.userInfo.repIsqy == 'false') {
+        that.setData({
+          yhlx: app.globalData.userInfo.yhlx
+        })
+        if (app.globalData.userInfo.yhlx == '1') {
           that.setData({
-            isqy: 'false',
             roleName: '监管用户',
-            qyid: app.globalData.userInfo.repRecordid,
-            logo: config.logoImg + app.globalData.userInfo.repRecordid,
+            qyid: app.globalData.userInfo.userid,
+            logo: config.logoImg + app.globalData.userInfo.userid,
             showCompanyName: app.globalData.userInfo.name,
             showCompanyPlace: "",
             showCompanyType: "",
@@ -169,11 +171,10 @@ Page({
           })
         } else {
           that.setData({
-            isqy: 'true',
-            qyid: app.globalData.userInfo.repRecordid,
-            logo: config.logoImg + app.globalData.userInfo.repRecordid,
+            qyid: app.globalData.userInfo.userid,
+            logo: config.logoImg + app.globalData.userInfo.userid,
             roleName: '企业用户',
-            showCompanyName: app.globalData.userInfo.repName,
+            showCompanyName: app.globalData.userInfo.name,
             showCompanyPlace: app.globalData.userInfo.companyLocal,
             showCompanyType: app.globalData.userInfo.companyType,
             showContact: app.globalData.userInfo.inChargePerson,
@@ -194,7 +195,7 @@ Page({
         console.log(app.globalData.userInfo)
       }, fail: function (res) {
         wx.navigateTo({
-          url: '../login/login'
+          url: '../login/chooseLoginType'
         })
       }
     })

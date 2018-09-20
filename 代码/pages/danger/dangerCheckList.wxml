@@ -1,8 +1,31 @@
 <!--pages/danger/dangerCheckList.wxml-->
 <view class='baseView'>
-  <view class="searchView">
+  <!-- <view class="searchView">
     <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
     <input class='searchInput' placeholder='请输入隐患名称'></input>
+  </view> -->
+  <view class="searchView">
+    <view id='0' class='tapBarItem' wx:if="{{currentTab != 0}}" bindtap='changeTap'>
+      <text class='tapText1'>全部</text>
+    </view>
+    <view id='0' class='tapBarItem2' wx:if="{{currentTab == 0}}" bindtap='changeTap'>
+      <text class='tapText2'>全部</text>
+    </view>
+    <view id='1' class='tapBarItem' wx:if="{{currentTab != 1}}" bindtap='changeTap'>
+      <text class='tapText1'>未整改</text>
+    </view>
+    <view id='1' class='tapBarItem2' wx:if="{{currentTab == 1}}" bindtap='changeTap'>
+      <text class='tapText2'>未整改</text>
+    </view>    
+    <view id='2' class='tapBarItem' wx:if="{{currentTab != 2}}" bindtap='changeTap'>
+      <text class='tapText1'>已整改</text>
+    </view>
+    <view id='2' class='tapBarItem2' wx:if="{{currentTab == 2}}" bindtap='changeTap'>
+      <text class='tapText2'>已整改</text>
+    </view>
+    <view class='searchItem'>
+      <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
+    </view>
   </view>
   <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-40}}px;">
     <view wx:for="{{dangerList}}" class='scrollItem'>
@@ -14,8 +37,8 @@
         <text class='typeText' wx:else>未整改</text>
       </view>
       <view class='subView'>
-        <text class='dangerText'>{{item.wtms}}</text>
-        <text class='subText'>{{item.tjsj}}</text>
+        <text class='dangerText'>{{item.xcwt}}</text>
+        <text class='subText'>{{item.flyj}}</text>
       </view>
     </view>
     </view>

@@ -1,4 +1,4 @@
-// pages/check/safetyManage.js
+// pages/check/dangerDetailSelect.js
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
 var app = getApp()
@@ -9,10 +9,8 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    // 搜索文字
     searchName: "",
-    // 对象数组
-    repLb: [],
+    repFgfl: [],
   },
 
   /**
@@ -28,7 +26,6 @@ Page({
         });
       }
     });
-    this.getDangerTypes()
   },
 
   /**
@@ -42,7 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('1111')
+    this.getLawTypesList()
   },
 
   /**
@@ -79,62 +76,46 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 查询类别
-  searchLB: function (e) {
+  // 查询常见隐患
+  searchYH: function (e) {
     this.setData({
       searchName: e.detail.value
     })
-    this.getDangerTypes()
+    this.getLawTypesList()
   },
-  // 获取类别
-  getDangerTypes: function() {
-    var param = {
-      "lbName": this.data.searchName
-    }
+  // 内容检索
+  infoSearch: function (e) {
+    wx.navigateTo({
+      url: '../laws/lawsInfoSearch'
+    })
+  },
+  // 获取法律分类列表
+  getLawTypesList: function () {
     var that = this
+    var param = {
+      "flName": that.data.searchName
+    }
     //调用接口
-    request.requestLoading(config.getCategory, param, '正在加载数据', function (res) {
+    request.requestLoading(config.getLawsType, param, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repLb != null) {
+      if (res.repFgfl != null) {
         that.setData({
-          repLb: res.repLb
+          repFgfl: res.repFgfl
         })
       }
     }, function () {
       wx.showToast({
         title: '加载数据失败',
+        icon: 'none'
       })
-    })
-  },
-  // 跳转编辑页面
-  jumpDetail: function (e) {
-    var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../danger/dangerDetailSelect?type=' + item.lb
     })
   },
 
-  // 保存安全信息
-  submit: function (e) {
-    var that = this
-    //调用接口
-    request.requestLoading(config.updateBaseInfoAndSaftyInfo, this.data.params, '正在加载数据', function (res) {
-      console.log(res)
-      if (res != null) {
-        if (res.repCode == null || res.repCode != '500') {
-          wx.navigateBack({
-            delta: 1
-          })
-        }
-      } else {
-        wx.showToast({
-          title: res.repMsg,
-        })
-      }
-    }, function () {
-      wx.showToast({
-        title: '加载数据失败',
-      })
+  // 选择并返回赋值
+  selectItem: function (e) {
+    var item = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: '../laws/lawsDetail?type=' + item.id
     })
   },
 })
