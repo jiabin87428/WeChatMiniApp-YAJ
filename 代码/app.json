@@ -23,26 +23,13 @@
     "pages/application/standardInfo",
     "pages/manger/companyFilter",
     "pages/application/companyInfoDetail",
-    "pages/danger/addDanger4JJ",
-    "pages/jijie/companyData",
-    "pages/common/companyList",
-    "pages/check/firstCheck",
-    "pages/check/baseInfo",
-    "pages/check/safetyManage",
-    "pages/check/editPage",
-    "pages/check/missionList",
-    "pages/danger/dangerDetail4JJ",
-    "pages/check/deviceInfo",
-    "pages/check/deviceDetail",
-    "pages/me/taskInMe",
-    "pages/application/vedioPlay",
-    "pages/check/dangerTypeSelect",
-    "pages/check/dangerDetailSelect"
+    "pages/danger/dangerTypeSelect",
+    "pages/danger/dangerDetailSelect"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2D68AA",
-    "navigationBarTitleText": "纪杰安管家",
+    "navigationBarTitleText": "易安监",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -58,10 +45,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/check/missionList",
+        "pagePath": "pages/danger/danger",
         "iconPath": "assets/dangerCheck_unselected.png",
         "selectedIconPath": "assets/dangerCheck.png",
-        "text": "检查任务"
+        "text": "隐患排查"
       },
       {
         "pagePath": "pages/application/application",

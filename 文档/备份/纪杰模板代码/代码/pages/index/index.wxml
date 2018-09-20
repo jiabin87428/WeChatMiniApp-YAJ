@@ -1,0 +1,114 @@
+<!--index.wxml-->
+<!--首页-用户类型为管理者或政府-->
+<view class='baseView' wx:if="{{yhlx == 3 || yhlx == 4}}">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <view id='local' class='scrollItem' bindtap='jumpLocal'>
+      <text class='JJ_cellText1'>区-街道</text>
+      <text class='JJ_cellText2'>{{orgname}}</text>
+      <image class="JJ_arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image> 
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
+      <text class='cellText1'>已查企业数</text>
+      <text class='cellText2'>{{ycqys}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
+      <text class='cellText1'>查出隐患总数</text>
+      <text class='cellText2'>{{yhzs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
+      <text class='cellText1'>复查已整改总数</text>
+      <text class='cellText2'>{{fcyzgzs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_blue.png" mode="aspectFit"></image>
+      <text class='cellText1'>重大隐患</text>
+      <text class='cellText2'>{{zdyhs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
+      <text class='cellText1'>不配合企业</text>
+      <text class='cellText2'>{{bphqy}}</text>
+    </view>
+    <!-- <view id='companyName' class='scrollItem' bindtap='getCompanyData'>
+      <text class='JJ_cellText1'>企业管理数据统计</text>
+      <text class='JJ_cellText2'>{{companyName.name}}</text>
+      <image class="JJ_arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image> 
+    </view> -->
+  </scroll-view>
+</view>
+
+<!--检查人(工程师)首页-->
+<view class='baseView' wx:elif="{{yhlx == 2}}">
+  <scroll-view scroll-y="true" class='scrollView'>
+    <image bindtap="userClick" class="titleImage" src="../../assets/dangerBG.png" mode="widthFix"></image> 
+    <view class="subBaseView3">
+      <view class='scrollItem'>
+        <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
+        <text class='cellText1'>待办任务</text>
+        <text class='cellText2'>{{dbrws}}</text>
+      </view>
+      <view class='scrollItem'>
+        <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
+        <text class='cellText1'>已办任务</text>
+        <text class='cellText2'>{{ybrws}}</text>
+      </view>
+      <!-- <view class='scrollItem'>
+        <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
+        <text class='cellText1'>未整改隐患</text>
+        <text class='cellText2'>{{wzgyhs}}</text>
+      </view> -->
+    </view>
+  </scroll-view>
+</view>
+
+<!--默认首页-->
+<view class='baseView' wx:else>
+  <view class="subBaseView3" wx:if="{{isqy == true}}">
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
+      <text class='cellText1'>隐患总数</text>
+      <text class='cellText2'>{{yhzs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
+      <text class='cellText1'>已整改隐患</text>
+      <text class='cellText2'>{{yzgyhs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
+      <text class='cellText1'>未整改隐患</text>
+      <text class='cellText2'>{{wzgyhs}}</text>
+    </view>
+  </view>
+  <view class="subBaseView4" wx:else>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
+      <text class='cellText1'>企业总数</text>
+      <text class='cellText2'>{{qyzs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
+      <text class='cellText1'>企业隐患总数</text>
+      <text class='cellText2'>{{qyyhzs}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_violet.png" mode="aspectFit"></image>
+      <text class='cellText1'>企业已整改隐患</text>
+      <text class='cellText2'>{{qyyzgyh}}</text>
+    </view>
+    <view class='scrollItem'>
+      <image class="point" src="../../assets/point_blue.png" mode="aspectFit"></image>
+      <text class='cellText1'>企业未整改隐患</text>
+      <text class='cellText2'>{{qywzgyh}}</text>
+    </view>
+  </view>
+  <view class="map_container" style='height:{{winHeight-titleHeight}}px;'>
+    <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" show-location="true" markers="{{markers}}" bindmarkertap="makertap">
+       <cover-image class="add" style='left:{{winWidth/2-25}}px;' src="../../assets/mainAdd_blue.png" mode="aspectFit" bindtap='addClick'></cover-image> 
+    </map>
+  </view>
+  <text class='location'>{{currentLocation}}</text>
+</view>

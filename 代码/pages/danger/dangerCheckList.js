@@ -9,13 +9,6 @@ Page({
    */
   data: {
     scrollHeight: 0,
-
-    // 企业ID
-    qyid: '',
-
-    // 企业信息对象
-    params: {},
-
     // 隐患列表
     dangerList: [
       // {
@@ -36,16 +29,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var qyid = options.qyid
-    var obj = JSON.parse(options.data)
     var that = this
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
         that.setData({
-          scrollHeight: res.windowHeight,
-          qyid: qyid,
-          params: obj
+          scrollHeight: res.windowHeight
         });
       }
     });
@@ -107,14 +96,14 @@ Page({
   // 点击查看隐患详情
   getDetail: function (e) {
     wx.navigateTo({
-      url: '../danger/dangerDetail4JJ?yhid=' + e.currentTarget.dataset.id + '&sfyzg=' + e.currentTarget.dataset.name
+      url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&sfyzg=' + e.currentTarget.dataset.name
     })
   },
   // 获取隐患列表
   reqDangerList: function (searchObj, cb) {
     var that = this
     //调用接口
-    request.requestLoading(config.getYhList + that.data.qyid, searchObj, '正在加载数据', function (res) {
+    request.requestLoading(config.getYhList, searchObj, '正在加载数据', function (res) {
       console.log(res)
       if (res.repYhList != null) {
         that.setData({
@@ -129,12 +118,6 @@ Page({
       wx.showToast({
         title: '加载数据失败',
       })
-    })
-  },
-  // 添加新隐患接口
-  addDanger: function () {
-    wx.navigateTo({
-      url: '../danger/addDanger4JJ?qyid=' + this.data.qyid + '&qymc=' + this.data.params.qymc
     })
   },
 })

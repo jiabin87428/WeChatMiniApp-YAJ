@@ -39,20 +39,7 @@
   border-radius: 10px;
   border-style: solid;
   align-items:center;/*垂直居中*/
-}
-
-.dangerView2 {
-  display:flex;
-  flex-direction:row;
-  width: 90%;
-  height: 150px;
-  background: linear-gradient(to right, #FE7369 , #FFBB73);
-  margin-top: 10px;
-  border-color: #D9E5F0;
-  border-width: 1px;
-  border-radius: 10px;
-  border-style: solid;
-  align-items:center;/*垂直居中*/
+  
 }
 
 .comingView {
@@ -77,14 +64,12 @@
 .dangerIcon {
   width: 60px;
   margin-left: 30px;
-  margin-right: 30px;
 }
 
 .subView {
   display:flex;
   flex-direction:column;
   height: 80%;
-  width: 90%;
   justify-content: center;/*水平居中*/
 }
 

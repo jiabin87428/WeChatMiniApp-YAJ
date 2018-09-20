@@ -1,5 +1,3 @@
-var request = require('../../utils/request.js')
-var config = require('../../utils/config.js')
 var app = getApp()
 // pages/common/selectRadioList.js
 Page({
@@ -27,17 +25,14 @@ Page({
   onLoad: function (options) {
     var viewId = options.id
     var data = options.data
-    var selected = {}
-    if (options.selected != null) {
-      selected = options.selected
-    }
+    var selected = options.selected
     this.setData({
       viewId: viewId,
       sourceList: JSON.parse(data),
-      selected: selected
+      selected: JSON.parse(selected)
     })
 
-    if (viewId == 'companyType1' || viewId == 'companyType2' || viewId == 'local' || viewId == 'local2' || viewId == 'local3') {
+    if (viewId == 'companyType1' || viewId == 'companyType2') {
       this.setData({
         needSearch: false,
         searchHeight: 0
@@ -138,37 +133,10 @@ Page({
       prevPage.setData({
         companyType2: this.data.sourceList[e.detail.value]
       })
-    } else if (this.data.viewId == "local") {
-      var orgid = this.data.sourceList[e.detail.value].id
-      prevPage = pages[pages.length - 2]
-      prevPage.setData({
-        orgname: this.data.sourceList[e.detail.value].name
-      })
-      this.getLocal(orgid,"local2")
-      return
-    } else if (this.data.viewId == "local2") {
-      var orgid = this.data.sourceList[e.detail.value].id
-      prevPage = pages[pages.length - 3]
-      prevPage.setData({
-        orgname: prevPage.data.orgname + '-' + this.data.sourceList[e.detail.value].name
-      })
-      this.getLocal(orgid, "local3")
-      return
-    } else if (this.data.viewId == "local3") {
-      prevPage = pages[pages.length - 4]
-      prevPage.setData({
-        orgid: this.data.sourceList[e.detail.value].id,
-        orgname: prevPage.data.orgname + '-' + this.data.sourceList[e.detail.value].name
-      })
-    }
-
+    } 
     if (this.data.viewId == "companyType2") {
       wx.navigateBack({
         delta: 2
-      })
-    } if (this.data.viewId == "local3") {
-      wx.navigateBack({
-        delta: 4
       })
     }else{
       wx.navigateBack({
@@ -193,24 +161,5 @@ Page({
         })
       })
     }
-  },
-  // 获取Local
-  getLocal: function(orgid,viewId) {
-    request.requestLoading(config.getLocal + orgid, null, '正在加载数据', function (res) {
-      //res就是我们请求接口返回的数据
-      console.log(res)
-      if (res.repCode != null && res.repCode == 500) {
-        return
-      }
-      wx.navigateTo({
-        url: '../common/selectRadioList?id=' + viewId + '&data=' + JSON.stringify(res.repOrg)
-      })
-    }, function () {
-      wx.showToast({
-        title: '加载数据失败',
-        icon: 'none'
-      })
-    })
-    return
-  },
+  }
 })

@@ -73,7 +73,7 @@ Page({
   
   },
   // 点击隐患列表
-  listClick: function (e) {
+  listClick: function () {
     if (this.data.isqy == false) {// 监管用户
       wx.navigateTo({
         url: '../manger/companyManger'
@@ -83,12 +83,6 @@ Page({
         url: '../application/companyInfoList?qyid=' + app.globalData.userInfo.repRecordid
       })
     }
-  },
-  // 点击视频播放列表
-  vedioClick: function (e) {
-    wx.navigateTo({
-      url: '../application/vedioPlay'
-    })
   },
   // 判断是否登录
   checkLogin: function () {

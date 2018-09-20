@@ -12,18 +12,30 @@ Page({
     editable: 'true',
     // 是否企业用户
     isqy: 'false',
-    // 用户类型
-    yhlx: 0,
-    // 用户ID
-    userid: '',
     // 修改的参数
-
-    // 电话
-    phone: '联系电话',
-    // 手机
-    mobile: '联系手机',
+    // 企业ID
+    qyid: '',
+    // 企业全称
+    companyName: '企业名称',
+    // 企业属地
+    companyPlace: { name: '' },
+    // 企业类型1
+    companyType1: {name: ''},
+    // 企业类型2
+    companyType2: { name: '' },
+    // 联系人
+    contact: '企业联系人',
+    // 联系方式
+    phone: '联系方式',
     // 邮箱
     email: '邮箱',
+    // 企业地址
+    address: '企业地址',
+
+    // 属地ID
+    companyLocalid: '',
+    // 类型ID
+    companyTypeid: '',
 
     // 监管用户显示
     // 姓名
@@ -32,10 +44,13 @@ Page({
     sex: '性别',
     // 岗位
     job: '岗位',
+    // 所在部门
+    dep: '所在部门',
+    // 联系手机
+    mobile: '联系手机',
 
-    // 检查人显示
-    // 职称
-    jobTitle: '职称',
+    longitude: '0',
+    latitude: '0',
   },
 
   /**
@@ -44,9 +59,18 @@ Page({
   onLoad: function (options) {
     this.checkLogin()
     var editable = options.editable
+    var longitude = options.longitude
+    var latitude = options.latitude
     if (editable != null) {
       this.setData({
         editable: editable
+      })
+    }
+
+    if (longitude != null && latitude != null) {
+      this.setData({
+        longitude: longitude,
+        latitude: latitude
       })
     }
   },
@@ -182,25 +206,53 @@ Page({
       key: 'userInfo',
       success: function (res) {
         app.globalData.userInfo = res.data
-        that.setData({
-          isqy: 'false',
-          yhlx: app.globalData.userInfo.yhlx,
-          userid: app.globalData.userInfo.userid,
-          // 姓名
-          name: app.globalData.userInfo.name == null ? '' : app.globalData.userInfo.name,
-          // 性别
-          sex: app.globalData.userInfo.sex == null ? '' : app.globalData.userInfo.sex,
-          // 职称
-          jobTitle: app.globalData.userInfo.title == null ? '' : app.globalData.userInfo.title,
-          // 岗位
-          job: app.globalData.userInfo.job == null ? '' : app.globalData.userInfo.job,
-          // 联系电话
-          phone: app.globalData.userInfo.phone == null ? '' : app.globalData.userInfo.phone,
-          // 联系手机
-          mobile: app.globalData.userInfo.mobile == null ? '' : app.globalData.userInfo.mobile,
-          // 邮箱
-          email: app.globalData.userInfo.email == null ? '' : app.globalData.userInfo.email
-        })
+        if (app.globalData.userInfo.repIsqy == 'false') {
+          that.setData({
+            isqy: 'false',
+            qyid: app.globalData.userInfo.repRecordid,
+            companyName: app.globalData.userInfo.repName,
+            companyPlace: "",
+            companyLocalid: "",
+            companyType1: "",
+            companyType2: "",
+            companyTypeid: "",
+            contact: "",
+            phone: "",
+            address: "",
+
+            name: app.globalData.userInfo.name == null ? '' : app.globalData.userInfo.name,
+            // 性别
+            sex: app.globalData.userInfo.sex == null ? '' : app.globalData.userInfo.sex,
+            // 岗位
+            job: app.globalData.userInfo.job == null ? '' : app.globalData.userInfo.job,
+            // 所在部门
+            dep: app.globalData.userInfo.dep == null ? '' : app.globalData.userInfo.dep,
+            // 联系手机
+            mobile: app.globalData.userInfo.mobile == null ? '' : app.globalData.userInfo.mobile,
+            // 邮箱
+            email: app.globalData.userInfo.email == null ? '' : app.globalData.userInfo.email
+          })
+        } else {
+          that.setData({
+            isqy: 'true',
+            qyid: app.globalData.userInfo.repRecordid,
+            companyName: app.globalData.userInfo.repName,
+            companyPlace: { name: app.globalData.userInfo.companyLocal},
+            companyLocalid: app.globalData.userInfo.companyLocalid,
+            companyType1: { name: app.globalData.userInfo.companyType},
+            companyTypeid: app.globalData.userInfo.companyTypeid,
+            contact: app.globalData.userInfo.inChargePerson,
+            phone: app.globalData.userInfo.mobile,
+            email: app.globalData.userInfo.email,
+            address: app.globalData.userInfo.address,
+            
+            name: '',
+            sex: '',
+            job: '',
+            dep: '',
+            mobile: '',
+          })
+        }
         console.log(app.globalData.userInfo)
       }, fail: function (res) {
         wx.navigateTo({
@@ -212,17 +264,36 @@ Page({
   // 提交按钮
   submit: function (e) {
     var that = this
-    var params = {
-      "userid": this.data.userid,
-      "name": this.data.name,
-      "sex": this.data.sex,
-      "title": this.data.jobTitle,
-      "job": this.data.job,
-      "phone": this.data.phone,
-      "mobile": this.data.mobile,
-      "email": this.data.email
-    }
+    var params = {}
 
+    if (that.data.isqy == 'true') {
+      params = {
+        "qyid": this.data.qyid,
+        "companyName": this.data.companyName,
+        "companyLocalid": this.data.companyLocalid,
+        "companyLocal": this.data.companyPlace.name,
+        "companyTypeid": this.data.companyTypeid,
+        "companyType": this.data.companyType1.name + this.data.companyType2.name,
+        "inChargePerson": this.data.contact,
+        "email": this.data.email,
+        "mobile": this.data.phone,
+        "address": this.data.address,
+        "mapx": this.data.longitude,
+        "mapy": this.data.latitude
+        }
+    }else {
+      params = {
+        "qyid": this.data.qyid,
+        "name": this.data.name,
+        "sex": this.data.sex,
+        "job": this.data.job,
+        "dep": this.data.dep,
+        "mobile": this.data.mobile,
+        "email": this.data.email,
+        "mapx": this.data.longitude,
+        "mapy": this.data.latitude
+      }
+    }
 
     request.requestLoading(config.updateQyxx, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据

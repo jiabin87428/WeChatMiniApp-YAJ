@@ -29,6 +29,10 @@ Page({
     longitude: "0",
     // 隐患描述
     desc: "",
+    // 对应条款
+    clause: "",
+    // 条款内容
+    clauseInfo: "",
     // 潜在隐患
     danger: null,
     // 整改类型
@@ -170,6 +174,29 @@ Page({
       imageViewHeight: Math.ceil((_this.data.imageList.length + 1) / 4) * (_this.data.littleImageWidth + 8)
     })
   },
+  // 选择现场问题输入方式：通过模板选择or直接输入
+  selectInputType: function (e) {
+    var that = this
+    wx.showActionSheet({
+      itemList: ['从模板选择问题', '自行输入问题'],
+      success: function (res) {
+        // console.log(res.tapIndex)
+        // var list = ['从模板选择问题', '自行输入问题']
+        // var obj = that.data.returnObj
+        // obj[e.currentTarget.id] = list[res.tapIndex]
+        if (res.tapIndex == 0) {// 从模板选择
+          wx.navigateTo({
+            url: '../danger/dangerTypeSelect'
+          })
+        } else {// 自行输入
+          that.jumpInput(e)
+        }
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   // 跳转输入页面
   jumpInput: function (e) {
     var viewId = e.currentTarget.id;
@@ -184,6 +211,12 @@ Page({
     } else if (viewId == "desc") {
       placeholder = "请输入问题描述"
       inputstring = this.data.desc
+    } else if (viewId == "clause") {
+      placeholder = "请输入对应条款"
+      inputstring = this.data.clause
+    } else if (viewId == "clauseInfo") {
+      placeholder = "请输入条款内容"
+      inputstring = this.data.clauseInfo
     } else if (viewId == "result") {
       placeholder = "请输入可能造成的后果"
       inputstring = this.data.result
@@ -253,6 +286,8 @@ Page({
       "qyid": app.globalData.userInfo.repRecordid,
       "qymc": companyName,
       "wtms": this.data.desc,
+      "dytk": this.data.clause,
+      "tknr": this.data.clauseInfo,
       "qzyh": this.data.dangerString,
       "zglx": this.data.rectifyType.name,
       "zgqx": this.data.date,

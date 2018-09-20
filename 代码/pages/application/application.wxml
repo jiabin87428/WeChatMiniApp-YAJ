@@ -9,14 +9,6 @@
       <image class="dangerIcon" src="../../assets/companyManager.png" mode="widthFix"></image>
     </view>
 
-    <view class='dangerView2' bindtap='vedioClick'>
-      <view class='subView'>
-        <text class='dangerText'>在线安全培训</text>
-        <text class='subText'>课件优质，由专业顾问精心提炼，全面覆盖安全、健康及环保领域，利用碎片时间学习，减少管理成本。</text>
-      </view>
-      <image class="dangerIcon" src="../../assets/vedio.png" mode="widthFix"></image>
-    </view>
-
     <!-- <view class='comingView' style='width:{{screenWidth}}px;height:{{screenHeight}}px;' wx:else>
       <text class='comingText'>企业用户即将推出更多功能\n敬请期待！</text>
     </view> -->

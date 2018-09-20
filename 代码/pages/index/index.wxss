@@ -117,38 +117,3 @@
   height: 24px;
   margin: 20rpx;
 }
-
-/**纪杰的首页用**/
-.JJ_cellText1 {
-  font-size: 14px;
-  color: #696969;
-  margin-left: 10px;
-  width: 220px;
-}
-
-.JJ_cellText2 {
-  font-size: 14px;
-  color: #696969;
-  margin-left: 20px;
-  margin-right: 5px;
-  width: 100%;
-  display: -webkit-box;
-  line-height: 40rpx;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:10;
-  overflow: hidden;
-  text-overflow:ellipsis;
-  text-align: right;
-}
-
-.JJ_arrow {
-  width: 10px;
-  height: 58px;
-  margin-right: 16px;
-}
-
-/**检查人（工程师）样式**/
-.titleImage{
-  width: 100%; 
-}
