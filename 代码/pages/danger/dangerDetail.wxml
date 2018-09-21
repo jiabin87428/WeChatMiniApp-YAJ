@@ -30,10 +30,6 @@
       </block> 
     </view>
   </view>
-  <view id='5' class='scrollItem'>
-    <text class='cellText1'>潜在事故</text>
-    <text class='flex-item cellText2'>{{qzyh}}</text>
-  </view>
   <view id='6' class='scrollItem'>
     <text class='cellText1'>整改建议</text>
     <text class='flex-item cellText2'>{{zgjy}}</text>

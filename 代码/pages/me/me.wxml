@@ -7,7 +7,7 @@
         <text class='userinfoTitle'>{{showCompanyName}}</text>
         <view class='userinfoSubRow'>
           <text class='userinfoSubTitle'>{{roleName}}</text>
-          <image class="setting" src="../../assets/setting.png" mode="aspectFit" bindtap='jumpSetting'></image>
+          <!-- <image class="setting" src="../../assets/setting.png" mode="aspectFit" bindtap='jumpSetting'></image> -->
         </view>
       </view>
     </view>

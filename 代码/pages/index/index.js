@@ -114,7 +114,7 @@ Page({
         that.getStatistics()
         if (app.globalData.userInfo != null) {
           var callout = {
-            content: app.globalData.userInfo.yhlx == '1' ? app.globalData.userInfo.name : app.globalData.userInfo.repName,
+            content: app.globalData.userInfo.name,
             color: '#FFFFFF',
             bgColor: '#018B0D',
             borderRadius: 5,
@@ -134,7 +134,7 @@ Page({
             that.setData({
               longitude: app.globalData.userInfo.mapx,
               latitude: app.globalData.userInfo.mapy,
-              titleHeight: 96,
+              titleHeight: 116,
               markers: mark
             })
           } else {
@@ -142,7 +142,7 @@ Page({
               longitude: app.globalData.userInfo.mapx,
               latitude: app.globalData.userInfo.mapy,
               currentLocation: app.globalData.userInfo.dep,
-              titleHeight: 48,
+              titleHeight: 68,
               markers: mark
             })
           }

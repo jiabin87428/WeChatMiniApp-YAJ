@@ -42,9 +42,6 @@ Page({
     // 整改建议
     advise: "",
 
-    // 显示潜在事故字符串
-    dangerString: "",
-
     // 第一次提交后返回的隐患id，用户上传图片用
     dangerId: ""
   },
@@ -81,18 +78,17 @@ Page({
     this.checkLogin()
 
 
-    if (this.data.danger != null) {
-      this.setData({
-        dangerString: ""
-      })
-      for (var i = 0; i < this.data.danger.length; i++) {
-        var name = this.data.danger[i].name
-        this.setData({
-          dangerString: this.data.dangerString + " " + name
-        })
-      }
-    }
-    console.log('123')
+    // if (this.data.danger != null) {
+    //   this.setData({
+    //     dangerString: ""
+    //   })
+    //   for (var i = 0; i < this.data.danger.length; i++) {
+    //     var name = this.data.danger[i].name
+    //     this.setData({
+    //       dangerString: this.data.dangerString + " " + name
+    //     })
+    //   }
+    // }
   },
 
   /**
@@ -178,14 +174,18 @@ Page({
   selectInputType: function (e) {
     var that = this
     wx.showActionSheet({
-      itemList: ['从隐患库选择', '自行输入问题'],
+      itemList: ['从隐患库选择', '自行输入问题', '从隐患库检索'],
       success: function (res) {
         if (res.tapIndex == 0) {// 从模板选择
           wx.navigateTo({
             url: '../danger/dangerTypeSelect'
           })
-        } else {// 自行输入
+        } else if (res.tapIndex == 1){// 自行输入
           that.jumpInput(e)
+        } else {// 从隐患库检索
+          wx.navigateTo({
+            url: '../danger/dangerDetailSelect'
+          })
         }
       },
       fail: function (res) {
@@ -290,7 +290,6 @@ Page({
       "wtms": this.data.desc,
       "dytk": this.data.clause,
       "tknr": this.data.clauseInfo,
-      "qzyh": this.data.dangerString,
       "zglx": this.data.rectifyType.name,
       "zgqx": this.data.date,
       "zgjy": this.data.advise,
@@ -366,9 +365,6 @@ Page({
     }
     if (this.data.date == "") {
       showText = "请输入整改期限"
-    }
-    if (this.data.danger == null) {
-      showText = "请输入潜在事故"
     }
     if (this.data.imageList.length == 0) {
       showText = "请添加隐患照片"

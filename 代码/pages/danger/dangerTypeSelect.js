@@ -89,7 +89,7 @@ Page({
   // 获取类别
   getDangerTypes: function() {
     var param = {
-      "lbName": this.data.searchName
+      "searchName": this.data.searchName
     }
     var that = this
     //调用接口
@@ -110,7 +110,7 @@ Page({
   jumpDetail: function (e) {
     var item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: '../danger/dangerDetailSelect?type=' + item.lb
+      url: '../danger/dangerDetailSelect?type=' + item.lb + '&searchName=' + this.data.searchName
     })
   },
 

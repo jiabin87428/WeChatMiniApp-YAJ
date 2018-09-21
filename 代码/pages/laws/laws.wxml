@@ -8,7 +8,7 @@
       <view class='scrollItem' data-item="{{item}}" bindtap='selectItem'>
         <view class='subscrollItem'>
           <text class='cellText1'>{{item.name}}</text>
-          <!-- <text class='cellText2'>({{item.cjwt}})</text> -->
+          <text class='cellText2'>({{item.sl}})</text>
         </view>
         <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
     </view>

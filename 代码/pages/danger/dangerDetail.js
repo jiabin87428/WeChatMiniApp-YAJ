@@ -37,8 +37,6 @@ Page({
     clauseInfo: "",
     // 可造成后果
     kzchg: "",
-    // 潜在隐患
-    qzyh: "",
     // 整改建议
     zgjy: "",
     // 提交时间
@@ -165,8 +163,6 @@ Page({
           clauseInfo: res.tknr,
           // 可造成后果
           kzchg: "",
-          // 潜在隐患
-          qzyh: res.qzyh == null ? '' : res.qzyh,
           // 整改建议
           zgjy: res.zgjy == null ? '' : res.zgjy,
           // 提交时间

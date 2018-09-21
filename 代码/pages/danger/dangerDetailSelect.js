@@ -28,9 +28,11 @@ Page({
       }
     });
 
-    var type = options.type
+    var type = options.type == null ? "" : options.type
+    var searchName = options.searchName == null ? "" : options.searchName
     this.setData({
       type: type,
+      searchName: searchName
     })
     this.getDangerDetails()
   },
@@ -95,7 +97,7 @@ Page({
     var that = this
     var param = {
       "lb": that.data.type,
-      "dytk": that.data.searchName
+      "searchName": that.data.searchName
     }
     //调用接口
     request.requestLoading(config.getDangerType, param, '正在加载数据', function (res) {

@@ -157,7 +157,7 @@ Page({
             // 所在部门
             dep: app.globalData.userInfo.dep == null ? '' : app.globalData.userInfo.dep,
             // 联系手机
-            mobile: app.globalData.userInfo.mobile == null ? '' : app.globalData.userInfo.mobile,
+            mobile: app.globalData.userInfo.mobile == null ? '' : app.globalData.userInfo.phone,
             // 邮箱
             email: app.globalData.userInfo.email == null ? '' : app.globalData.userInfo.email,
             longitude: app.globalData.userInfo.mapx,
