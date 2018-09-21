@@ -11,12 +11,12 @@
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
       <text class='cellText1'>隐患库总数</text>
-      <text class='cellText2'>{{qyzs}}</text>
+      <text class='cellText2'>{{yhkzs}}</text>
     </view>
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_yellow.png" mode="aspectFit"></image>
       <text class='cellText1'>法律法规总数</text>
-      <text class='cellText2'>{{qyyhzs}}</text>
+      <text class='cellText2'>{{flfgzs}}</text>
     </view>
   </view>
   <view class="map_container" style='height:{{winHeight-titleHeight}}px;'>

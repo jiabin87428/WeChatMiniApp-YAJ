@@ -32,13 +32,11 @@ Page({
     // 未整改隐患数
     wzgyhs: 0,
 
-    // MARK:非企业用
-    // 企业总数
-    qyzs: 0,
-    // 企业已整改隐患
-    qyyzgyh: 0,
-    // 企业未整改隐患
-    qywzgyh: 0,
+    // MARK:监管用
+    // 隐患库总数
+    yhkzs: 0,
+    // 法律法规总数
+    flfgzs: 0,
   },
   onLoad: function (e) {
     var that = this;
@@ -196,15 +194,14 @@ Page({
         }
         that.setData({
           markers: markList,
-          qyzs: res.yhzs,
-          qyyzgyh: res.yzg,
-          qywzgyh: res.wzg
+          yhkzs: res.yhkzs,
+          flfgzs: res.flfgzs
         })
       } else {
         for (var i = 0; i < res.list.length; i++) {
           var item = res.list[i]
           var callout = {
-            content: item.yhmc,
+            content: item.yhms,
             color: '#FFFFFF',
             bgColor: item.sfyzg == 'true' ? '#0A6BDA' :'#FF6B2D',
             borderRadius: 5,
@@ -269,18 +266,19 @@ Page({
   // maker点击事件
   makertap: function (e) {
     console.log(e)
-    if (app.globalData.userInfo.yhlx == '1') { // 监管用户
-      if (e.markerId != '99999') { // 点击的不是监管用户本身
-        wx.navigateTo({
-          url: '../application/companyInfoList?qyid=' + e.markerId
-        })
-      }
-    }else {// 企业用户
-      if (e.markerId != '99999') { // 点击的不是企业本身的坐标点
-        var mark = this.data.markers[e.markerId+1]
-        this.getDetail(mark.yhid, mark.sfyzg)
-      }
-    }
+    // 暂时不加点击事件
+    // if (app.globalData.userInfo.yhlx == '1') { // 监管用户
+    //   if (e.markerId != '99999') { // 点击的不是监管用户本身
+    //     wx.navigateTo({
+    //       url: '../application/companyInfoList?qyid=' + e.markerId
+    //     })
+    //   }
+    // }else {// 企业用户
+    //   if (e.markerId != '99999') { // 点击的不是企业本身的坐标点
+    //     var mark = this.data.markers[e.markerId+1]
+    //     this.getDetail(mark.yhid, mark.sfyzg)
+    //   }
+    // }
   },
   // 查看隐患详情
   getDetail: function (dangerId,sfyzg) {

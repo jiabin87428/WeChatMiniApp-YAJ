@@ -117,8 +117,14 @@ Page({
 
   // 选择并返回赋值
   selectItem: function (e) {
+    var dataPage = 3
+    var backNum = 2
+    if (this.data.type == "") {
+      dataPage = 2
+      backNum = 1
+    }
     var pages = getCurrentPages();             //  获取页面栈
-    var prevPage = pages[pages.length - 3];   // 上2个页面
+    var prevPage = pages[pages.length - dataPage];   // 上2个页面
     var item = e.currentTarget.dataset.item
     prevPage.setData({
       desc: item.cjwt,
@@ -126,7 +132,7 @@ Page({
       clauseInfo: item.tknr
     })
     wx.navigateBack({
-      delta: 2
+      delta: backNum
     })
   },
 })
