@@ -35,8 +35,6 @@ Page({
     // MARK:非企业用
     // 企业总数
     qyzs: 0,
-    // 企业隐患总数
-    qyyhzs: 0,
     // 企业已整改隐患
     qyyzgyh: 0,
     // 企业未整改隐患
@@ -172,18 +170,11 @@ Page({
     request.requestLoading(config.getTj, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据
       console.log(res)
-      if (res.repCode != null && res.repCode == 500){
-        return
-      }
-
       var markList = that.data.markers
 
       if (app.globalData.userInfo.yhlx == '1') {
-        if (res.qylist == null) {
-          return
-        }
-        for (var i = 0; i < res.qylist.length; i++) {
-          var item = res.qylist[i]
+        for (var i = 0; i < res.list.length; i++) {
+          var item = res.list[i]
           var callout = {
             content: item.qymc,
             color: '#FFFFFF',
@@ -205,17 +196,13 @@ Page({
         }
         that.setData({
           markers: markList,
-          qyzs: res.qyzs,
-          qyyhzs: res.yhzs,
-          qyyzgyh: res.yzgyhs,
-          qywzgyh: res.wzgyhs
+          qyzs: res.yhzs,
+          qyyzgyh: res.yzg,
+          qywzgyh: res.wzg
         })
       } else {
-        if (res.yhlist == null) {
-          return
-        }
-        for (var i = 0; i < res.yhlist.length; i++) {
-          var item = res.yhlist[i]
+        for (var i = 0; i < res.list.length; i++) {
+          var item = res.list[i]
           var callout = {
             content: item.yhmc,
             color: '#FFFFFF',
@@ -226,8 +213,8 @@ Page({
           }
           var mark = {
             id: i,
-            latitude: item.mapy,
-            longitude: item.mapx,
+            latitude: item.mapy == "" ? 0 : item.mapy,
+            longitude: item.mapx == "" ? 0 : item.mapx,
             iconPath: item.sfyzg == 'true' ? '../../assets/danger_done.png' :'../../assets/danger_undo.png',
             width: 30,
             height: 30,
@@ -240,8 +227,8 @@ Page({
         that.setData({
           markers: markList,
           yhzs: res.yhzs,
-          yzgyhs: res.yzgyhs,
-          wzgyhs: res.wzgyhs
+          yzgyhs: res.yzg,
+          wzgyhs: res.wzg
         })
       }
     }, function () {
