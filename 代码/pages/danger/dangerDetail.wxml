@@ -80,7 +80,7 @@
     <text class='cellText2' wx:else>{{date}}</text>
   </view>
   <view id='9' class='scrollButtonItem'>
-    <button class='submitButton' bindtap="submitClick" wx:if="{{sfyzg=='false'}}">处理隐患</button>
+    <button class='submitButton' bindtap="submitClick" wx:if="{{sfyzg=='false'}}">隐患完成整改</button>
   </view>
 </scroll-view>
 </view>

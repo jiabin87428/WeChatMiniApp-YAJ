@@ -129,7 +129,8 @@ Page({
     prevPage.setData({
       desc: item.cjwt,
       clause: item.dytk,
-      clauseInfo: item.tknr
+      clauseInfo: item.tknr,
+      advise: item.zgjy
     })
     wx.navigateBack({
       delta: backNum

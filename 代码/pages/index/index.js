@@ -128,15 +128,15 @@ Page({
           }]
           if (app.globalData.userInfo.yhlx == '1') {
             that.setData({
-              longitude: app.globalData.userInfo.mapx,
-              latitude: app.globalData.userInfo.mapy,
+              // longitude: app.globalData.userInfo.mapx,
+              // latitude: app.globalData.userInfo.mapy,
               titleHeight: 116,
               markers: mark
             })
           } else {
             that.setData({
-              longitude: app.globalData.userInfo.mapx,
-              latitude: app.globalData.userInfo.mapy,
+              // longitude: app.globalData.userInfo.mapx,
+              // latitude: app.globalData.userInfo.mapy,
               currentLocation: app.globalData.userInfo.dep,
               titleHeight: 68,
               markers: mark
@@ -243,6 +243,7 @@ Page({
   },
   // 获取当前位置
   getCurrentLocation: function (e) {
+    var that = this
     var myAmapFun = new amapFile.AMapWX({ key: 'f28afe6170399e78d1f7e1b672c1fa49' });
     myAmapFun.getRegeo({
       success: function (data) {
