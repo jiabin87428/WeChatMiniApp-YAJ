@@ -1,12 +1,11 @@
 <!--pages/danger/addDanger.wxml-->
 <view class="baseView">
 <scroll-view scroll-y="true" class='scrollView'>
-  <view id='companyName' class='scrollItem' bindtap='jumpRadio' wx:if='{{yhlx != 0}}'>
+  <view id='companyName' class='scrollItem' wx:if='{{yhlx != 0}}'>
     <text class='cellText1'>企业名称</text>
     <text class='mustText'>*</text>
     <text class='cellText2'>{{companyName.name}}</text>
-    <!-- <input class='flex-item input' placeholder="请输入企业名称" placeholder-style='font-size:14px;font-weight: initial;'/> -->
-    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image> 
+    <image class="arrow" src="" mode="aspectFit"></image> 
   </view>
   <view id='desc' class='scrollItem' bindtap='selectInputType'>
     <text class='cellText1'>隐患描述</text>

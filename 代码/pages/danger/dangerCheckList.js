@@ -13,6 +13,8 @@ Page({
     dangerList: [],
     // 当前选中tab页 0-全部 1-未整改 2-已整改
     currentTab: 0,
+    // 项目id
+    xmid: ""
   },
 
   /**
@@ -20,6 +22,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var xmid = options.xmid
+    if (xmid != null) {
+      that.setData({
+        xmid: xmid
+      })
+    }
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
@@ -43,7 +51,8 @@ Page({
   onShow: function () {
     var that = this
     var params = {
-      "userid": app.globalData.userInfo.userid
+      "userid": app.globalData.userInfo.userid,
+      "xmid": that.data.xmid
     }
     if (that.data.currentTab == 1) {
       params["sfyzg"] = "false"
@@ -96,7 +105,8 @@ Page({
     })
 
     var params = {
-      "userid": app.globalData.userInfo.userid
+      "userid": app.globalData.userInfo.userid,
+      "xmid": that.data.xmid
     }
     if (that.data.currentTab == 1) {
       params["sfyzg"] = "false"

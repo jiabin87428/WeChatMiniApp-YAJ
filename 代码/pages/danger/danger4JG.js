@@ -13,11 +13,15 @@ Page({
     // tab切换    
     currentTab: 0,
     //用户名
-    userName: "请登录"
+    userName: "请登录",
+    item: null
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
-
+    var item = JSON.parse(options.item)
+    that.setData({
+      item: item
+    })
     /**  
      * 获取系统信息  
      */
@@ -49,19 +53,19 @@ Page({
   // 点击添加隐患
   addClick: function () {
     wx.navigateTo({
-      url: '../danger/addDanger'
+      url: '../danger/addDanger?item=' + JSON.stringify(this.data.item) 
     })
   },
   // 点击隐患列表
   listClick: function () {
     wx.navigateTo({
-      url: '../danger/dangerCheckList'
+      url: '../danger/dangerCheckList?xmid=' + this.data.item.xmid
     })
   },
-  // 点击新建项目
-  addProjectClick: function (e) {
+  // 查看项目详情
+  projectClick: function (e) {
     wx.navigateTo({
-      url: '../danger/addProject'
+      url: '../danger/addProject?item=' + JSON.stringify(this.data.item)
     })
   },
   // 点击查看项目列表

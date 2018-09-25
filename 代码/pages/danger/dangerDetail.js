@@ -27,6 +27,10 @@ Page({
     bigWcImgList: [],
 
     // 隐患详情显示参数
+    // 项目id
+    xmid: "",
+    // 项目名称
+    xmmc: "",
     // 企业名称
     qymc: "",
     // 问题描述
@@ -152,6 +156,8 @@ Page({
           }
         }
         that.setData({
+          xmid: res.xmid,
+          xmmc: res.xmmc,
           qyid: res.qyid,
           // 企业名称
           qymc: res.qymc,
@@ -277,6 +283,8 @@ Page({
   submitClick: function (e) {
     var that = this
     var params = {
+      "xmid": that.data.xmid,
+      "xmmc": that.data.xmmc,
       "yhid": that.data.yhid,
       "sfyzg": "true",
       "qyid": that.data.qyid,

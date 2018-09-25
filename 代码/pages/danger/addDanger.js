@@ -16,6 +16,10 @@ Page({
     littleImageWidth: 0,
     imageViewHeight: 100,
 
+    // 项目id
+    xmid: "",
+    // 项目名称
+    xmmc: "",
     // 用户类型
     yhlx: 0,
     // 提交时间
@@ -62,6 +66,19 @@ Page({
     this.setData({
       time: time
     });
+
+    var item = JSON.parse(options.item)
+    if (item != null) {
+      var company = {
+        "name": item.qymc,
+        "id": item.qyid
+      }
+      this.setData({
+        companyName: company,
+        xmid: item.xmid,
+        xmmc: item.xmmc
+      })
+    }
   },
 
   /**
@@ -283,6 +300,8 @@ Page({
       qyid = this.data.companyName.id
     }
     var params = {
+      "xmid": this.data.xmid,
+      "xmmc": this.data.xmmc,
       "yhid": "",
       "userid": app.globalData.userInfo.userid,
       "qyid": qyid,

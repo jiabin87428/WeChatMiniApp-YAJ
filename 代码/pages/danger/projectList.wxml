@@ -1,0 +1,17 @@
+<view class="baseView">
+  <view class="searchView">
+    <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
+    <input class='searchInput' placeholder='请输入项目名称或企业名称' confirm-type='search' bindconfirm="searchProject"></input>
+  </view>
+  <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-40}}px;">
+    <block wx:for="{{repXmlist}}" wx:for-item="item" wx:for-index="index">
+      <view class='scrollItem' data-item="{{item}}" bindtap='selectItem'>
+        <view class='subscrollItem' style="left=-150px;" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}">
+          <text class='dangerText'>{{item.xmmc}}</text>
+          <text class='subText'>{{item.qymc}}</text>
+        </view>
+        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
+      </view>
+    </block>
+  </scroll-view>
+</view>

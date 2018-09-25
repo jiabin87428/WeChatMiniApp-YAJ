@@ -93,6 +93,18 @@ var config = {
   // 法律法规内容检索
   searchLawsInfo: `${host}/getXx.do?action=showWj`,
 
+  // 新建项目
+  createProjcet: `${host}/getXx.do?action=insertXm`,
+  // 获取项目列表
+  getProjectList: `${host}/getXx.do?action=getXmlist`,
+  // 获取项目详情
+  getProjectDetail: `${host}/getXx.do?action=getOneXm&xmid=`,
+
+  // 删除隐患
+  deleteYH: `${host}/getXx.do?action=delYh`,
+  // 删除项目
+  deleteProject: `${host}/getXx.do?action=delXm`,
+
   // 下载文件
   downLoadFile: `${host}/getfile?fileid=`,
 };
