@@ -32,19 +32,12 @@ Page({
     // 未整改隐患数
     wzgyhs: 0,
 
-<<<<<<< Updated upstream
-    // MARK:监管用
-    // 隐患库总数
-    yhkzs: 0,
-    // 法律法规总数
-    flfgzs: 0,
-=======
     // MARK:非企业用
     // 法律法规总数
     flfgzs: 0,
     // 隐患库总数
     yhkzs: 0,
->>>>>>> Stashed changes
+
   },
   onLoad: function (e) {
     var that = this;
@@ -202,13 +195,8 @@ Page({
         }
         that.setData({
           markers: markList,
-<<<<<<< Updated upstream
-          yhkzs: res.yhkzs,
-          flfgzs: res.flfgzs
-=======
           flfgzs: res.flfgzs,
           yhkzs: res.yhkzs
->>>>>>> Stashed changes
         })
       } else {
         for (var i = 0; i < res.list.length; i++) {
