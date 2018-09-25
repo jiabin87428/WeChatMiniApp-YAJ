@@ -14,7 +14,7 @@ Page({
     repXmlist: [],
 
     editIndex: 0,
-    delBtnWidth: 150//删除按钮宽度单位（rpx）
+    delBtnWidth: 80//删除按钮宽度单位（rpx）
   },
 
   /**
@@ -122,6 +122,33 @@ Page({
     })
   },
 
+  // 删除项目
+  deleteProject: function (e) {
+    var item = e.currentTarget.dataset.item
+    var that = this
+    var param = {
+      "xmid": item.xmid,
+    }
+    //调用接口
+    request.requestLoading(config.deleteProject, param, '正在加载数据', function (res) {
+      console.log(res)
+      if (res.repCode == "200") {
+        var newList = that.data.repXmlist
+        newList.splice(e.currentTarget.dataset.index,1)
+        that.setData({
+          repXmlist: newList
+        })
+        wx.showToast({
+          title: res.repMsg
+        })
+      }
+    }, function () {
+      wx.showToast({
+        title: '加载数据失败',
+        icon: 'none'
+      })
+    })
+  },
   //手指刚放到屏幕触发
   touchS: function (e) {
     console.log("touchS" + e);
@@ -146,12 +173,12 @@ Page({
       var delBtnWidth = that.data.delBtnWidth;
       var txtStyle = "";
       if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
-        txtStyle = "left:0px";
+        txtStyle = "margin-left:0px";
       } else if (disX > 0) {//移动距离大于0，文本层left值等于手指移动距离
-        txtStyle = "left:-" + disX + "px";
+        txtStyle = "margin-left:-" + disX + "px";
         if (disX >= delBtnWidth) {
           //控制手指移动距离最大值为删除按钮的宽度
-          txtStyle = "left:-" + delBtnWidth + "px";
+          txtStyle = "margin-left:-" + delBtnWidth + "px";
         }
       }
       //获取手指触摸的是哪一个item
@@ -175,7 +202,7 @@ Page({
       var disX = that.data.startX - endX;
       var delBtnWidth = that.data.delBtnWidth;
       //如果距离小于删除按钮的1/2，不显示删除按钮
-      var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
+      var txtStyle = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "px" : "margin-left:0px";
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
       var list = that.data.repXmlist;

@@ -47,11 +47,40 @@
   align-items:center;/*垂直居中*/
 }
 
+.posit {
+  position: absolute;
+  right: 0px;
+  width: 80px;
+  height: 48px;
+  background-color: red;
+  z-index: 0;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;/*垂直居中*/
+  justify-content: center;/*水平居中*/
+}
+
+.del {
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.subscrollBG {
+  display:flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+}
+
 .subscrollItem {
   display:flex;
   flex-direction: column;
   width: 100%;
   background-color: white;
+  z-index: 1;
 }
 
 .dangerText {
@@ -105,8 +134,10 @@
 .arrow {
   width: 10px;
   height: 48px;
+  background-color: white;
   margin-left: 5px;
   margin-right: 10px;
+  z-index: 1;
 }
 
 .userinfo-avatar {
