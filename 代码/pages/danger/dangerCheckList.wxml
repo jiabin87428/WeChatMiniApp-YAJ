@@ -33,8 +33,8 @@
         <view class="del" data-addressid="{{item.address.ID}}" data-index="{{index}}">删除</view>
       </view>
 
-      <view class='subscrollBG' style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item="{{item}}" bindtap='getDetail'>
-        <view class='dangerView' data-id='{{item.yhid}}' data-name='{{item.sfyzg}}'>
+      <view class='subscrollBG' style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item="{{item}}" data-id='{{item.yhid}}' data-name='{{item.sfyzg}}' bindtap='getDetail'>
+        <view class='dangerView'>
           <view class='typeView'>
             <image class="dangerIcon" src="../../assets/dangerTypeBG.png" mode="widthFix" wx:if="{{item.sfyzg == 'true'}}"></image>
             <image class="dangerIcon" src="../../assets/dangerTypeBG2.png" mode="widthFix" wx:else></image>
