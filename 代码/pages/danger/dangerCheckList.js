@@ -11,7 +11,7 @@ Page({
     scrollHeight: 0,
     // 隐患列表
     dangerList: [],
-    // 当前选中tab页 0-全部 1-未整改 2-已整改
+    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
     currentTab: 0,
     // 项目id
     xmid: "",
@@ -58,9 +58,11 @@ Page({
       "xmid": that.data.xmid
     }
     if (that.data.currentTab == 1) {
-      params["sfyzg"] = "false"
+      params["yhzt"] = "1"
     } else if (that.data.currentTab == 2) {
-      params["sfyzg"] = "true"
+      params["yhzt"] = "0"
+    } else if (that.data.currentTab == 3) {
+      params["yhzt"] = "2"
     }
     this.reqDangerList(params)
   },
@@ -112,17 +114,25 @@ Page({
       "xmid": that.data.xmid
     }
     if (that.data.currentTab == 1) {
-      params["sfyzg"] = "false"
+      params["yhzt"] = "1"
     } else if (that.data.currentTab == 2) {
-      params["sfyzg"] = "true"
+      params["yhzt"] = "0"
+    } else if (that.data.currentTab == 3) {
+      params["yhzt"] = "2"
     }
     this.reqDangerList(params)
   },
   // 点击查看隐患详情
   getDetail: function (e) {
-    wx.navigateTo({
-      url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&sfyzg=' + e.currentTarget.dataset.name
-    })
+    if (e.currentTarget.dataset.name == "2") {// 草稿状态
+      wx.navigateTo({
+        url: '../danger/addDanger?item=' + JSON.stringify(e.currentTarget.dataset.item)
+      })
+    }else {// 已整改 未整改
+      wx.navigateTo({
+        url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&yhzt=' + e.currentTarget.dataset.name
+      })
+    }
   },
   // 获取隐患列表
   reqDangerList: function (searchObj, cb) {

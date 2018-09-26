@@ -23,6 +23,12 @@
     <view id='2' class='tapBarItem2' wx:if="{{currentTab == 2}}" bindtap='changeTap'>
       <text class='tapText2'>已整改</text>
     </view>
+    <view id='3' class='tapBarItem' wx:if="{{currentTab != 3}}" bindtap='changeTap'>
+      <text class='tapText1'>草稿</text>
+    </view>
+    <view id='3' class='tapBarItem2' wx:if="{{currentTab == 3}}" bindtap='changeTap'>
+      <text class='tapText2'>草稿</text>
+    </view>
     <view class='searchItem'>
       <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
     </view>
@@ -33,13 +39,15 @@
         <view class="del" data-addressid="{{item.address.ID}}" data-index="{{index}}">删除</view>
       </view>
 
-      <view class='subscrollBG' style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item="{{item}}" data-id='{{item.yhid}}' data-name='{{item.sfyzg}}' bindtap='getDetail'>
+      <view class='subscrollBG' style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item="{{item}}" data-id='{{item.yhid}}' data-name='{{item.yhzt}}' bindtap='getDetail'>
         <view class='dangerView'>
           <view class='typeView'>
-            <image class="dangerIcon" src="../../assets/dangerTypeBG.png" mode="widthFix" wx:if="{{item.sfyzg == 'true'}}"></image>
-            <image class="dangerIcon" src="../../assets/dangerTypeBG2.png" mode="widthFix" wx:else></image>
-            <text class='typeText' wx:if="{{item.sfyzg == 'true'}}">已整改</text>
-            <text class='typeText' wx:else>未整改</text>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG.png" mode="widthFix" wx:if="{{item.yhzt == '0'}}"></image>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG2.png" mode="widthFix" wx:if="{{item.yhzt == '1'}}"></image>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG3.png" mode="widthFix" wx:else></image>
+            <text class='typeText' wx:if="{{item.yhzt == '0'}}">已整改</text>
+            <text class='typeText' wx:if="{{item.yhzt == '1'}}">未整改</text>
+            <text class='typeText' wx:else>草稿</text>
           </view>
           <view class='subView'>
             <text class='dangerText'>{{item.xcwt}}</text>

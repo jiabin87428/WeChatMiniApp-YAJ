@@ -13,9 +13,12 @@ Page({
    */
   data: {
     imageList: [],
+    newaddImagelist: [],
     littleImageWidth: 0,
     imageViewHeight: 100,
 
+    // 隐患ID
+    yhid: "",
     // 项目id
     xmid: "",
     // 项目名称
@@ -45,6 +48,8 @@ Page({
     date: "",
     // 整改建议
     advise: "",
+    // 检查人
+    checkPerson: "",
 
     // 第一次提交后返回的隐患id，用户上传图片用
     dangerId: ""
@@ -76,8 +81,13 @@ Page({
       this.setData({
         companyName: company,
         xmid: item.xmid,
-        xmmc: item.xmmc
+        xmmc: item.xmmc,
+        yhid: item.yhid
       })
+    }
+
+    if (this.data.yhid != "") {
+      this.getDetail()
     }
   },
 
@@ -149,6 +159,7 @@ Page({
       success: function (res) {
         _this.setData({
           imageList: _this.data.imageList.concat(res.tempFilePaths),
+          newaddImagelist: _this.data.newaddImagelist.concat(res.tempFilePaths),
         })
 
         _this.setData({
@@ -179,6 +190,13 @@ Page({
     var _this = this
     var currentIdx = e.currentTarget.id;
     var list = _this.data.imageList;
+
+    var item = list[currentIdx]
+    var reg = RegExp(/www.gelure.com/);
+    if (item.match(reg)) {// 包含
+      for (var i = 0; i < this.data.danger.length; i++)
+    }
+
     list.splice(currentIdx,1)
     _this.setData({
       imageList: list
@@ -287,15 +305,23 @@ Page({
   },
   // 提交事件
   submitClick: function (e) {
-    if (this.checkInput() == false) {
-      return
-    }
+    this.createYH(1)
+  },
+  // 保存事件
+  saveClick: function (e) {
+    this.createYH(2)
+  },
+  // 调用新增隐患接口
+  createYH: function (yhzt) {
+    // if (this.checkInput() == false) {
+    //   return
+    // }
     var that = this
     var companyName = ""
     var qyid = ""
     if (app.globalData.userInfo.yhlx == "0") {
       companyName = app.globalData.userInfo.name
-    }else {
+    } else {
       companyName = this.data.companyName.name
       qyid = this.data.companyName.id
     }
@@ -314,7 +340,7 @@ Page({
       "zgjy": this.data.advise,
       "tjsj": this.data.time,
       "dqwz": this.data.address,
-      "sfyzg": "false",
+      "yhzt": yhzt,
       "zgwcqk": "",
       "zgfzr": "",
       "zgwcrq": "",
@@ -329,7 +355,7 @@ Page({
           dangerId: res.yhid
         })
         that.submitImage()
-      }else {
+      } else {
         wx.showToast({
           title: res.repMsg,
           icon: 'none'
@@ -343,7 +369,7 @@ Page({
   },
   // 提交图片事件
   submitImage: function() {
-    app.uploadDIY('?yhid=' + this.data.dangerId + '&zptype=zgqzp', this.data.imageList, 0, 0, 0, this.data.imageList.length, function (resultCode) {
+    app.uploadDIY('?yhid=' + this.data.dangerId + '&zptype=zgqzp', imgList, 0, 0, 0, imgList.length, function (resultCode) {
       if (resultCode == '200') {
         wx.showToast({
           title: '新建成功',
@@ -418,7 +444,8 @@ Page({
       success: function (res) {
         app.globalData.userInfo = res.data
         that.setData({
-          yhlx: app.globalData.userInfo.yhlx
+          yhlx: app.globalData.userInfo.yhlx,
+          checkPerson: app.globalData.userInfo.name
         })
       }, fail: function (res) {
         wx.navigateTo({
@@ -435,5 +462,73 @@ Page({
     this.setData({
       date: e.detail.value
     })
+  },
+
+  // 查询隐患详情
+  getDetail: function (e) {
+    var that = this
+    var params = {
+      "yhid": that.data.yhid
+    }
+    request.requestLoading(config.getOneYh, params, '正在加载数据', function (res) {
+      //res就是我们请求接口返回的数据
+      console.log(res);
+      if (res.repCode == null || res.repCode != '500') {
+        var imgList = []
+        var wcImgList = []
+        var bigImgList = []
+        var bigWcImgList = []
+        for (var i = 0; i < res.zplist.length; i++) {
+          var id = config.loadYhPhoto + res.zplist[i].id
+          var bigId = config.loadBigPhoto + res.zplist[i].id
+          var name = res.zplist[i].name
+          if (name == 'zgqzp') {
+            imgList.push(id)
+            bigImgList.push(bigId)
+          } else {
+            wcImgList.push(id)
+            bigWcImgList.push(bigId)
+          }
+        }
+        var company = {
+          "name": res.qymc,
+          "id": res.qyid
+        }
+        that.setData({
+          xmid: res.xmid,
+          xmmc: res.xmmc,
+          companyName: company,
+          // 问题描述
+          desc: res.wtms,
+          // 对应条款
+          clause: res.dytk,
+          // 条款内容
+          clauseInfo: res.tknr,
+          // 整改建议
+          advise: res.zgjy == null ? '' : res.zgjy,
+          // 提交时间
+          time: res.tjsj,
+          // 完成高清图
+          imageList: bigImgList,
+          date:res.zgqx
+        });
+        var num = 1
+        if (that.data.yhzt == "0") {
+          num = 0
+        }
+        that.setData({
+          imageViewHeight: Math.ceil((that.data.imageList.length) / 4) * (that.data.littleImageWidth + 8),
+          wcImageViewHeight: Math.ceil((that.data.wcImageList.length + num) / 4) * (that.data.littleImageWidth + 8)
+        })
+      } else {
+        wx.showToast({
+          title: res.repMsg
+        });
+      }
+    }, function () {
+      wx.showToast({
+        title: '加载数据失败'
+      });
+    });
   },
 })

@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sfyzg: "false",
+    yhzt: "",
     qyid: "",
     yhid: "",
     // 缩略图
@@ -66,10 +66,10 @@ Page({
     })
 
     var yhid = options.yhid
-    var sfyzg = options.sfyzg
+    var yhzt = options.yhzt
     this.setData({
       yhid: yhid,
-      sfyzg: sfyzg
+      yhzt: yhzt
     })
 
     this.getDetail()
@@ -189,7 +189,7 @@ Page({
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
         var num = 1
-        if (that.data.sfyzg == "true") {
+        if (that.data.yhzt == "0") {
           num = 0
         }
         that.setData({
@@ -255,7 +255,7 @@ Page({
   },
   // 跳转输入页面
   jumpInput: function (e) {
-    if (this.data.sfyzg == 'true') {
+    if (this.data.yhzt == '0') {
       return
     }
     var viewId = e.currentTarget.id;
@@ -286,7 +286,7 @@ Page({
       "xmid": that.data.xmid,
       "xmmc": that.data.xmmc,
       "yhid": that.data.yhid,
-      "sfyzg": "true",
+      "yhzt": "0",
       "qyid": that.data.qyid,
       "zgwcqk": that.data.zgcs,
       "zgfzr": that.data.zgr,

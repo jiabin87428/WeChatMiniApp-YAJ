@@ -40,20 +40,20 @@
   </view>
   <view id='zgr' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>整改人</text>
-    <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text>
+    <!-- <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text> -->
     <text class='cellText2'>{{zgr}}</text>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{sfyzg=='false'}}"></image>
   </view>
   <view id='zgcs' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>整改情况</text>
-    <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text>
+    <!-- <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text> -->
     <text class='cellText2'>{{zgcs}}</text>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{sfyzg=='false'}}"></image>
   </view>
   <view class='imageBaseView' style='height:{{58+wcImageViewHeight}}px;'>
     <view class='titleView'>
       <text class='cellText1'>整改照片</text>
-      <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text>
+      <!-- <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text> -->
       <text class='cellText3'>{{wcImageList.length}}</text>
     </view>
     <view id='imageView' style='height:{{wcImageViewHeight}}px;' class='imageView'>
@@ -70,7 +70,7 @@
   </view>
   <view id='zgwcrq' class='scrollItem'>
     <text class='cellText1'>完成日期</text>
-    <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text>
+    <!-- <text class='mustText' wx:if="{{sfyzg=='false'}}">*</text> -->
     <picker class='dateChoose' mode="date" value="{{date}}" start="2015-09-01" end="2118-12-31" bindchange="bindDateChange" wx:if="{{sfyzg=='false'}}">
       <view class="picker">
         <text class='pickerText'>{{date}}</text>
