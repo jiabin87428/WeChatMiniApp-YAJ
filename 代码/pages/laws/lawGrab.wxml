@@ -10,7 +10,7 @@
           <text class='cellText1'>{{item.title}}</text>
           <text class='cellText2'>({{item.fbrq}})</text>
         </view>
-        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
+        <!-- <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image> -->
     </view>
     </block>
   </scroll-view>

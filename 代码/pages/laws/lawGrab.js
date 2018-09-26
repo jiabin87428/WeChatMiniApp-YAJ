@@ -158,8 +158,8 @@ Page({
   // 选择并返回赋值
   selectItem: function (e) {
     var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../laws/lawsDetail?type=' + item.id
-    })
+    // wx.navigateTo({
+    //   url: '../common/webView?url=' + item.titleUrl
+    // })
   },
 })
