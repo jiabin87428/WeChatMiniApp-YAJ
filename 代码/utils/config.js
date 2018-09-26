@@ -100,6 +100,9 @@ var config = {
   // 获取项目详情
   getProjectDetail: `${host}/getXx.do?action=getOneXm&xmid=`,
 
+  // 获取法规抓取文件
+  getGrabLaws: `${host}/getXx.do?action=getFglist`,
+
   // 删除隐患
   deleteYH: `${host}/getXx.do?action=delYh`,
   // 删除项目

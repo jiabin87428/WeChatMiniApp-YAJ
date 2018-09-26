@@ -32,7 +32,9 @@
     "pages/laws/lawsInfoSearch",
     "pages/danger/projectList",
     "pages/danger/addProject",
-    "pages/danger/danger4JG"
+    "pages/danger/danger4JG",
+    "pages/laws/lawList",
+    "pages/laws/lawGrab"
   ],
   "window": {
     "backgroundTextStyle": "light",

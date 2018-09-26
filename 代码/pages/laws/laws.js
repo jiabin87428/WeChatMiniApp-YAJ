@@ -1,121 +1,76 @@
-// pages/check/dangerDetailSelect.js
-var request = require('../../utils/request.js')
-var config = require('../../utils/config.js')
 var app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    scrollHeight: 0,
-    searchName: "",
-    repFgfl: [],
+    /**  
+    * 页面配置  
+    */
+    winWidth: 0,
+    winHeight: 0,
+    // 用户类型
+    yhlx: 0,
   },
+  onLoad: function () {
+    var that = this;
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this
+    /**  
+     * 获取系统信息  
+     */
     wx.getSystemInfo({
+
       success: function (res) {
-        console.info(res.windowHeight);
         that.setData({
-          scrollHeight: res.windowHeight
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
         });
       }
+
     });
   },
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
+   *  监听页面显示，
+   *    当从当前页面调转到另一个页面
+   *    另一个页面销毁时会再次执行
    */
   onShow: function () {
-    this.getLawTypesList()
+    this.checkLogin()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  // 查询常见隐患
-  searchYH: function (e) {
-    this.setData({
-      searchName: e.detail.value
-    })
-    this.getLawTypesList()
-  },
-  // 内容检索
-  infoSearch: function (e) {
+  // 获取法规清单
+  getList: function () {
     wx.navigateTo({
-      url: '../laws/lawsInfoSearch'
+      url: '../laws/lawList'
     })
   },
-  // 获取法律分类列表
-  getLawTypesList: function () {
-    var that = this
-    var param = {
-      "flName": that.data.searchName
+  // 法律抓取
+  grabClick: function () {
+    wx.navigateTo({
+      url: '../laws/lawGrab'
+    })
+  },
+
+  // 判断是否登录
+  checkLogin: function () {
+    if (app.globalData.userInfo) {
+      return true
     }
-    //调用接口
-    request.requestLoading(config.getLawsType, param, '正在加载数据', function (res) {
-      console.log(res)
-      if (res.repFgfl != null) {
+    return false
+  },
+  // 判断是否登录
+  checkLogin: function () {
+    var that = this
+    wx.getStorage({
+      key: 'userInfo',
+      success: function (res) {
+        app.globalData.userInfo = res.data
         that.setData({
-          repFgfl: res.repFgfl
+          addDangerTitle: "隐患快报",
+          addDangerDesc: "企业隐患自查自报",
+          yhlx: app.globalData.userInfo.yhlx
+        })
+      }, fail: function (res) {
+        wx.navigateTo({
+          url: '../login/chooseLoginType'
         })
       }
-    }, function () {
-      wx.showToast({
-        title: '加载数据失败',
-        icon: 'none'
-      })
     })
   },
-
-  // 选择并返回赋值
-  selectItem: function (e) {
-    var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../laws/lawsDetail?type=' + item.id
-    })
-  },
-})
+})    

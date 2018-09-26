@@ -28,10 +28,20 @@ Page({
   },
   // 微信登录
   weChartLogin: function (e) {
-    wx.showToast({
-      title: "正在开发，请先使用用户名登录",
-      icon: 'none'
-    })
+    // wx.showToast({
+    //   title: "正在开发，请先使用用户名登录",
+    //   icon: 'none'
+    // })
+    wx.login({
+      success: function (res) {
+        var code = res.code;
+        if (code) {
+          console.log('获取用户登录凭证：' + code);
+        } else {
+          console.log('获取用户登录态失败：' + res.errMsg);
+        }
+      }
+    });
   },
   // 用户名登录
   userNameLogin: function (e) {

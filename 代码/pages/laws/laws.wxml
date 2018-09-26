@@ -1,17 +1,19 @@
-<view class="baseView">
-  <view class="searchView" bindtap='infoSearch'>
-    <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
-    <text class='searchText'>请输入您要搜索的法律法规</text>
-  </view>
-  <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-40}}px;">
-    <block wx:for="{{repFgfl}}" wx:for-item="item" wx:for-index="idx">
-      <view class='scrollItem' data-item="{{item}}" bindtap='selectItem'>
-        <view class='subscrollItem'>
-          <text class='cellText1'>{{item.name}}</text>
-          <text class='cellText2'>({{item.sl}})</text>
-        </view>
-        <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>
+<scroll-view scroll-y="true" class='scrollView'>
+  <image class="titleImage" src="../../assets/fgBG.png" mode="widthFix"></image> 
+  <view class="userinfo">
+    <view class='dangerView' bindtap='getList'>
+      <image class="dangerIcon" src="../../assets/add.png" mode="widthFix"></image>
+      <view class='subView'>
+        <text class='dangerText'>法规清单</text>
+        <text class='subText'>收录全面的安全生产相关的法律法规</text>
+      </view>
     </view>
-    </block>
-  </scroll-view>
-</view>
+    <view class='dangerView' bindtap='grabClick'>
+      <image class="dangerIcon" src="../../assets/list.png" mode="widthFix"></image>
+      <view class='subView'>
+        <text class='dangerText'>法规抓取</text>
+        <text class='subText'>通过网络爬虫技术智能抓取最新更新的法律法规</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
