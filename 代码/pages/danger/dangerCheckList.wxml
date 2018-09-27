@@ -29,7 +29,7 @@
     <view id='3' class='tapBarItem2' wx:if="{{currentTab == 3}}" bindtap='changeTap'>
       <text class='tapText2'>草稿</text>
     </view>
-    <view class='searchItem'>
+    <view class='searchItem' bindtap='jumpDangerSearch'>
       <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
     </view>
   </view>

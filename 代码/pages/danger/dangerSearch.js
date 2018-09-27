@@ -1,7 +1,7 @@
-// pages/check/dangerDetailSelect.js
+var app = getApp()
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
-var app = getApp()
+// pages/danger/dangerCheckList.js
 Page({
 
   /**
@@ -9,14 +9,13 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    searchText: "",
-    userid: "",
-    repXmlist: [],
+    // 隐患列表
+    dangerList: [],
+    // 项目id
+    xmid: "",
 
     editIndex: 0,
-    delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
-    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
-    currentTab: 0,
+    delBtnWidth: 80//删除按钮宽度单位（rpx）
   },
 
   /**
@@ -24,10 +23,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    var userid = options.userid
-    that.setData({
-      userid: userid
-    });
+    var xmid = options.xmid
+    if (xmid != null) {
+      that.setData({
+        xmid: xmid
+      })
+    }
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
@@ -49,14 +50,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    var xmzt = ""
-    if (that.data.currentTab == 1) {
-      xmzt = "0"
-    } else if (that.data.currentTab == 2) {
-      xmzt = "1"
-    } 
-    this.getProjectList(xmzt)
+    
   },
 
   /**
@@ -93,42 +87,43 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 切换Tab页面
-  changeTap: function (e) {
+  // 搜索
+  searchDanger: function (e) {
     var that = this
-    var viewId = e.currentTarget.id;
-    that.setData({
-      currentTab: viewId
-    })
-
-    var xmzt = ""
-    if (that.data.currentTab == 1) {
-      xmzt = "0"
-    } else if (that.data.currentTab == 2) {
-      xmzt = "1"
+    var params = {
+      "userid": app.globalData.userInfo.userid,
+      "xmid": that.data.xmid,
+      "searchText": e.detail.value,
+      "yhzt": ""
     }
-    this.getProjectList(xmzt)
+    this.reqDangerList(params)
   },
-  // 跳转搜索页
-  jumpProjectSearch: function (e) {
-    wx.navigateTo({
-      url: '../danger/projectSearch?userid=' + this.data.userid
-    })
+  // 点击查看隐患详情
+  getDetail: function (e) {
+    if (e.currentTarget.dataset.name == "2") {// 草稿状态
+      wx.navigateTo({
+        url: '../danger/addDanger?item=' + JSON.stringify(e.currentTarget.dataset.item)
+      })
+    } else {// 已整改 未整改
+      wx.navigateTo({
+        url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&yhzt=' + e.currentTarget.dataset.name
+      })
+    }
   },
-  // 获取项目列表
-  getProjectList: function (xmzt) {
+  // 获取隐患列表
+  reqDangerList: function (searchObj, cb) {
     var that = this
-    var param = {
-      "userid": that.data.userid,
-      "searchText": that.data.searchText,
-      "xmzt": xmzt
-    }
     //调用接口
-    request.requestLoading(config.getProjectList, param, '正在加载数据', function (res) {
+    request.requestLoading(config.getYhList, searchObj, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repXmlist != null) {
+      if (res.repYhList != null) {
         that.setData({
-          repXmlist: res.repXmlist
+          dangerList: res.repYhList
+        })
+      } else {
+        wx.showToast({
+          title: res.repMsg,
+          icon: 'none'
         })
       }
     }, function () {
@@ -138,30 +133,21 @@ Page({
       })
     })
   },
-
-  // 选择并返回赋值
-  selectItem: function (e) {
-    var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../danger/danger4JG?item=' + JSON.stringify(item)
-    })
-  },
-
-  // 删除项目
-  deleteProject: function (e) {
+  // 删除隐患
+  deleteYH: function (e) {
     var item = e.currentTarget.dataset.item
     var that = this
     var param = {
-      "xmid": item.xmid,
+      "yhid": item.yhid,
     }
     //调用接口
-    request.requestLoading(config.deleteProject, param, '正在加载数据', function (res) {
+    request.requestLoading(config.deleteYH, param, '正在加载数据', function (res) {
       console.log(res)
       if (res.repCode == "200") {
-        var newList = that.data.repXmlist
-        newList.splice(e.currentTarget.dataset.index,1)
+        var newList = that.data.dangerList
+        newList.splice(e.currentTarget.dataset.index, 1)
         that.setData({
-          repXmlist: newList
+          dangerList: newList
         })
         wx.showToast({
           title: res.repMsg
@@ -208,12 +194,12 @@ Page({
       }
       //获取手指触摸的是哪一个item
       var index = e.currentTarget.dataset.index;
-      var list = that.data.repXmlist;
+      var list = that.data.dangerList;
       //将拼接好的样式设置到当前item中
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       this.setData({
-        repXmlist: list
+        dangerList: list
       });
     }
   },
@@ -230,11 +216,11 @@ Page({
       var txtStyle = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "px" : "margin-left:0px";
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
-      var list = that.data.repXmlist;
+      var list = that.data.dangerList;
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       that.setData({
-        repXmlist: list
+        dangerList: list
       });
     }
   }

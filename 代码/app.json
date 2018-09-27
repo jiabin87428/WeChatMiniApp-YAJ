@@ -35,7 +35,9 @@
     "pages/danger/danger4JG",
     "pages/laws/lawList",
     "pages/laws/lawGrab",
-    "pages/common/webView"
+    "pages/common/webView",
+    "pages/danger/projectSearch",
+    "pages/danger/dangerSearch"
   ],
   "window": {
     "backgroundTextStyle": "light",

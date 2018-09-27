@@ -122,6 +122,12 @@ Page({
     }
     this.reqDangerList(params)
   },
+  // 跳转搜索页
+  jumpDangerSearch: function (e) {
+    wx.navigateTo({
+      url: '../danger/dangerSearch?xmid=' + this.data.xmid
+    })
+  },
   // 点击查看隐患详情
   getDetail: function (e) {
     if (e.currentTarget.dataset.name == "2") {// 草稿状态
