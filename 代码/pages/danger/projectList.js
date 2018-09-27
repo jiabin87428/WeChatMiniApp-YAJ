@@ -14,7 +14,9 @@ Page({
     repXmlist: [],
 
     editIndex: 0,
-    delBtnWidth: 80//删除按钮宽度单位（rpx）
+    delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
+    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
+    currentTab: 0,
   },
 
   /**
@@ -47,7 +49,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getProjectList()
+    var that = this
+    var xmzt = ""
+    if (that.data.currentTab == 1) {
+      xmzt = "0"
+    } else if (that.data.currentTab == 2) {
+      xmzt = "1"
+    } 
+    this.getProjectList(xmzt)
   },
 
   /**
@@ -84,19 +93,42 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 切换Tab页面
+  changeTap: function (e) {
+    var that = this
+    var viewId = e.currentTarget.id;
+    that.setData({
+      currentTab: viewId
+    })
+
+    var xmzt = ""
+    if (that.data.currentTab == 1) {
+      xmzt = "0"
+    } else if (that.data.currentTab == 2) {
+      xmzt = "1"
+    }
+    this.getProjectList(xmzt)
+  },
   // 查询关键字
   searchProject: function (e) {
     this.setData({
       searchText: e.detail.value
     })
-    this.getProjectList()
+    var xmzt = ""
+    if (this.data.currentTab == 1) {
+      xmzt = "0"
+    } else if (this.data.currentTab == 2) {
+      xmzt = "1"
+    }
+    this.getProjectList(xmzt)
   },
   // 获取项目列表
-  getProjectList: function () {
+  getProjectList: function (xmzt) {
     var that = this
     var param = {
       "userid": that.data.userid,
-      "searchText": that.data.searchText
+      "searchText": that.data.searchText,
+      "xmzt": xmzt
     }
     //调用接口
     request.requestLoading(config.getProjectList, param, '正在加载数据', function (res) {

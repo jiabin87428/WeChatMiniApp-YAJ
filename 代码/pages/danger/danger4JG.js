@@ -52,6 +52,13 @@ Page({
   },
   // 点击添加隐患
   addClick: function () {
+    if (this.data.item != null && this.data.item.xmzt == "1") {
+      wx.showToast({
+        title: '已归档项目不能新建隐患',
+        icon: 'none',
+      })
+      return
+    }
     wx.navigateTo({
       url: '../danger/addDanger?item=' + JSON.stringify(this.data.item) 
     })

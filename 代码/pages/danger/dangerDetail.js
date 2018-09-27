@@ -31,6 +31,8 @@ Page({
     xmid: "",
     // 项目名称
     xmmc: "",
+    // 项目状态
+    xmzt: "",
     // 企业名称
     qymc: "",
     // 问题描述
@@ -158,6 +160,7 @@ Page({
         that.setData({
           xmid: res.xmid,
           xmmc: res.xmmc,
+          xmzt: res.xmzt,
           qyid: res.qyid,
           // 企业名称
           qymc: res.qymc,
@@ -184,7 +187,7 @@ Page({
           // 整改负责人
           zgr: res.zgfzr == null ? "" : res.zgfzr,
           // 整改完成日期
-          date: res.zgwcrq == "" ? "请选择完成日期" : res.zgwcrq,
+          date: res.zgwcrq == "" ? res.xmzt == "1" ? "" : "请选择完成日期" : res.zgwcrq,
           // 整改完成情况
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
@@ -218,6 +221,9 @@ Page({
   },
   // 添加图片
   addPhoto: function () {
+    if (this.data.xmzt == '1') {
+      return
+    }
     var _this = this;
     wx.chooseImage({
       success: function (res) {
@@ -255,6 +261,9 @@ Page({
   },
   // 跳转输入页面
   jumpInput: function (e) {
+    if (this.data.xmzt == '1') {
+      return
+    }
     if (this.data.yhzt == '0') {
       return
     }

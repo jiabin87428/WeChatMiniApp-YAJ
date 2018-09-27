@@ -23,7 +23,9 @@ Page({
     // 项目负责人
     projectInCharge: "",
     // 项目id
-    xmid: ""
+    xmid: "",
+    // 项目状态
+    xmzt: ""
   },
 
   /**
@@ -41,7 +43,8 @@ Page({
         projectName: item.xmmc,
         projectNumber: item.xmbh,
         projectInCharge: item.xmfzr,
-        xmid: item.xmid
+        xmid: item.xmid,
+        xmzt: item.xmzt,
       })
     } 
   },
@@ -96,6 +99,9 @@ Page({
   },
   // 跳转输入页面
   jumpInput: function (e) {
+    if (this.data.xmzt == "1") {
+      return
+    }
     var viewId = e.currentTarget.id;
     var placeholder = ""
     var inputstring = ""
@@ -118,6 +124,9 @@ Page({
   },
   // 跳转单选列表
   jumpRadio: function (e) {
+    if (this.data.xmzt == "1") {
+      return
+    }
     var viewId = e.currentTarget.id;
     var sourceData = null
     var selected = null
@@ -143,6 +152,19 @@ Page({
   },
   // 提交事件
   submitClick: function (e) {
+    this.setData({
+      xmzt: "0"
+    })
+    this.editProject()
+  },
+  // 归档
+  fileClick: function (e) {
+    this.setData({
+      xmzt: "1"
+    })
+    this.editProject()
+  },
+  editProject: function () {
     if (this.checkInput() == false) {
       return
     }
@@ -157,6 +179,7 @@ Page({
       "xmmc": that.data.projectName,
       "xmbh": that.data.projectNumber,
       "xmfzr": that.data.projectInCharge,
+      "xmzt": that.data.xmzt,
     }
     request.requestLoading(config.createProjcet, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据

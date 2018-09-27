@@ -19,6 +19,37 @@
   border-bottom: 1rpx solid #D8D8D8;
 }
 
+.tapBarItem {
+  width: 100%;
+  text-align: center;
+  color: #A7A7A7;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.tapBarItem2 {
+  display:flex;
+  flex-direction:row;
+  width: 100%;
+  height: 39px;
+  justify-content: center;/*水平居中*/
+  align-items: center;
+  color: #2D68AA;
+  font-size: 14px;
+  border-bottom: 1rpx solid #2D68AA;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.tapText1 {
+  color: #A7A7A7;
+}
+
+.tapText2 {
+  color: #2D68AA;
+}
+
 .searchIcon {
   width: 20px;
   margin-left: 20px;
