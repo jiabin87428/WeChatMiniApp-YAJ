@@ -192,7 +192,7 @@ Page({
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
         var num = 1
-        if (that.data.yhzt == "0") {
+        if (that.data.yhzt == "0" || that.data.xmzt == "1") {
           num = 0
         }
         that.setData({
