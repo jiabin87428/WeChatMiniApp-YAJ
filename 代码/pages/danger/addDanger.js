@@ -82,7 +82,7 @@ Page({
         companyName: company,
         xmid: item.xmid,
         xmmc: item.xmmc,
-        yhid: item.yhid
+        yhid: item.yhid == null ? "" : item.yhid
       })
     }
 
@@ -193,8 +193,18 @@ Page({
 
     var item = list[currentIdx]
     var reg = RegExp(/www.gelure.com/);
-    if (item.match(reg)) {// 包含
-      for (var i = 0; i < this.data.danger.length; i++)
+    if (item.match(reg) == null) {// 不包含, 说明是新增的图片，这时候也要去newaddImagelist里找到并删除对应的
+      var newlist = _this.data.newaddImagelist
+      for (var i = 0; i < newlist.length; i++) {
+        var newItem = newlist[i]
+        if (item == newItem) {
+          newlist.splice(i,1)
+          i--
+        }
+      }
+      _this.setData({
+        newaddImagelist: newlist
+      })
     }
 
     list.splice(currentIdx,1)
@@ -328,7 +338,7 @@ Page({
     var params = {
       "xmid": this.data.xmid,
       "xmmc": this.data.xmmc,
-      "yhid": "",
+      "yhid": this.data.yhid,
       "userid": app.globalData.userInfo.userid,
       "qyid": qyid,
       "qymc": companyName,
@@ -354,7 +364,9 @@ Page({
         that.setData({
           dangerId: res.yhid
         })
-        that.submitImage()
+        if (that.data.newaddImagelist.length > 0) {
+          that.submitImage()
+        }
       } else {
         wx.showToast({
           title: res.repMsg,
@@ -369,7 +381,7 @@ Page({
   },
   // 提交图片事件
   submitImage: function() {
-    app.uploadDIY('?yhid=' + this.data.dangerId + '&zptype=zgqzp', imgList, 0, 0, 0, imgList.length, function (resultCode) {
+    app.uploadDIY('?yhid=' + this.data.dangerId + '&zptype=zgqzp', this.data.newaddImagelist, 0, 0, 0, this.data.newaddImagelist.length, function (resultCode) {
       if (resultCode == '200') {
         wx.showToast({
           title: '新建成功',
@@ -518,7 +530,7 @@ Page({
         }
         that.setData({
           imageViewHeight: Math.ceil((that.data.imageList.length) / 4) * (that.data.littleImageWidth + 8),
-          wcImageViewHeight: Math.ceil((that.data.wcImageList.length + num) / 4) * (that.data.littleImageWidth + 8)
+          // wcImageViewHeight: Math.ceil((that.data.wcImageList.length + num) / 4) * (that.data.littleImageWidth + 8)
         })
       } else {
         wx.showToast({

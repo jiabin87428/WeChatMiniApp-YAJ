@@ -201,10 +201,27 @@ Page({
       } else {
         for (var i = 0; i < res.list.length; i++) {
           var item = res.list[i]
+          var color = ''
+          if (item.zgzt == '0') {// 已整改
+            color = '#0A6BDA'
+          } else if (item.zgzt == '1') {// 未整改
+            color = '#FF6B2D'
+          }else {// 草稿
+            color = '#2FD065'
+          }
+          var icon = ''
+          if (item.zgzt == '0') {// 已整改
+            icon = '../../assets/danger_done.png'
+          } else if (item.zgzt == '1') {// 未整改
+            icon = '../../assets/danger_undo.png'
+          } else {// 草稿
+            icon = '../../assets/danger_draft.png'
+          }
+
           var callout = {
             content: item.yhms,
             color: '#FFFFFF',
-            bgColor: item.sfyzg == 'true' ? '#0A6BDA' :'#FF6B2D',
+            bgColor: color,
             borderRadius: 5,
             padding: 5,
             display: 'ALWAYS'
@@ -213,12 +230,12 @@ Page({
             id: i,
             latitude: item.mapy == "" ? 0 : item.mapy,
             longitude: item.mapx == "" ? 0 : item.mapx,
-            iconPath: item.sfyzg == 'true' ? '../../assets/danger_done.png' :'../../assets/danger_undo.png',
+            iconPath: icon,
             width: 30,
             height: 30,
             callout: callout,
             yhid: item.yhid,
-            sfyzg: item.sfyzg
+            zgzt: item.zgzt
           }
           markList.push(mark)
         }
@@ -278,14 +295,14 @@ Page({
     // }else {// 企业用户
     //   if (e.markerId != '99999') { // 点击的不是企业本身的坐标点
     //     var mark = this.data.markers[e.markerId+1]
-    //     this.getDetail(mark.yhid, mark.sfyzg)
+    //     this.getDetail(mark.yhid, mark.zgzt)
     //   }
     // }
   },
   // 查看隐患详情
-  getDetail: function (dangerId,sfyzg) {
+  getDetail: function (dangerId,zgzt) {
     wx.navigateTo({
-      url: '../danger/dangerDetail?yhid=' + dangerId + '&sfyzg=' + sfyzg
+      url: '../danger/dangerDetail?yhid=' + dangerId + '&zgzt=' + zgzt
     })
   },
 })    
