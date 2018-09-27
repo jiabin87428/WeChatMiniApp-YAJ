@@ -47,6 +47,8 @@ Page({
     zgjy: "",
     // 提交时间
     tjsj: "",
+    // 整改期限
+    zgqx: "",
 
 
     // 隐患处理参数
@@ -157,6 +159,12 @@ Page({
             bigWcImgList.push(bigId)
           }
         }
+        var zgqx = res.zgwcrq
+        if (zgqx == "") {
+          if (res.xmzt != "1" && res.yhzt != "0") {
+            zgqx = "请选择完成日期"
+          }
+        }
         that.setData({
           xmid: res.xmid,
           xmmc: res.xmmc,
@@ -176,6 +184,8 @@ Page({
           zgjy: res.zgjy == null ? '' : res.zgjy,
           // 提交时间
           tjsj: res.tjsj,
+          // 整改期限
+          zgqx: res.zgqx,
           // 照片列表
           imageList: imgList,
           // 完成照片列表
@@ -187,7 +197,7 @@ Page({
           // 整改负责人
           zgr: res.zgfzr == null ? "" : res.zgfzr,
           // 整改完成日期
-          date: res.zgwcrq == "" ? res.xmzt == "1" ? "" : "请选择完成日期" : res.zgwcrq,
+          date: zgqx,
           // 整改完成情况
           zgcs: res.zgwcqk == null ? "" : res.zgwcqk
         });
@@ -305,7 +315,18 @@ Page({
       //res就是我们请求接口返回的数据
       console.log(res)
       if (res.repCode == '200') {
-        that.submitImage()
+        if (that.data.wcImageList.length > 0) {
+          that.submitImage()
+        }else {
+          wx.showToast({
+            title: '隐患处理成功',
+            complete: setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1500)
+          })
+        }
       } else {
         wx.showToast({
           title: res.repMsg,
@@ -325,9 +346,11 @@ Page({
       if (resultCode == '200') {
         wx.showToast({
           title: '隐患处理成功',
-          complete: wx.navigateBack({
-            delta: 1
-          })
+          complete: setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500)
         })
       }
     })

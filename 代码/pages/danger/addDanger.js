@@ -366,6 +366,15 @@ Page({
         })
         if (that.data.newaddImagelist.length > 0) {
           that.submitImage()
+        }else {
+          wx.showToast({
+            title: res.repMsg,
+            complete: setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1500)
+          })
         }
       } else {
         wx.showToast({
@@ -384,7 +393,7 @@ Page({
     app.uploadDIY('?yhid=' + this.data.dangerId + '&zptype=zgqzp', this.data.newaddImagelist, 0, 0, 0, this.data.newaddImagelist.length, function (resultCode) {
       if (resultCode == '200') {
         wx.showToast({
-          title: '新建成功',
+          title: '成功',
           complete: setTimeout(function () {
             wx.navigateBack({
               delta: 1
@@ -529,7 +538,7 @@ Page({
           num = 0
         }
         that.setData({
-          imageViewHeight: Math.ceil((that.data.imageList.length) / 4) * (that.data.littleImageWidth + 8),
+          imageViewHeight: Math.ceil((that.data.imageList.length + num) / 4) * (that.data.littleImageWidth + 8),
           // wcImageViewHeight: Math.ceil((that.data.wcImageList.length + num) / 4) * (that.data.littleImageWidth + 8)
         })
       } else {

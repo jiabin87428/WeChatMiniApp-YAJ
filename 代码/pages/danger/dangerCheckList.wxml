@@ -44,10 +44,10 @@
           <view class='typeView'>
             <image class="dangerIcon" src="../../assets/dangerTypeBG.png" mode="widthFix" wx:if="{{item.yhzt == '0'}}"></image>
             <image class="dangerIcon" src="../../assets/dangerTypeBG2.png" mode="widthFix" wx:if="{{item.yhzt == '1'}}"></image>
-            <image class="dangerIcon" src="../../assets/dangerTypeBG3.png" mode="widthFix" wx:else></image>
+            <image class="dangerIcon" src="../../assets/dangerTypeBG3.png" mode="widthFix" wx:if="{{item.yhzt == '2'}}"></image>
             <text class='typeText' wx:if="{{item.yhzt == '0'}}">已整改</text>
             <text class='typeText' wx:if="{{item.yhzt == '1'}}">未整改</text>
-            <text class='typeText' wx:else>草稿</text>
+            <text class='typeText' wx:if="{{item.yhzt == '2'}}">草稿</text>
           </view>
           <view class='subView'>
             <text class='dangerText'>{{item.xcwt}}</text>
