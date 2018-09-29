@@ -115,6 +115,12 @@ Page({
       url: '../danger/projectSearch?userid=' + this.data.userid
     })
   },
+  // 新建项目
+  addClick: function (e) {
+    wx.navigateTo({
+      url: '../danger/addProject'
+    })
+  },
   // 获取项目列表
   getProjectList: function (xmzt) {
     var that = this

@@ -1,0 +1,29 @@
+<!--pages/danger/addDanger.wxml-->
+<view class="baseView">
+<scroll-view scroll-y="true" class='scrollView'>
+  <view id='companyName' class='scrollItem'>
+    <text class='cellText1'>企业名称</text>
+    <text class='mustText'>*</text>
+    <text class='cellText2'>{{companyName}}</text>
+    <image class="arrow" src="" mode="aspectFit"></image> 
+  </view>
+  <view id='address' class='scrollItem'  bindtap='jumpLocation'>
+    <text class='cellText1'>企业地址</text>
+    <text class='cellText2'>{{address}}</text>
+    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
+  </view>
+  <view id='companyName' class='scrollItem'>
+    <text class='cellText1'>主要负责人</text>
+    <text class='cellText2'>{{inCharge}}</text>
+    <image class="arrow" src="" mode="aspectFit"></image> 
+  </view>
+  <view id='companyName' class='scrollItem'>
+    <text class='cellText1'>负责人电话</text>
+    <text class='cellText2'>{{phoneNum}}</text>
+    <image class="arrow" src="" mode="aspectFit"></image> 
+  </view>
+  <view id='9' class='scrollButtonItem'>
+    <button class='submitButton' bindtap="saveClick">保存</button>
+  </view>
+</scroll-view>
+</view>

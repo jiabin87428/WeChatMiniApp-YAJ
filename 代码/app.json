@@ -37,7 +37,9 @@
     "pages/laws/lawGrab",
     "pages/common/webView",
     "pages/danger/projectSearch",
-    "pages/danger/dangerSearch"
+    "pages/danger/dangerSearch",
+    "pages/me/companyList",
+    "pages/me/companyEdit"
   ],
   "window": {
     "backgroundTextStyle": "light",

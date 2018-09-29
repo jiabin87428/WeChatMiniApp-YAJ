@@ -1,7 +1,7 @@
-var app = getApp()
+// pages/check/dangerDetailSelect.js
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
-// pages/danger/dangerCheckList.js
+var app = getApp()
 Page({
 
   /**
@@ -9,17 +9,14 @@ Page({
    */
   data: {
     scrollHeight: 0,
-    // 隐患列表
-    dangerList: [],
-    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
-    currentTab: 0,
-    // 项目id
-    xmid: "",
-    // 项目item
-    item: null,
+    searchText: "",
+    userid: "",
+    repXmlist: [],
 
     editIndex: 0,
-    delBtnWidth: 80//删除按钮宽度单位（rpx）
+    delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
+    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
+    currentTab: 0,
   },
 
   /**
@@ -27,13 +24,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    var item = JSON.parse(options.item)
-    if (item != null) {
-      that.setData({
-        item: item,
-        xmid: item.xmid
-      })
-    }
+    var userid = options.userid
+    that.setData({
+      userid: userid
+    });
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
@@ -48,135 +42,70 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    var params = {
-      "userid": app.globalData.userInfo.userid,
-      "xmid": that.data.xmid
-    }
-    if (that.data.currentTab == 1) {
-      params["yhzt"] = "1"
-    } else if (that.data.currentTab == 2) {
-      params["yhzt"] = "0"
-    } else if (that.data.currentTab == 3) {
-      params["yhzt"] = "2"
-    }
-    this.reqDangerList(params)
+    this.getQYList()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
-  },
-  // 切换Tab页面
-  changeTap: function(e) {
-    var that = this
-    var viewId = e.currentTarget.id;
-    that.setData({
-      currentTab: viewId
-    })
 
-    var params = {
-      "userid": app.globalData.userInfo.userid,
-      "xmid": that.data.xmid
-    }
-    if (that.data.currentTab == 1) {
-      params["yhzt"] = "1"
-    } else if (that.data.currentTab == 2) {
-      params["yhzt"] = "0"
-    } else if (that.data.currentTab == 3) {
-      params["yhzt"] = "2"
-    }
-    this.reqDangerList(params)
   },
-  // 跳转搜索页
-  jumpDangerSearch: function (e) {
-    wx.navigateTo({
-      url: '../danger/dangerSearch?xmid=' + this.data.xmid
-    })
-  },
-  // 新建隐患
+  // 新建企业
   addClick: function (e) {
-    if (this.data.item != null && this.data.item.xmzt == "1") {
-      wx.showToast({
-        title: '已归档项目不能新建隐患',
-        icon: 'none',
-      })
-      return
-    }
     wx.navigateTo({
-      url: '../danger/addDanger?item=' + JSON.stringify(this.data.item)
+      url: '../me/companyEdit'
     })
   },
-  // 归档状态点击新建
-  addClickDisable: function (e) {
-    wx.showToast({
-      title: '已归档项目不能新建隐患',
-      icon: 'none'
-    })
-  },
-  // 点击查看隐患详情
-  getDetail: function (e) {
-    if (e.currentTarget.dataset.name == "2") {// 草稿状态
-      wx.navigateTo({
-        url: '../danger/addDanger?item=' + JSON.stringify(e.currentTarget.dataset.item)
-      })
-    }else {// 已整改 未整改
-      wx.navigateTo({
-        url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&yhzt=' + e.currentTarget.dataset.name
-      })
-    }
-  },
-  // 获取隐患列表
-  reqDangerList: function (searchObj, cb) {
+  // 获取项目列表
+  getQYList: function () {
     var that = this
+    var param = {
+      "userid": that.data.userid,
+      "searchText": that.data.searchText,
+      "xmzt": xmzt
+    }
     //调用接口
-    request.requestLoading(config.getYhList, searchObj, '正在加载数据', function (res) {
+    request.requestLoading(config.getProjectList, param, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repYhList != null) {
+      if (res.repXmlist != null) {
         that.setData({
-          dangerList: res.repYhList
-        })
-      }else {
-        wx.showToast({
-          title: res.repMsg,
-          icon: 'none'
+          repXmlist: res.repXmlist
         })
       }
     }, function () {
@@ -186,21 +115,29 @@ Page({
       })
     })
   },
-  // 删除隐患
-  deleteYH: function (e) {
+
+  // 选择企业进入编辑
+  selectItem: function (e) {
+    wx.navigateTo({
+      url: '../danger/companyEdit'
+    })
+  },
+
+  // 删除企业
+  deleteCompany: function (e) {
     var item = e.currentTarget.dataset.item
     var that = this
     var param = {
-      "yhid": item.yhid,
+      "xmid": item.xmid,
     }
     //调用接口
-    request.requestLoading(config.deleteYH, param, '正在加载数据', function (res) {
+    request.requestLoading(config.deleteProject, param, '正在加载数据', function (res) {
       console.log(res)
       if (res.repCode == "200") {
-        var newList = that.data.dangerList
+        var newList = that.data.repXmlist
         newList.splice(e.currentTarget.dataset.index, 1)
         that.setData({
-          dangerList: newList
+          repXmlist: newList
         })
         wx.showToast({
           title: res.repMsg
@@ -247,12 +184,12 @@ Page({
       }
       //获取手指触摸的是哪一个item
       var index = e.currentTarget.dataset.index;
-      var list = that.data.dangerList;
+      var list = that.data.repXmlist;
       //将拼接好的样式设置到当前item中
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       this.setData({
-        dangerList: list
+        repXmlist: list
       });
     }
   },
@@ -269,11 +206,11 @@ Page({
       var txtStyle = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "px" : "margin-left:0px";
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
-      var list = that.data.dangerList;
+      var list = that.data.repXmlist;
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       that.setData({
-        dangerList: list
+        repXmlist: list
       });
     }
   }

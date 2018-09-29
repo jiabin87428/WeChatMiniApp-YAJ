@@ -197,5 +197,11 @@ Page({
     wx.navigateTo({
       url: '../me/editMe?longitude=' + this.data.longitude + '&latitude=' + this.data.latitude
     })
-  }
+  },
+  // 挑战企业管理
+  companyManagerClick: function (e) {
+    wx.navigateTo({
+      url: '../me/companyList?userid=' + app.globalData.userInfo.userid
+    })
+  },
 })
