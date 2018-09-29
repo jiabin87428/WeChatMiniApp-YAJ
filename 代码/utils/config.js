@@ -108,6 +108,13 @@ var config = {
   // 删除项目
   deleteProject: `${host}/getXx.do?action=delXm`,
 
+  // 获取企业列表
+  getCompanyList: `${host}/getXx.do?action=getQyList`,
+  // 新建/编辑企业
+  editCompany: `${host}/getXx.do?action=insertQy`,
+  // 删除企业
+  deleteCompany: `${host}/getXx.do?action=delQy`,
+
   // 下载文件
   downLoadFile: `${host}/getfile?fileid=`,
 };

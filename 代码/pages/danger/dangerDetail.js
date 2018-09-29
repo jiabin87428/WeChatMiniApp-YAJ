@@ -39,8 +39,6 @@ Page({
     wtms: "",
     // 法律依据
     clause: "",
-    // 条款内容
-    clauseInfo: "",
     // 可造成后果
     kzchg: "",
     // 整改建议
@@ -176,8 +174,6 @@ Page({
           wtms: res.wtms,
           // 对应条款
           clause: res.dytk,
-          // 条款内容
-          clauseInfo: res.tknr,
           // 可造成后果
           kzchg: "",
           // 整改建议

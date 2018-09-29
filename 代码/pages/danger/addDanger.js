@@ -38,8 +38,6 @@ Page({
     desc: "",
     // 对应条款
     clause: "",
-    // 条款内容
-    clauseInfo: "",
     // 潜在隐患
     danger: null,
     // 整改类型
@@ -255,9 +253,6 @@ Page({
     } else if (viewId == "clause") {
       placeholder = "请输入对应条款"
       inputstring = this.data.clause
-    } else if (viewId == "clauseInfo") {
-      placeholder = "请输入条款内容"
-      inputstring = this.data.clauseInfo
     } else if (viewId == "result") {
       placeholder = "请输入可能造成的后果"
       inputstring = this.data.result
@@ -344,7 +339,6 @@ Page({
       "qymc": companyName,
       "wtms": this.data.desc,
       "dytk": this.data.clause,
-      "tknr": this.data.clauseInfo,
       "zglx": this.data.rectifyType.name,
       "zgqx": this.data.date,
       "zgjy": this.data.advise,
@@ -523,8 +517,6 @@ Page({
           desc: res.wtms,
           // 对应条款
           clause: res.dytk,
-          // 条款内容
-          clauseInfo: res.tknr,
           // 整改建议
           advise: res.zgjy == null ? '' : res.zgjy,
           // 提交时间

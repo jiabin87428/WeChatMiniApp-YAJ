@@ -66,11 +66,29 @@
   font-size: 14px;
   color: #060606;
   margin-top: 5px;
+  margin-bottom: 5px;
   margin-left: 10px;
   width: 100%;
 }
 
 .cellText2 {
+  font-size: 14px;
+  color: #A3A3A3;
+  margin-left: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  display: -webkit-box;
+  line-height: 40rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:10;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  font-weight: 400;
+}
+
+.cellText3 {
   font-size: 14px;
   color: #A3A3A3;
   margin-left: 20px;

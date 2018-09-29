@@ -37,12 +37,6 @@
     <text class='cellText2'>{{clause}}</text>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
   </view>
-  <view id='clauseInfo' class='scrollItem' bindtap='selectInputType'>
-    <text class='cellText1'>条款内容</text>
-    <text class='cellText2'>{{clauseInfo}}</text>
-    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
-  </view>
-  <!-- <imageView style='height:100px;'></imageView> -->
   <view id='advise' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>整改建议</text>
     <!-- <text class='mustText'>*</text> -->

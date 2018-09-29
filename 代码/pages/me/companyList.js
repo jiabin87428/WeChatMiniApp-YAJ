@@ -11,7 +11,7 @@ Page({
     scrollHeight: 0,
     searchText: "",
     userid: "",
-    repXmlist: [],
+    repCompany: [],
 
     editIndex: 0,
     delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
@@ -89,23 +89,30 @@ Page({
   // 新建企业
   addClick: function (e) {
     wx.navigateTo({
-      url: '../me/companyEdit'
+      url: '../me/companyEdit?userid=' + this.data.userid
     })
+  },
+  // 搜索
+  searchCompany: function (e) {
+    var that = this
+    that.setData({
+      searchText: e.detail.value,
+    })
+    that.getQYList()
   },
   // 获取项目列表
   getQYList: function () {
     var that = this
     var param = {
-      "userid": that.data.userid,
       "searchText": that.data.searchText,
-      "xmzt": xmzt
+      "userid": that.data.userid,
     }
     //调用接口
-    request.requestLoading(config.getProjectList, param, '正在加载数据', function (res) {
+    request.requestLoading(config.getCompanyList, param, '正在加载数据', function (res) {
       console.log(res)
-      if (res.repXmlist != null) {
+      if (res.repCompany != null) {
         that.setData({
-          repXmlist: res.repXmlist
+          repCompany: res.repCompany
         })
       }
     }, function () {
@@ -119,7 +126,7 @@ Page({
   // 选择企业进入编辑
   selectItem: function (e) {
     wx.navigateTo({
-      url: '../danger/companyEdit'
+      url: '../me/companyEdit?userid=' + this.data.userid + '&item=' + JSON.stringify(e.currentTarget.dataset.item)
     })
   },
 
@@ -128,16 +135,16 @@ Page({
     var item = e.currentTarget.dataset.item
     var that = this
     var param = {
-      "xmid": item.xmid,
+      "qyid": item.qyid,
     }
     //调用接口
-    request.requestLoading(config.deleteProject, param, '正在加载数据', function (res) {
+    request.requestLoading(config.deleteCompany, param, '正在加载数据', function (res) {
       console.log(res)
       if (res.repCode == "200") {
-        var newList = that.data.repXmlist
+        var newList = that.data.repCompany
         newList.splice(e.currentTarget.dataset.index, 1)
         that.setData({
-          repXmlist: newList
+          repCompany: newList
         })
         wx.showToast({
           title: res.repMsg
@@ -184,12 +191,12 @@ Page({
       }
       //获取手指触摸的是哪一个item
       var index = e.currentTarget.dataset.index;
-      var list = that.data.repXmlist;
+      var list = that.data.repCompany;
       //将拼接好的样式设置到当前item中
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       this.setData({
-        repXmlist: list
+        repCompany: list
       });
     }
   },
@@ -206,11 +213,11 @@ Page({
       var txtStyle = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "px" : "margin-left:0px";
       //获取手指触摸的是哪一项
       var index = e.currentTarget.dataset.index;
-      var list = that.data.repXmlist;
+      var list = that.data.repCompany;
       list[index].txtStyle = txtStyle;
       //更新列表的状态
       that.setData({
-        repXmlist: list
+        repCompany: list
       });
     }
   }

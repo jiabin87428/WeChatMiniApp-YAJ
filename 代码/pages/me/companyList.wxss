@@ -123,6 +123,7 @@
   flex-direction: column;
   width: 100%;
   background-color: white;
+  justify-content: center;/*水平居中*/
   z-index: 1;
 }
 

@@ -13,10 +13,6 @@
     <text class='cellText1'>对应条款</text>
     <text class='cellText2'>{{clause}}</text>
   </view>
-  <view id='clauseInfo' class='scrollItem'>
-    <text class='cellText1'>条款内容</text>
-    <text class='cellText2'>{{clauseInfo}}</text>
-  </view>
   <view class='imageBaseView' style='height:{{58+imageViewHeight}}px;'>
     <view class='titleView'>
       <text class='cellText1'>隐患照片</text>
