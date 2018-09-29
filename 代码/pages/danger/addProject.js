@@ -133,9 +133,12 @@ Page({
 
     if (viewId == "companyName") {
       selected = this.data.companyName
+      var param = {
+        "userid": app.globalData.userInfo.userid
+      }
       //调用应用实例的方法获取全局数据
-      app.getCompanyName(null, function (companyName) {
-        sourceData = companyName
+      app.getCompanyName(param, function (companyName) {
+        sourceData = companyName == null ? [] : companyName
         wx.navigateTo({
           url: '../common/selectRadioList?id=' + viewId + '&data=' + JSON.stringify(sourceData) + '&selected=' + JSON.stringify(selected)
         })

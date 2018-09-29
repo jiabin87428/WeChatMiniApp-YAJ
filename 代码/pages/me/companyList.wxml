@@ -12,7 +12,7 @@
 
         <view class='subscrollBG' style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item="{{item}}" bindtap='selectItem'>
           <view class='subscrollItem'>
-            <text class='dangerText'>{{item.qymc}}</text>
+            <text class='dangerText'>{{item.name}}</text>
             <text class='subText'>{{item.qydz}}</text>
           </view>
           <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" ></image>

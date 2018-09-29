@@ -135,7 +135,7 @@ Page({
     var item = e.currentTarget.dataset.item
     var that = this
     var param = {
-      "qyid": item.qyid,
+      "qyid": item.id,
     }
     //调用接口
     request.requestLoading(config.deleteCompany, param, '正在加载数据', function (res) {

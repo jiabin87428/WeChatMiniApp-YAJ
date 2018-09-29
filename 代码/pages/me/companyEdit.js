@@ -40,8 +40,8 @@ Page({
     var item = JSON.parse(options.item)
     if (item != null) {
       that.setData({
-        qyid: item.qyid,
-        qymc: item.qymc,
+        qyid: item.id,
+        qymc: item.name,
         longitude: item.mapx,
         latitude: item.mapy,
         address: item.qydz,
