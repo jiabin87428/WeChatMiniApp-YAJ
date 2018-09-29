@@ -120,11 +120,21 @@ Page({
   },
   // 退出登录
   loginOut: function () {
-    var that = this
-    wx.removeStorage({
-      key: 'userInfo',
-      success: function (res) {
-        app.checkLogin()
+    wx.showModal({
+      title: '提示',
+      content: '是否确认退出登录？',
+      success:function (res){
+        if (res.confirm) {
+          var that = this
+          wx.removeStorage({
+            key: 'userInfo',
+            success: function (res) {
+              app.checkLogin()
+            }
+          })
+        }else if (res.cancel) {
+          
+        }
       }
     })
   },

@@ -34,6 +34,9 @@ Page({
       userid: userid,
     })
 
+    if (options.item == null) {
+      return
+    }
     var item = JSON.parse(options.item)
     if (item != null) {
       that.setData({
