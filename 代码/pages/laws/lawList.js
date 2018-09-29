@@ -11,6 +11,7 @@ Page({
     scrollHeight: 0,
     searchName: "",
     repFgfl: [],
+    categoryid: "",
   },
 
   /**
@@ -18,6 +19,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var categoryid = options.categoryid
+    if (categoryid != null) {
+      that.setData({
+        categoryid: categoryid
+      })
+    }
     wx.getSystemInfo({
       success: function (res) {
         console.info(res.windowHeight);
@@ -93,6 +100,7 @@ Page({
   getLawTypesList: function () {
     var that = this
     var param = {
+      "categoryid": that.data.categoryid,
       "flName": that.data.searchName
     }
     //调用接口
@@ -114,8 +122,14 @@ Page({
   // 选择并返回赋值
   selectItem: function (e) {
     var item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: '../laws/lawsDetail?type=' + item.id
-    })
+    if (item.hasChild == "Y") {
+      wx.navigateTo({
+        url: '../laws/lawList?categoryid=' + item.id
+      })
+    }else {
+      wx.navigateTo({
+        url: '../laws/lawsDetail?type=' + item.id
+      })
+    }
   },
 })
