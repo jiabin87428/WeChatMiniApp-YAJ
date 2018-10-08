@@ -15,8 +15,8 @@ Page({
 
     editIndex: 0,
     delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
-    // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
-    currentTab: 0,
+    // 当前选中tab页 0-全部 1-进行中 2-已归档
+    currentTab: 1,
   },
 
   /**
@@ -148,8 +148,11 @@ Page({
   // 选择并返回赋值
   selectItem: function (e) {
     var item = e.currentTarget.dataset.item
+    // wx.navigateTo({
+    //   url: '../danger/danger4JG?item=' + JSON.stringify(item)
+    // })
     wx.navigateTo({
-      url: '../danger/danger4JG?item=' + JSON.stringify(item)
+      url: '../danger/addProject?item=' + JSON.stringify(item)
     })
   },
 

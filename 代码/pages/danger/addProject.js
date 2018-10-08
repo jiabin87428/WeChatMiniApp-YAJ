@@ -12,6 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 项目对象
+    item: null,
     // 用户类型
     yhlx: 0,
     // 企业名称
@@ -39,6 +41,7 @@ Page({
         "id": item.qyid
       }
       this.setData({
+        item: item,
         companyName: companyObj,
         projectName: item.xmmc,
         projectNumber: item.xmbh,
@@ -152,6 +155,12 @@ Page({
         url: '../common/selectRadioList?id=' + viewId + '&data=' + JSON.stringify(sourceData) + '&selected=' + JSON.stringify(selected)
       })
     }
+  },
+  // 隐患处理
+  jumpDanger: function (e) {
+    wx.navigateTo({
+      url: '../danger/dangerCheckList?item=' + JSON.stringify(this.data.item)
+    })
   },
   // 提交事件
   submitClick: function (e) {

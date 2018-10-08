@@ -81,7 +81,7 @@
   </view>
   <view id='9' class='scrollButtonItem'>
     <button class='submitButton' bindtap="submitClick">提交</button>
-    <button class='submitButton' bindtap="saveClick">保存</button>
+    <button class='submitButton' bindtap="saveClick">保存到草稿</button>
   </view>
 </scroll-view>
 </view>
