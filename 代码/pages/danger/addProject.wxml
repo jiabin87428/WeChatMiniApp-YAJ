@@ -36,7 +36,7 @@
     <image class="arrow" src="" mode="aspectFit" wx:if="{{xmzt == '1'}}"></image> 
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:else></image>
   </view> -->
-  <view id='8' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">
+  <view id='8' class='scrollButtonItem'>
     <button class='submitButtonGreen' bindtap="jumpDanger">检查问题</button>
   </view>
   <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">
