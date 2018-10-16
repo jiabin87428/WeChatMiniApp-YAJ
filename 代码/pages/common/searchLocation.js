@@ -116,6 +116,7 @@ Page({
       keyword: e.currentTarget.dataset.keywords,
       address: e.currentTarget.dataset.address
     })
+    prevPage.getLocationInfo()
     wx.navigateBack({
       delta: 1
     })

@@ -21,6 +21,12 @@ Page({
 
     markers: [],
     markerId: 0,
+    // 省
+    province: "",
+    // 市
+    city: "",
+    // 区
+    district: "",
   },
 
   /**
@@ -176,7 +182,10 @@ Page({
     request.request(getAddressUrl, '正在加载数据', function (res) {
       //console.log(JSON.stringify(res));
       that.setData({
-        address: res.result.address
+        address: res.result.address,
+        province: res.result.ad_info.province,
+        city: res.result.ad_info.city,
+        district: res.result.ad_info.district,
       })
     }, function () {
       wx.showToast({
@@ -222,7 +231,10 @@ Page({
     prevPage.setData({
       longitude: this.data.longitude,
       latitude: this.data.latitude,
-      address: this.data.address
+      address: this.data.address,
+      province: this.data.province,
+      city: this.data.city,
+      district: this.data.district,
     })
     wx.navigateBack({
       delta: 1

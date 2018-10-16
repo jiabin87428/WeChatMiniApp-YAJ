@@ -22,6 +22,12 @@ Page({
     // 主要负责人电话
     zyfzrdh: "",
 
+    // 省
+    province: "",
+    // 市
+    city: "",
+    // 区
+    district: "",
   },
 
   /**
@@ -135,7 +141,10 @@ Page({
       "zyfzrdh": that.data.zyfzrdh,
       "qydz": that.data.address,
       "mapx": that.data.longitude,
-      "mapy": that.data.latitude
+      "mapy": that.data.latitude,
+      "province": that.data.province,
+      "city": that.data.city,
+      "district": that.data.district,
     }
     request.requestLoading(config.editCompany, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据
