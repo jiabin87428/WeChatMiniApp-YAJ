@@ -93,6 +93,9 @@ var config = {
   // 法律法规内容检索
   searchLawsInfo: `${host}/getXx.do?action=showWj`,
 
+  // 获取全部法律法规-新建隐患从法规库选择对应条款
+  getAllFlfg: `${host}/getXx.do?action=getAllFlfg`,
+
   // 新建项目
   createProjcet: `${host}/getXx.do?action=insertXm`,
   // 获取项目列表
@@ -114,6 +117,8 @@ var config = {
   editCompany: `${host}/getXx.do?action=insertQy`,
   // 删除企业
   deleteCompany: `${host}/getXx.do?action=delQy`,
+  // 重置企业密码
+  resetCompanyPassword: `${host}/getXx.do?action=resetPwd`,
 
   // 下载文件
   downLoadFile: `${host}/getfile?fileid=`,

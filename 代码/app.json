@@ -39,12 +39,13 @@
     "pages/danger/projectSearch",
     "pages/danger/dangerSearch",
     "pages/me/companyList",
-    "pages/me/companyEdit"
+    "pages/me/companyEdit",
+    "pages/danger/clauseList"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2D68AA",
-    "navigationBarTitleText": "易安监",
+    "navigationBarTitleText": "安全管家",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

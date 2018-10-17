@@ -226,12 +226,12 @@ Page({
     if (this.data.projectName == "") {
       showText = "请输入项目名称"
     }
-    if (this.data.projectNumber == "") {
-      showText = "请输入项目编号"
-    }
-    if (this.data.projectInCharge == "") {
-      showText = "请输入项目负责人"
-    }
+    // if (this.data.projectNumber == "") {
+    //   showText = "请输入项目编号"
+    // }
+    // if (this.data.projectInCharge == "") {
+    //   showText = "请输入项目负责人"
+    // }
     if (app.globalData.userInfo.yhlx != "0") {
       if (this.data.companyName == null) {
         showText = "请选择企业"

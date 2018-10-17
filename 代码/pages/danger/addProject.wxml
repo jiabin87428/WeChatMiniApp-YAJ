@@ -17,14 +17,14 @@
   </view>
   <view id='projectNumber' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>项目编号</text>
-    <text class='mustText'>*</text>
+    <text class='mustText'></text>
     <text class='cellText2'>{{projectNumber}}</text>
     <image class="arrow" src="" mode="aspectFit" wx:if="{{xmzt == '1'}}"></image> 
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:else></image>
   </view>
   <view id='projectInCharge' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>负责人</text>
-    <text class='mustText'>*</text>
+    <text class='mustText'></text>
     <text class='cellText2'>{{projectInCharge}}</text>
     <image class="arrow" src="" mode="aspectFit" wx:if="{{xmzt == '1'}}"></image> 
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:else></image>
@@ -36,7 +36,7 @@
     <image class="arrow" src="" mode="aspectFit" wx:if="{{xmzt == '1'}}"></image> 
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:else></image>
   </view> -->
-  <view id='8' class='scrollButtonItem'>
+  <view id='8' class='scrollButtonItem' wx:if="{{xmid != ''}}">
     <button class='submitButtonGreen' bindtap="jumpDanger">检查问题</button>
   </view>
   <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">

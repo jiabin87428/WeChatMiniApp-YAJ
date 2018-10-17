@@ -25,5 +25,8 @@
   <view id='9' class='scrollButtonItem'>
     <button class='submitButton' bindtap="saveClick">保存</button>
   </view>
+  <view id='9' class='scrollButtonItem'>
+    <button class='resetPasswordButton' bindtap="resetPasswordClick">重置密码</button>
+  </view>
 </scroll-view>
 </view>

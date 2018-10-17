@@ -170,4 +170,45 @@ Page({
       })
     })
   },
+
+  // 重置密码点击事件
+  resetPasswordClick: function (e) {
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '是否确认将' + that.data.qymc + '的密码重制为111111？',
+      success: function (res) {
+        if (res.confirm) {
+          that.resetPassword()
+        } else if (res.cancel) {
+
+        }
+      }
+    })
+  },
+  // 重置密码事件
+  resetPassword: function() {
+    var that = this
+    var params = {
+      "qymc": that.data.qymc,
+    }
+    request.requestLoading(config.resetCompanyPassword, params, '正在加载数据', function (res) {
+      //res就是我们请求接口返回的数据
+      console.log(res)
+      if (res.repCode == '200') {
+        wx.showToast({
+          title: res.repMsg,
+        })
+      } else {
+        wx.showToast({
+          title: res.repMsg,
+          icon: 'none'
+        })
+      }
+    }, function () {
+      wx.showToast({
+        title: '重置密码失败',
+      })
+    })
+  },
 })

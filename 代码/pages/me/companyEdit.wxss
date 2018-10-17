@@ -113,6 +113,14 @@
   margin: 5px 5px 5px 5px;
 }
 
+.resetPasswordButton {
+  background-color: #FE604F;
+  color: white;
+  width: 90%;
+  height: 48px;
+  margin: 5px 5px 5px 5px;
+}
+
 .imageBaseView {
   display:flex;
   flex-direction:column;

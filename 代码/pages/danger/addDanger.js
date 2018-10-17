@@ -215,9 +215,10 @@ Page({
   },
   // 选择现场问题输入方式：通过模板选择or直接输入
   selectInputType: function (e) {
+    var viewId = e.currentTarget.id
     var that = this
     wx.showActionSheet({
-      itemList: ['从隐患库选择', '自行输入问题', '从隐患库检索'],
+      itemList: viewId == "clause" ? ['从隐患库选择', '自行输入问题', '从隐患库检索', '从法规库选择']:['从隐患库选择', '自行输入问题', '从隐患库检索'],
       success: function (res) {
         if (res.tapIndex == 0) {// 从模板选择
           wx.navigateTo({
@@ -225,9 +226,13 @@ Page({
           })
         } else if (res.tapIndex == 1){// 自行输入
           that.jumpInput(e)
-        } else {// 从隐患库检索
+        } else if (res.tapIndex == 2) {// 从隐患库检索
           wx.navigateTo({
             url: '../danger/dangerDetailSelect'
+          })
+        } else {// 法规库选择
+          wx.navigateTo({
+            url: '../danger/clauseList'
           })
         }
       },

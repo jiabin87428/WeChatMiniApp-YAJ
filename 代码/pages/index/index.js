@@ -175,7 +175,7 @@ Page({
         for (var i = 0; i < res.list.length; i++) {
           var item = res.list[i]
           var callout = {
-            content: item.qymc,
+            content: item.qymc + '(隐患总数：' + item.yhsl + ')',
             color: '#FFFFFF',
             bgColor: '#5490FF',
             borderRadius: 5,
