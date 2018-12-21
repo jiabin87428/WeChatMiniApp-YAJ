@@ -11,6 +11,11 @@
         </view>
       </view>
     </view>
+    <view id='companyName' class='scrollItem' wx:if="{{yhlx == '2'}}">
+      <text class='cellText1'>监管区域</text>
+      <text class='cellText2'>{{showCompanyName}}</text>
+    </view>
+
     <view id='companyName' class='scrollItem' wx:if="{{yhlx == '0'}}">
       <text class='cellText1'>企业全称</text>
       <text class='cellText2'>{{showCompanyName}}</text>

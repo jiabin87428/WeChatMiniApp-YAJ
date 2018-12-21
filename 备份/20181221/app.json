@@ -1,0 +1,89 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/danger/addDanger",
+    "pages/danger/dangerList",
+    "pages/danger/dangerDetail",
+    "pages/danger/danger",
+    "pages/me/me",
+    "pages/common/inputPage",
+    "pages/common/selectRadioList",
+    "pages/common/selectCheckList",
+    "pages/danger/dangerCheckList",
+    "pages/me/editMe",
+    "pages/common/chooseLocation",
+    "pages/common/searchLocation",
+    "pages/application/application",
+    "pages/manger/companyManger",
+    "pages/application/companyInfoList",
+    "pages/application/personInfo",
+    "pages/application/standardInfo",
+    "pages/manger/companyFilter",
+    "pages/application/companyInfoDetail",
+    "pages/danger/dangerTypeSelect",
+    "pages/danger/dangerDetailSelect",
+    "pages/login/chooseLoginType",
+    "pages/danger/dangerSearchList",
+    "pages/laws/laws",
+    "pages/laws/lawsDetail",
+    "pages/laws/lawsInfoSearch",
+    "pages/danger/projectList",
+    "pages/danger/addProject",
+    "pages/danger/danger4JG",
+    "pages/laws/lawList",
+    "pages/laws/lawGrab",
+    "pages/common/webView",
+    "pages/danger/projectSearch",
+    "pages/danger/dangerSearch",
+    "pages/me/companyList",
+    "pages/me/companyEdit",
+    "pages/danger/clauseList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2D68AA",
+    "navigationBarTitleText": "安全管家",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#898989",
+    "selectedColor": "#086DD7",
+    "borderStyle": "#6F6F6F",
+    "backgroundColor": "#F7F7F7",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/home_unselected.png",
+        "selectedIconPath": "assets/home.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/danger/danger",
+        "iconPath": "assets/dangerCheck_unselected.png",
+        "selectedIconPath": "assets/dangerCheck.png",
+        "text": "隐患排查"
+      },
+      {
+        "pagePath": "pages/laws/laws",
+        "iconPath": "assets/application_unselected.png",
+        "selectedIconPath": "assets/application.png",
+        "text": "法律法规"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "assets/me_unselected.png",
+        "selectedIconPath": "assets/me.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 5000,
+    "connectSocket": 5000,
+    "uploadFile": 5000,
+    "downloadFile": 5000
+  }
+}

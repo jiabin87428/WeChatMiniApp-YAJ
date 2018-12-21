@@ -1,4 +1,4 @@
-
+var util = require('../../utils/util.js');
 var request = require('../../utils/request.js')
 var config = require('../../utils/config.js')
 var amapFile = require('../../libs/amap-wx.js');
@@ -38,6 +38,12 @@ Page({
     // 隐患库总数
     yhkzs: 0,
 
+    // MARK:监管用户用
+    qysl: 0,
+    yhzs: 0,
+    yzg: 0,
+    startDate: "",
+    endDate: ""
   },
   onLoad: function (e) {
     var that = this;
@@ -53,9 +59,16 @@ Page({
           winHeight: res.windowHeight
         });
       }
-
     });
-    
+
+    // 调用函数时，传入new Date()参数，返回值是日期和时间  
+    var time = util.formatDate(new Date());
+    // 再通过setData更改Page()里面的data，动态更新页面的数据  
+    this.setData({
+      startDate: time,
+      endDate: time
+    });
+
   },
   /**
    *  监听页面显示，
@@ -73,12 +86,12 @@ Page({
   },
   // 点击添加隐患
   addClick: function () {
-    if(!this.checkLogin()) {
+    if (!this.checkLogin()) {
       wx.navigateTo({
         url: '../login/chooseLoginType'
       })
       return
-    }else{
+    } else {
       wx.navigateTo({
         url: '../danger/addDanger'
       })
@@ -86,7 +99,7 @@ Page({
   },
   // 点击隐患列表
   listClick: function () {
-    if(!this.checkLogin()) {
+    if (!this.checkLogin()) {
       wx.navigateTo({
         url: '../login/chooseLoginType'
       })
@@ -96,6 +109,20 @@ Page({
         url: '../danger/dangerList'
       })
     }
+  },
+  // 开始时间变更
+  startDateChange: function (e) {
+    this.setData({
+      startDate: e.detail.value
+    })
+    this.getStatistics()
+  },
+  // 结束时间变更
+  endDateChange: function (e) {
+    this.setData({
+      endDate: e.detail.value
+    })
+    this.getStatistics()
   },
 
   // 判断是否登录
@@ -134,6 +161,13 @@ Page({
               titleHeight: 116,
               markers: mark
             })
+          } else if (app.globalData.userInfo.yhlx == '2') {
+            that.setData({
+              // longitude: app.globalData.userInfo.mapx,
+              // latitude: app.globalData.userInfo.mapy,
+              titleHeight: 192,
+              markers: mark
+            })
           } else {
             that.setData({
               // longitude: app.globalData.userInfo.mapx,
@@ -164,87 +198,93 @@ Page({
   getStatistics: function () {
     var that = this
     var params = {
-      "userid": app.globalData.userInfo.userid
+      "userid": app.globalData.userInfo.userid,
+      "beginTime": that.data.yhlx == "1" ? that.data.startDate : "",
+      "endTime": that.data.yhlx == "1" ? that.data.endDate : "",
     }
     request.requestLoading(config.getTj, params, '正在加载数据', function (res) {
       //res就是我们请求接口返回的数据
       console.log(res)
-      var markList = that.data.markers
+      if (res.repCode == "200") {
+        var markList = that.data.markers
+        if (app.globalData.userInfo.yhlx == '1' || app.globalData.userInfo.yhlx == '2') {
+          for (var i = 0; i < res.list.length; i++) {
+            var item = res.list[i]
+            var callout = {
+              content: item.qymc + '(隐患总数：' + item.yhsl + ')',
+              color: '#FFFFFF',
+              bgColor: '#5490FF',
+              borderRadius: 5,
+              padding: 5,
+              display: 'ALWAYS'
+            }
+            var mark = {
+              id: item.qyid,
+              latitude: item.mapy,
+              longitude: item.mapx,
+              iconPath: '../../assets/danger_position.png',
+              width: 30,
+              height: 30,
+              callout: callout
+            }
+            markList.push(mark)
+          }
+          that.setData({
+            markers: markList,
+            flfgzs: res.flfgzs == null ? 0 : res.flfgzs,
+            yhkzs: res.yhkzs == null ? 0 : res.yhkzs,
+            qysl: res.qysl == null ? 0 : res.qysl,
+            yhzs: res.yhzs == null ? 0 : res.yhzs,
+            yzg: res.yzg == null ? 0 : res.yzg,
+          })
+        } else {
+          for (var i = 0; i < res.list.length; i++) {
+            var item = res.list[i]
+            var color = ''
+            if (item.zgzt == '0') {// 已整改
+              color = '#0A6BDA'
+            } else if (item.zgzt == '1') {// 未整改
+              color = '#FF6B2D'
+            } else {// 草稿
+              color = '#2FD065'
+            }
+            var icon = ''
+            if (item.zgzt == '0') {// 已整改
+              icon = '../../assets/danger_done.png'
+            } else if (item.zgzt == '1') {// 未整改
+              icon = '../../assets/danger_undo.png'
+            } else {// 草稿
+              icon = '../../assets/danger_draft.png'
+            }
 
-      if (app.globalData.userInfo.yhlx == '1') {
-        for (var i = 0; i < res.list.length; i++) {
-          var item = res.list[i]
-          var callout = {
-            content: item.qymc + '(隐患总数：' + item.yhsl + ')',
-            color: '#FFFFFF',
-            bgColor: '#5490FF',
-            borderRadius: 5,
-            padding: 5,
-            display: 'ALWAYS'
+            var callout = {
+              content: item.yhms,
+              color: '#FFFFFF',
+              bgColor: color,
+              borderRadius: 5,
+              padding: 5,
+              display: 'ALWAYS'
+            }
+            var mark = {
+              id: i,
+              latitude: item.mapy == "" ? 0 : item.mapy,
+              longitude: item.mapx == "" ? 0 : item.mapx,
+              iconPath: icon,
+              width: 22,
+              height: 30,
+              callout: callout,
+              yhid: item.yhid,
+              zgzt: item.zgzt
+            }
+            markList.push(mark)
           }
-          var mark = {
-            id: item.qyid,
-            latitude: item.mapy,
-            longitude: item.mapx,
-            iconPath: '../../assets/danger_position.png',
-            width: 30,
-            height: 30,
-            callout: callout
-          }
-          markList.push(mark)
+          that.setData({
+            markers: markList,
+            yhzs: res.yhzs,
+            yzgyhs: res.yzg,
+            wzgyhs: res.wzg
+          })
         }
-        that.setData({
-          markers: markList,
-          flfgzs: res.flfgzs,
-          yhkzs: res.yhkzs
-        })
-      } else {
-        for (var i = 0; i < res.list.length; i++) {
-          var item = res.list[i]
-          var color = ''
-          if (item.zgzt == '0') {// 已整改
-            color = '#0A6BDA'
-          } else if (item.zgzt == '1') {// 未整改
-            color = '#FF6B2D'
-          }else {// 草稿
-            color = '#2FD065'
-          }
-          var icon = ''
-          if (item.zgzt == '0') {// 已整改
-            icon = '../../assets/danger_done.png'
-          } else if (item.zgzt == '1') {// 未整改
-            icon = '../../assets/danger_undo.png'
-          } else {// 草稿
-            icon = '../../assets/danger_draft.png'
-          }
-
-          var callout = {
-            content: item.yhms,
-            color: '#FFFFFF',
-            bgColor: color,
-            borderRadius: 5,
-            padding: 5,
-            display: 'ALWAYS'
-          }
-          var mark = {
-            id: i,
-            latitude: item.mapy == "" ? 0 : item.mapy,
-            longitude: item.mapx == "" ? 0 : item.mapx,
-            iconPath: icon,
-            width: 30,
-            height: 30,
-            callout: callout,
-            yhid: item.yhid,
-            zgzt: item.zgzt
-          }
-          markList.push(mark)
-        }
-        that.setData({
-          markers: markList,
-          yhzs: res.yhzs,
-          yzgyhs: res.yzg,
-          wzgyhs: res.wzg
-        })
       }
     }, function () {
       wx.showToast({
@@ -283,9 +323,12 @@ Page({
     })
   },
   // maker点击事件
-  makertap: function (e) {
-    console.log(e)
-    // 暂时不加点击事件
+  markertap(e) {
+    // wx.showToast({
+    //   title: e.markerId + "",
+    //   icon: 'none'
+    // })
+    //暂时不加点击事件
     // if (app.globalData.userInfo.yhlx == '1') { // 监管用户
     //   if (e.markerId != '99999') { // 点击的不是监管用户本身
     //     wx.navigateTo({
@@ -299,8 +342,24 @@ Page({
     //   }
     // }
   },
+  // 气泡点击事件
+  callouttap(e){
+    if (app.globalData.userInfo.yhlx == "0"){ // 企业用户
+      if (e.markerId != '99999') { // 点击的不是企业本身的坐标点
+        var mark = this.data.markers[e.markerId + 1]
+        this.getDetail(mark.yhid, mark.zgzt)
+      }
+    } else if (app.globalData.userInfo.yhlx == "2") {// 监管(政府)
+      var item = {
+        qyid: e.markerId + ""
+      }
+      wx.navigateTo({
+        url: '../danger/dangerCheckList?item=' + JSON.stringify(item) + '&pageType=1'
+      })
+    }
+  },
   // 查看隐患详情
-  getDetail: function (dangerId,zgzt) {
+  getDetail: function (dangerId, zgzt) {
     wx.navigateTo({
       url: '../danger/dangerDetail?yhid=' + dangerId + '&zgzt=' + zgzt
     })

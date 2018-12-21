@@ -176,7 +176,7 @@
 
 .arrow {
   width: 10px;
-  height: 48px;
+  height: 86px;
   background-color: white;
   margin-left: 5px;
   margin-right: 10px;

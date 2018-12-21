@@ -6,34 +6,34 @@
   </view> -->
   <view class="searchView">
     <view id='0' class='tapBarItem' wx:if="{{currentTab != 0}}" bindtap='changeTap'>
-      <text class='tapText1'>全部</text>
+      <text class='tapText1'>全部({{allsl}})</text>
     </view>
     <view id='0' class='tapBarItem2' wx:if="{{currentTab == 0}}" bindtap='changeTap'>
-      <text class='tapText2'>全部</text>
+      <text class='tapText2'>全部({{allsl}})</text>
     </view>
     <view id='1' class='tapBarItem' wx:if="{{currentTab != 1}}" bindtap='changeTap'>
-      <text class='tapText1'>未整改</text>
+      <text class='tapText1'>未整改({{wzgsl}})</text>
     </view>
     <view id='1' class='tapBarItem2' wx:if="{{currentTab == 1}}" bindtap='changeTap'>
-      <text class='tapText2'>未整改</text>
+      <text class='tapText2'>未整改({{wzgsl}})</text>
     </view>    
     <view id='2' class='tapBarItem' wx:if="{{currentTab != 2}}" bindtap='changeTap'>
-      <text class='tapText1'>已整改</text>
+      <text class='tapText1'>已整改({{yzgsl}})</text>
     </view>
     <view id='2' class='tapBarItem2' wx:if="{{currentTab == 2}}" bindtap='changeTap'>
-      <text class='tapText2'>已整改</text>
+      <text class='tapText2'>已整改({{yzgsl}})</text>
     </view>
     <view id='3' class='tapBarItem' wx:if="{{currentTab != 3}}" bindtap='changeTap'>
-      <text class='tapText1'>草稿</text>
+      <text class='tapText1'>草稿({{cgsl}})</text>
     </view>
     <view id='3' class='tapBarItem2' wx:if="{{currentTab == 3}}" bindtap='changeTap'>
-      <text class='tapText2'>草稿</text>
+      <text class='tapText2'>草稿({{cgsl}})</text>
     </view>
     <view class='searchItem' bindtap='jumpDangerSearch'>
       <image class="searchIcon" src="../../assets/search.png" mode="widthFix"></image>
     </view>
   </view>
-  <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-40-70}}px;">
+  <scroll-view scroll-y="true" class='scrollView' style="height:{{scrollHeight-40-bottomHeight}}px;">
     <view wx:for="{{dangerList}}" class='scrollItem'>
       <view class="posit" data-item="{{item}}" data-index="{{index}}" bindtap='deleteYH'>
         <view class="del" data-addressid="{{item.address.ID}}" data-index="{{index}}">删除</view>
@@ -57,7 +57,7 @@
       </view>
     </view>
   </scroll-view>
-  <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">
+  <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1' && pageType == 0}}">
     <button class='submitButton' bindtap="addClick" wx:if="{{item.xmzt != '1'}}">新建隐患</button>
     <button class='submitButtonDisable' bindtap="addClickDisable" wx:else>新建隐患</button>
   </view>

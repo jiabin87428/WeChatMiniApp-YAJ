@@ -40,12 +40,15 @@
     "pages/danger/dangerSearch",
     "pages/me/companyList",
     "pages/me/companyEdit",
-    "pages/danger/clauseList"
+    "pages/danger/clauseList",
+    "pages/check/editPage",
+    "pages/check/safetyManage",
+    "pages/danger/dangerClassify"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2D68AA",
-    "navigationBarTitleText": "安全管家",
+    "navigationBarTitleText": "易安监",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

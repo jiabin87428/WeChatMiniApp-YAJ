@@ -134,8 +134,8 @@
   text-align: center;
   color: #A7A7A7;
   font-size: 14px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .tapBarItem2 {
@@ -148,16 +148,18 @@
   color: #2D68AA;
   font-size: 14px;
   border-bottom: 1rpx solid #2D68AA;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .tapText1 {
   color: #A7A7A7;
+  font-size: 12px;
 }
 
 .tapText2 {
   color: #2D68AA;
+  font-size: 12px;
 }
 
 .searchItem {

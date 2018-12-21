@@ -6,6 +6,14 @@
     <text class='flex-item cellText2'>{{qymc}}</text>
   </view>
   <view id='3' class='scrollItem'>
+    <text class='cellText1'>隐患级别</text>
+    <text class='flex-item cellText2'>{{yhjb}}</text>
+  </view>
+  <view id='3' class='scrollItem'>
+    <text class='cellText1'>隐患分类</text>
+    <text class='flex-item cellText2'>{{yhfl}}</text>
+  </view>
+  <view id='3' class='scrollItem'>
     <text class='cellText1'>问题描述</text>
     <text class='flex-item cellText2'>{{wtms}}</text>
   </view>
@@ -73,7 +81,7 @@
   <view id='zgwcrq' class='scrollItem'>
     <text class='cellText1'>完成日期</text>
     <!-- <text class='mustText'>*</text> -->
-    <picker class='dateChoose' mode="date" value="{{date}}" start="2015-09-01" end="2118-12-31" bindchange="bindDateChange" wx:if="{{yhzt!='0' && xmzt != '1'}}">
+    <picker class='dateChoose' mode="date" value="{{date}}" start="2015-09-01" end="2118-12-31" bindchange="bindDateChange" wx:if="{{yhzt!='0' && xmzt != '1' && editable == true}}">
       <view class="picker">
         <text class='pickerText'>{{date}}</text>
       </view>
@@ -82,7 +90,7 @@
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:if="{{yhzt!='0' && xmzt != '1'}}"></image>
     <image class="arrow" src="" mode="aspectFit" wx:else></image> 
   </view>
-  <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">
+  <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1' && editable == true}}">
     <button class='submitButton' bindtap="submitClick" wx:if="{{yhzt != '0'}}">隐患完成整改</button>
   </view>
 </scroll-view>

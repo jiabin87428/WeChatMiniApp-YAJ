@@ -23,11 +23,14 @@ Page({
     zyfzrdh: "",
 
     // 省
-    province: "",
+    province: "省",
     // 市
-    city: "",
+    city: "市",
     // 区
-    district: "",
+    district: "区",
+
+    // 基本信息和安全管理信息对象
+    baseAndSaftyObj: {},
   },
 
   /**
@@ -53,6 +56,9 @@ Page({
         address: item.qydz,
         zyfzr: item.zyfzr,
         zyfzrdh: item.zyfzrdh,
+        province: item.province,
+        city: item.city,
+        district: item.district,
       })
     }
   },
@@ -68,7 +74,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -105,6 +111,30 @@ Page({
   onShareAppMessage: function () {
 
   },
+  // 获取企业基本信息和安全生产管理现状信息
+  getBaseAndSaftyInfo: function () {
+    var that = this
+    //调用接口
+    request.requestLoading(config.getBaseAndSaftyInfo + that.data.qyid, null, '正在加载数据', function (res) {
+      console.log(res)
+      if (res != null) {
+        that.setData({
+          baseAndSaftyObj: res
+        })
+        wx.navigateTo({
+          url: '../check/safetyManage?data=' + JSON.stringify(that.data.baseAndSaftyObj) + '&qyid=' + that.data.qyid
+        })
+      } else {
+        wx.showToast({
+          title: res.repMsg,
+        })
+      }
+    }, function () {
+      wx.showToast({
+        title: '加载数据失败',
+      })
+    })
+  },
   // 跳转输入页面
   jumpInput: function (e) {
     var viewId = e.currentTarget.id;
@@ -124,10 +154,21 @@ Page({
       url: '../common/inputPage?id=' + viewId + '&placeholder=' + placeholder + '&inputstring=' + inputstring
     })
   },
+  // 跳转信息编辑
+  jumpSafteyManage: function (e) {
+    this.getBaseAndSaftyInfo()
+  },
   // 跳转地图坐标选择
   jumpLocation: function (e) {
     wx.navigateTo({
       url: '../common/chooseLocation'
+    })
+  },
+  // 点击了所属区域
+  choosePlace: function (e) {
+    wx.showToast({
+      title: '所属区域会根据所选企业地址自动匹配',
+      icon: 'none'
     })
   },
   // 保存
@@ -187,7 +228,7 @@ Page({
     })
   },
   // 重置密码事件
-  resetPassword: function() {
+  resetPassword: function () {
     var that = this
     var params = {
       "qymc": that.data.qymc,

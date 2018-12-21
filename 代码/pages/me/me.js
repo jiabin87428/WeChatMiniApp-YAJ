@@ -150,7 +150,7 @@ Page({
         })
         if (app.globalData.userInfo.yhlx == '1') {
           that.setData({
-            roleName: '监管用户',
+            roleName: '检查用户',
             qyid: app.globalData.userInfo.userid,
             logo: config.logoImg + app.globalData.userInfo.userid,
             showCompanyName: app.globalData.userInfo.name,
@@ -173,7 +173,13 @@ Page({
             longitude: app.globalData.userInfo.mapx,
             latitude: app.globalData.userInfo.mapy,
           })
-        } else {
+        } else if (app.globalData.userInfo.yhlx == '2'){
+          that.setData({
+            logo: config.logoImg + app.globalData.userInfo.userid,
+            roleName: '监管用户',
+            showCompanyName: app.globalData.userInfo.name,
+          })
+        }else {
           that.setData({
             qyid: app.globalData.userInfo.userid,
             logo: config.logoImg + app.globalData.userInfo.userid,

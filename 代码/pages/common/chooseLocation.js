@@ -16,7 +16,7 @@ Page({
     winHeight: 0,
     latitude: "0",
     longitude: "0",
-    keyword:"搜索地址",
+    keyword: "搜索地址",
     address: "",
 
     markers: [],
@@ -42,7 +42,7 @@ Page({
         latitude: latitude
       })
     }
-    
+
     var that = this;
 
     /**  
@@ -59,7 +59,7 @@ Page({
             iconPath: '../../assets/ic_position.png',
             position: {
               left: res.windowWidth / 2 - 15,
-              top: (res.windowHeight - 177)/2,
+              top: (res.windowHeight - 177) / 2,
               width: 30,
               height: 30
             },
@@ -92,49 +92,49 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
   //获取中间点的经纬度，并mark出来
   getLngLat: function () {
@@ -146,9 +146,9 @@ Page({
         if (that.data.longitude == res.longitude && that.data.latitude == res.latitude) {
           return
         }
-        
+
         that.setData({
-          longitude: res.longitude, 
+          longitude: res.longitude,
           latitude: res.latitude,
           // currentLocation: '经度：' + res.longitude + '，纬度：' + res.latitude
           // , markers: [
@@ -166,10 +166,10 @@ Page({
         that.getLocationInfo()
       }
     })
-  }, 
+  },
   regionchange(e) {
     // 地图发生变化的时候，获取中间点，也就是用户选择的位置
-    if(e.type == 'end') {
+    if (e.type == 'end') {
       this.getLngLat()
     }
   },

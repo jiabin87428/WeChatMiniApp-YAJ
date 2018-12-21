@@ -37,7 +37,10 @@
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit" wx:else></image>
   </view> -->
   <view id='8' class='scrollButtonItem' wx:if="{{xmid != ''}}">
-    <button class='submitButtonGreen' bindtap="jumpDanger">检查问题</button>
+    <button class='submitButtonGreen' bindtap="jumpDanger">隐患列表</button>
+  </view>
+  <view id='8' class='scrollButtonItem' wx:if="{{xmid != ''}}">
+    <button class='submitButtonSkyBlue' bindtap="addDanger">新建隐患</button>
   </view>
   <view id='9' class='scrollButtonItem' wx:if="{{xmzt != '1'}}">
     <button class='submitButton' bindtap="submitClick">保存项目</button>

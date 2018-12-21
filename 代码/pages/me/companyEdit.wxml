@@ -12,6 +12,11 @@
     <text class='cellText2'>{{address}}</text>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
   </view>
+  <view id='address' class='scrollItem' bindtap='choosePlace'>
+    <text class='cellText1'>所属区域</text>
+    <text class='cellText2'>{{province}}-{{city}}-{{district}}</text>
+    <image class="arrow" src="" mode="aspectFit"></image>
+  </view>
   <view id='zyfzr' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>主要负责人</text>
     <text class='cellText2'>{{zyfzr}}</text>
@@ -20,6 +25,11 @@
   <view id='zyfzrdh' class='scrollItem' bindtap='jumpInput'>
     <text class='cellText1'>负责人电话</text>
     <text class='cellText2'>{{zyfzrdh}}</text>
+    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
+  </view>
+  <view id='zyfzrdh' class='scrollItem' bindtap='jumpSafteyManage'>
+    <text class='cellText1'>更多信息</text>
+    <text class='cellText2'></text>
     <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
   </view>
   <view id='9' class='scrollButtonItem'>

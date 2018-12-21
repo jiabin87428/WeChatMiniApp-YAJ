@@ -49,7 +49,7 @@ Page({
         xmid: item.xmid,
         xmzt: item.xmzt,
       })
-    } 
+    }
   },
 
   /**
@@ -159,7 +159,20 @@ Page({
   // 隐患处理
   jumpDanger: function (e) {
     wx.navigateTo({
-      url: '../danger/dangerCheckList?item=' + JSON.stringify(this.data.item)
+      url: '../danger/dangerCheckList?item=' + JSON.stringify(this.data.item) + '&pageType=0'
+    })
+  },
+  // 新建隐患
+  addDanger: function (e) {
+    if (this.data.item != null && this.data.item.xmzt == "1") {
+      wx.showToast({
+        title: '已归档项目不能新建隐患',
+        icon: 'none',
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '../danger/addDanger?item=' + JSON.stringify(this.data.item)
     })
   },
   // 提交事件

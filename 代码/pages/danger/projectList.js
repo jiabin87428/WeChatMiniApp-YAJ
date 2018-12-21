@@ -17,6 +17,12 @@ Page({
     delBtnWidth: 80,  //删除按钮宽度单位（rpx）m
     // 当前选中tab页 0-全部 1-进行中 2-已归档
     currentTab: 1,
+    // 全部项目数量
+    allsl: 0,
+    // 进行中数量
+    jxzsl: 0,
+    // 已归档数量
+    ygdsl: 0
   },
 
   /**
@@ -134,7 +140,10 @@ Page({
       console.log(res)
       if (res.repXmlist != null) {
         that.setData({
-          repXmlist: res.repXmlist
+          repXmlist: res.repXmlist,
+          allsl: res.allsl,
+          jxzsl: res.jxzsl,
+          ygdsl: res.ygdsl,
         })
       }
     }, function () {

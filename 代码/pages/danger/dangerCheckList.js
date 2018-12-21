@@ -8,18 +8,29 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 0-正常检查人用户通过隐患排查进入的
+    // 1-监管用户通过首页点击企业进入的
+    pageType: 0,
     scrollHeight: 0,
+    bottomHeight: 70, // 底部按钮位置，如果不能新建隐患，则置为0
     // 隐患列表
     dangerList: [],
     // 当前选中tab页 0-全部 1-未整改 2-已整改 3-草稿
     currentTab: 0,
     // 项目id
     xmid: "",
+    // 企业id-政府首页点击坐标进来加载隐患使用
+    qyid: "",
     // 项目item
     item: null,
 
     editIndex: 0,
-    delBtnWidth: 80//删除按钮宽度单位（rpx）
+    delBtnWidth: 80,//删除按钮宽度单位（rpx）
+    
+    allsl: 0,
+    cgsl: 0,
+    wzgsl:0,
+    yzgsl: 0,
   },
 
   /**
@@ -27,12 +38,24 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    var item = JSON.parse(options.item)
+    var item = options.item == null ? null : JSON.parse(options.item)
+    var pageType = options.pageType
+    if (pageType != null) {
+      that.setData({
+        pageType: pageType
+      })
+    }
     if (item != null) {
       that.setData({
         item: item,
-        xmid: item.xmid
+        xmid: item.xmid == null ? "" : item.xmid,
+        qyid: item.qyid == null ? "" : item.qyid
       })
+    }
+    if(that.pageType == 1) {
+      bottomHeight = 0
+    }else {
+      bottomHeight = 70
     }
     wx.getSystemInfo({
       success: function (res) {
@@ -56,9 +79,17 @@ Page({
    */
   onShow: function () {
     var that = this
-    var params = {
-      "userid": app.globalData.userInfo.userid,
-      "xmid": that.data.xmid
+    var params = {}
+    if (that.data.pageType == 0) {
+      params = {
+        "userid": app.globalData.userInfo.userid,
+        "xmid": that.data.xmid
+      }
+    } else {
+      params = {
+        "userid": app.globalData.userInfo.userid,
+        "qyid": that.data.qyid
+      }
     }
     if (that.data.currentTab == 1) {
       params["yhzt"] = "1"
@@ -112,9 +143,17 @@ Page({
       currentTab: viewId
     })
 
-    var params = {
-      "userid": app.globalData.userInfo.userid,
-      "xmid": that.data.xmid
+    var params = {}
+    if (that.data.pageType == 0) {
+      params = {
+        "userid": app.globalData.userInfo.userid,
+        "xmid": that.data.xmid
+      }
+    }else {
+      params = {
+        "userid": app.globalData.userInfo.userid,
+        "qyid": that.data.qyid
+      }
     }
     if (that.data.currentTab == 1) {
       params["yhzt"] = "1"
@@ -158,20 +197,31 @@ Page({
         url: '../danger/addDanger?item=' + JSON.stringify(e.currentTarget.dataset.item)
       })
     }else {// 已整改 未整改
+      var editable = this.data.pageType == 0 ? true : false
       wx.navigateTo({
-        url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&yhzt=' + e.currentTarget.dataset.name
+        url: '../danger/dangerDetail?yhid=' + e.currentTarget.dataset.id + '&yhzt=' + e.currentTarget.dataset.name + '&editable=' + editable
       })
     }
   },
   // 获取隐患列表
   reqDangerList: function (searchObj, cb) {
     var that = this
+    var loadUrl = ""
+    if (that.data.pageType == 0) {
+      loadUrl = config.getYhList
+    }else {
+      loadUrl = config.getQyyhList
+    }
     //调用接口
-    request.requestLoading(config.getYhList, searchObj, '正在加载数据', function (res) {
+    request.requestLoading(loadUrl, searchObj, '正在加载数据', function (res) {
       console.log(res)
       if (res.repYhList != null) {
         that.setData({
-          dangerList: res.repYhList
+          dangerList: res.repYhList,
+          allsl: res.allsl,
+          cgsl: res.cgsl,
+          wzgsl: res.wzgsl,
+          yzgsl: res.yzgsl,
         })
       }else {
         wx.showToast({

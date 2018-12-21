@@ -66,7 +66,7 @@ Page({
   // 点击隐患列表
   listClick: function () {
     wx.navigateTo({
-      url: '../danger/dangerCheckList?item=' + JSON.stringify(this.data.item)
+      url: '../danger/dangerCheckList?item=' + JSON.stringify(this.data.item) + '&pageType=0'
     })
   },
   // 查看项目详情

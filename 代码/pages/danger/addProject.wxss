@@ -127,6 +127,14 @@
   margin-top: 10px;
 }
 
+.submitButtonSkyBlue {
+  background-color: #17C9C5;
+  color: white;
+  width: 90%;
+  height: 48px;
+  margin-top: 10px;
+}
+
 .imageBaseView {
   display:flex;
   flex-direction:column;

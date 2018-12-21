@@ -43,6 +43,11 @@ Page({
         wx.navigateBack({
           delta: 2
         })
+      }else {
+        wx.showToast({
+          title: res.repMsg,
+          icon: 'none'
+        })
       }
     }, function () {
       wx.showToast({

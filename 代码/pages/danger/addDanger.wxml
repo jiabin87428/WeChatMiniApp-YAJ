@@ -25,6 +25,16 @@
       </view>
     </view>
   </view>
+  <view id='desc' class='scrollItem' bindtap='selectLevel'>
+    <text class='cellText1'>隐患级别</text>
+    <text class='cellText2'>{{level}}</text>
+    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
+  </view>
+  <view id='classify' class='scrollItem' bindtap='selectClassify'>
+    <text class='cellText1'>隐患分类</text>
+    <text class='cellText2'>{{classify}}</text>
+    <image class="arrow" src="../../assets/arrowRight.png" mode="aspectFit"></image>
+  </view>
   <view id='desc' class='scrollItem' bindtap='selectInputType'>
     <text class='cellText1'>隐患描述</text>
     <!-- <text class='mustText'>*</text> -->

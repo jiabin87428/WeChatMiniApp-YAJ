@@ -5,7 +5,7 @@
 var host = "https://www.gelure.com"  //域名要在小程序的管理平台配置好，如果出现调用时报错，无效的域名，可在微信开发工具左边点项目-》配置信息-》看一下配置的域名【request合法域名】有没有刷新下来，没有的话就点下面的刷新
 
 var config = {
- 
+
   // 下面的地址配合 Server 工作
   host,
   // 登录
@@ -25,6 +25,9 @@ var config = {
 
   // 隐患列表
   getYhList: `${host}/getXx.do?action=getYhList`,
+
+  // 获取企业隐患列表
+  getQyyhList: `${host}/getXx.do?action=getQyyhList`,
 
   // 隐患详情
   getOneYh: `${host}/getXx.do?action=getOneYh`,
@@ -53,7 +56,7 @@ var config = {
   getQyxx: `${host}/getXx.do?action=getQyxx`,
 
   //-----------纪杰------------
-  
+
   // 获取任务列表
   getRw: `${host}/getXx.do?action=getRw&`,
 
@@ -76,13 +79,10 @@ var config = {
   getCategory: `${host}/getXx.do?action=getLb`,
 
   // 根据模版隐患类别获取详情隐患列表
-  getDangerType: `${host}/getXx.do?action=getCjwt&lb=`,
-
-  // 获取模板隐患类别
-  getCategory: `${host}/getXx.do?action=getLb`,
-
-  // 根据模版隐患类别获取详情隐患列表
   getDangerType: `${host}/getXx.do?action=getCjwt`,
+
+  // 获取隐患分类
+  getDangerClassify: `${host}/getXx.do?action=getYhfl`,
 
   // 获取法律法规分类
   getLawsType: `${host}/getXx.do?action=getFgfl`,
