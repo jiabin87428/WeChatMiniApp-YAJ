@@ -74,7 +74,7 @@ Page({
 
     var yhid = options.yhid
     var yhzt = options.yhzt
-    var editable = options.editable == null ? true : false
+    var editable = options.editable == null ? true : Boolean(options.editable)
     this.setData({
       yhid: yhid,
       yhzt: yhzt,

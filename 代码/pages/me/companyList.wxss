@@ -111,6 +111,7 @@
   width: 100%;
   background-color: white;
   z-index: 1;
+  align-items:center;/*垂直居中*/
 }
 
 .subscrollItem {
