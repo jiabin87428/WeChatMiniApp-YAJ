@@ -159,6 +159,11 @@
   z-index: 1;
 }
 
+.itemTitle {
+  width: 100%;
+  background-color: white;
+}
+
 .dangerText {
   font-size: 15px;
   color: #6D6D6D;
