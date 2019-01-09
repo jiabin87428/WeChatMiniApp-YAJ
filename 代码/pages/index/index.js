@@ -259,6 +259,8 @@ Page({
               content: item.qymc + '(隐患总数：' + item.yhsl + ')',
               color: textColor,
               bgColor: bgColor,
+              borderColor: '#DDDDDD',
+              borderWidth: 1,
               borderRadius: 5,
               padding: 5,
               display: 'ALWAYS'
@@ -306,6 +308,8 @@ Page({
               content: item.yhms,
               color: '#FFFFFF',
               bgColor: color,
+              borderColor: '#dddddd',
+              borderWidth: 1,
               borderRadius: 5,
               padding: 5,
               display: 'ALWAYS'
