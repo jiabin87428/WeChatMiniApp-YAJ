@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <view class='baseView'>
-  <view class="subBaseView3" wx:if="{{yhlx == 0}}">
+  <video id="myVideo" class='videoView' src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" autoplay="true" controls="false"></video>
+  <!-- <view class="subBaseView3" wx:if="{{yhlx == 0}}">
     <view class='scrollItem'>
       <image class="point" src="../../assets/point_green.png" mode="aspectFit"></image>
       <text class='cellText1'>隐患总数/已整改/未整改</text>
@@ -57,5 +58,5 @@
        <cover-image class="tip" style='left:5px;' src="../../assets/tip.png" mode="aspectFit"></cover-image> 
     </map>
   </view>
-  <text class='location'>{{currentLocation}}</text>
+  <text class='location'>{{currentLocation}}</text> -->
 </view>

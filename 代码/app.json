@@ -56,42 +56,11 @@
     "navigationBarTitleText": "易安监",
     "navigationBarTextStyle": "white"
   },
-  "tabBar": {
-    "color": "#898989",
-    "selectedColor": "#086DD7",
-    "borderStyle": "#6F6F6F",
-    "backgroundColor": "#F7F7F7",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "assets/home_unselected.png",
-        "selectedIconPath": "assets/home.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/danger/danger",
-        "iconPath": "assets/dangerCheck_unselected.png",
-        "selectedIconPath": "assets/dangerCheck.png",
-        "text": "隐患排查"
-      },
-      {
-        "pagePath": "pages/laws/laws",
-        "iconPath": "assets/application_unselected.png",
-        "selectedIconPath": "assets/application.png",
-        "text": "法律法规"
-      },
-      {
-        "pagePath": "pages/me/me",
-        "iconPath": "assets/me_unselected.png",
-        "selectedIconPath": "assets/me.png",
-        "text": "我的"
-      }
-    ]
-  },
   "networkTimeout": {
     "request": 20000,
     "connectSocket": 20000,
     "uploadFile": 20000,
     "downloadFile": 20000
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

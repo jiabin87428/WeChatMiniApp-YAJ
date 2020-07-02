@@ -57,7 +57,12 @@ Page({
     // 当前筛选隐患等级 - 用于显示在底部
     currentLevel: "全部",
   },
+  onReady: function (e) {
+    this.videoContext = wx.createVideoContext('myVideo');
+    wx.createVideoContext('myVideo').requestFullScreen({ direction: 90 });
+  },
   onLoad: function (e) {
+    return;
     var that = this;
 
     /**  
@@ -88,7 +93,7 @@ Page({
    *    另一个页面销毁时会再次执行
    */
   onShow: function () {
-    this.checkLogin()
+    // this.checkLogin()
   },
   // 点击用户头像
   userClick: function () {
